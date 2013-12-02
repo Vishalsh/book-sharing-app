@@ -7,7 +7,7 @@ gem 'rails', '4.0.1'
 gem 'sqlite3', :group => [:development, :test]
 group :production do
   gem 'thin'
-  gem 'pg'
+#  gem 'pg'
 end
 
 
