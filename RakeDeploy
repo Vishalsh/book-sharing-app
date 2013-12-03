@@ -1,0 +1,5 @@
+puts "Almost there..."
+task :global, :except => {:no_release => true} do
+  packages.install
+  gems.install
+end
