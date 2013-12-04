@@ -4,6 +4,9 @@ BookSharingApp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
+  match '/test/logout' , controller: 'test#logout', via: [:get, :post]
+  get '/anonymous/index' , controller: 'anonymous#index'
+
   resources :test
 
   root 'test#index'
