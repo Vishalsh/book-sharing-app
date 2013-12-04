@@ -1,15 +1,22 @@
-require 'capistrano/ext/multistage'
+#require 'capistrano/ext/multistage'
 
 set :application, "booksharingapp"
 set :scm, :git
+set :branch, "master"
 set :repository, "https://github.com/Vishalsh/book-sharing-app"
-set :scm_passphrase, ""
+
+default_run_options[:pty] = true
+
+set :user, "user"
+set :scm_passphrase, "p@ssw0rd"
+set :use_sudo, true
+set :deploy_via, :copy
 
 ssh_options[:forward_agent] = true
 
-set :user, ""
+set :deploy_to, "/home/user/BookSharing"
 
-set :stages, ["staging", "production"]
+set :stages, ["staging"]
 set :default_stage, "staging"
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
@@ -18,7 +25,6 @@ set :default_stage, "staging"
 role :web, "10.10.5.111"                          # Your HTTP server, Apache/etc
 role :app, "10.10.5.111"                          # This may be the same as your `Web` server
 role :db,  "10.10.5.111", :primary => true # This is where Rails migrations will run
-role :db,  "10.10.5.111"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -35,3 +41,23 @@ role :db,  "10.10.5.111"
 #   end
 # end
 
+namespace :deploy do
+  desc "Symlink shared config files"
+  task :symlink_config_files do
+    #run "#{ try_sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
+  end
+
+  desc "Open firewall port for server"
+  task :open_firewall_port do
+    run "#{ try_sudo } iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 3000 -j ACCEPT; #{ try_sudo } /etc/init.d/iptables save; #{ try_sudo } /etc/init.d/iptables restart; "
+  end
+
+  desc "Restart Passenger app"
+  task :restart do
+    run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
+  end
+end
+
+after "deploy", "deploy:symlink_config_files"
+after "deploy:symlink_config_files", "deploy:open_firewall_port"
+after "deploy:open_firewall_port", "deploy:restart"
