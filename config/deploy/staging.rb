@@ -42,4 +42,5 @@ set :stage, :staging
 # fetch(:default_env).merge!(rails_env: :staging)
 
 server "10.10.5.111", :app, :web, :db, :primary => true, port: 22
+set :ssh_options, { :forward_agent => true }
 set :deploy_to, "/home/user/BookSharing"
