@@ -9,7 +9,8 @@ default_run_options[:pty] = true
 
 set :user, "user"
 set :scm_passphrase, "p@ssw0rd"
-set :use_sudo, true
+set :use_sudo, false
+set :sudo_password, "p@ssw0rd"
 set :deploy_via, :copy
 
 set :copy_remote_dir, "/home/user/repo"
@@ -52,12 +53,12 @@ namespace :deploy do
 
   desc "Open firewall port for server"
   task :open_firewall_port do
-    run "#{ try_sudo } iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 3000 -j ACCEPT; #{ try_sudo } /etc/init.d/iptables save; #{ try_sudo } /etc/init.d/iptables restart; "
+    run "sudo iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 3000 -j ACCEPT; sudo /etc/init.d/iptables save; sudo /etc/init.d/iptables restart; "
   end
 
   desc "Restart Passenger app"
   task :restart do
-    run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
+    run "sudo touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
   end
 end
 

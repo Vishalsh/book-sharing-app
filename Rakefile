@@ -5,4 +5,4 @@ require File.expand_path('../config/application', __FILE__)
 
 BookSharingApp::Application.load_tasks
 
-Rake::Task['RakeDeploy'].invoke
+#Rake::Task['RakeDeploy'].invoke
