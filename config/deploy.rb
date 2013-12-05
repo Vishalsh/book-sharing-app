@@ -12,8 +12,8 @@ set :scm_passphrase, "p@ssw0rd"
 set :use_sudo, true
 set :deploy_via, :copy
 
-set :ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
-#set :ssh_options, { :forward_agent => true }
+#set :ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
+set :ssh_options, { :forward_agent => true }
 
 set :deploy_to, "/home/user/BookSharing"
 
