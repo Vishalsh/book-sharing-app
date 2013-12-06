@@ -7,10 +7,10 @@ BookSharingApp::Application.routes.draw do
   match '/test/logout' , controller: 'test#logout', via: [:get, :post]
   get '/anonymous/index' , controller: 'anonymous#index'
 
-  resources :test
   resources :books
+  resources :home
 
-  root 'test#index'
+  root 'home#index'
 
 
   # Example of regular route:

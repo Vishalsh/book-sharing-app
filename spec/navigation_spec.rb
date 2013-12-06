@@ -7,7 +7,7 @@ describe "Navigation bar" do
   end
 
   before(:each) do
-  	visit 'test/new'
+  	visit 'home/new'
   end
 
   it "should have message" do
