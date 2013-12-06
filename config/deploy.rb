@@ -59,6 +59,7 @@ namespace :deploy do
   desc "Restart Passenger app"
   task :restart do
     run "sudo touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
+    run " BUILD_ID=dontKillMe;    kill -9 $( /usr/sbin/lsof -i:3000 -t );    bundle exec rails s &"
   end
 end
 
