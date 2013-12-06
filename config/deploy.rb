@@ -59,7 +59,6 @@ namespace :deploy do
   desc "Restart Passenger app"
   task :restart do
     run "sudo touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
-    run " sh startserver.sh"
   end
 end
 
