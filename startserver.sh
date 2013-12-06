@@ -3,4 +3,4 @@
 ssh user@10.10.5.111 /home/user/BookSharing/current
 "sudo kill -9 $(ps aux | grep rails | grep -v grep | awk '{ print $2 }');
 BUILD_ID=dontKillMe;
-rails s &"
+rails s &;"
