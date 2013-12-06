@@ -58,7 +58,6 @@ namespace :deploy do
 
   desc "Restart Passenger app"
   task :restart do
-    run "sudo kill -9 $(ps aux | grep rails | grep -v grep | awk '{ print $2 }')"
     run "sudo touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
   end
 end
