@@ -8,6 +8,7 @@ BookSharingApp::Application.routes.draw do
   get '/anonymous/index' , controller: 'anonymous#index'
 
   resources :test
+  resources :books
 
   root 'test#index'
 
