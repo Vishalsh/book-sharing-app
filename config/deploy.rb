@@ -64,4 +64,5 @@ end
 
 after "deploy", "deploy:symlink_config_files"
 after "deploy:symlink_config_files", "deploy:open_firewall_port"
-after "deploy:open_firewall_port", "deploy:restart"
+after "deploy:open_firewall_port", "deploy:migrate"
+after "deploy:migrate", "deploy:restart"
