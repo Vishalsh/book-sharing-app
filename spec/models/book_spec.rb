@@ -3,31 +3,22 @@ require 'spec_helper'
 describe Book do
 
   before(:each) do
-    @book = FactoryGirl.create(:valid_book)
+    @book = FactoryGirl.build(:valid_book)
   end
 
   it 'should valid with proper values' do
     @book.should be_valid
+    @book.errors.size.should be(0)
   end
 
-  it 'should not valid without a title' do
-    @book.title = nil
-    @book.should_not be_valid
-  end
-
-  it 'should not valid without a description' do
-    @book.description = nil
-    @book.should_not be_valid
-  end
-
-  it 'should not valid without a isbn' do
-    @book.isbn = nil
-    @book.should_not be_valid
-  end
-
-  it 'should not valid without a edition' do
-    @book.edition = nil
-    @book.should_not be_valid
+  context "Validations" do
+    [:title, :description, :isbn, :edition].each do |attr|
+      it "should not be valid without #{attr}" do
+        @book[attr] = nil
+        @book.should_not be_valid
+        @book.errors.to_hash[attr].should_not be_nil
+      end
+    end
   end
 
   it 'should not valid with an isbn number already exists' do

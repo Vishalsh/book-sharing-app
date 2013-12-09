@@ -2,13 +2,8 @@ require 'spec_helper'
 
 describe BooksController do
 
-  before(:each) do
-    CASClient::Frameworks::Rails::Filter.fake('alladin')
-  end
-
-
   describe 'GET #new' do
-    it 'should renders the #new page' do
+    it 'should render the #new page' do
       get :new
       response.should render_template :new
     end
@@ -17,14 +12,13 @@ describe BooksController do
   describe 'POST #create' do
 
     context 'with valid attributes' do
-
       it 'creates a new book' do
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
         }.to change(Book, :count).by(1)
       end
     end
 
-    it "redirects to the show new contact" do
+    it "redirects to the show new book" do
       post :create, book: FactoryGirl.attributes_for(:valid_book)
       response.should redirect_to Book.last
     end
