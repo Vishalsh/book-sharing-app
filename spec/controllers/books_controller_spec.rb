@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe BooksController do
 
+  before(:each) do
+    CASClient::Frameworks::Rails::Filter.fake('alladin')
+  end
+
   describe 'GET #new' do
     it 'should render the #new page' do
       get :new
@@ -15,6 +19,11 @@ describe BooksController do
       it 'creates a new book' do
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
         }.to change(Book, :count).by(1)
+      end
+
+      it 'creates a new bookOwner' do
+        expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
+        }.to change(BookOwner, :count).by(1)
       end
     end
 

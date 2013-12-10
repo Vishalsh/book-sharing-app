@@ -22,7 +22,7 @@ describe Book do
   end
 
   it 'should not valid with an isbn number already exists' do
-    expect{FactoryGirl.create(
+    expect{FactoryGirl.build(
         :book, title: 'abcd', description: 'hello world', isbn: '123456789', edition: '1'
     )}.to raise_error
   end
