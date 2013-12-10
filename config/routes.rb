@@ -10,7 +10,7 @@ BookSharingApp::Application.routes.draw do
   resources :books
   resources :home
 
-  root 'home#index'
+  root 'books#new'
 
 
   # Example of regular route:

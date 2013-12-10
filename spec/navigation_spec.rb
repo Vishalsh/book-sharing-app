@@ -10,16 +10,13 @@ describe "Navigation bar" do
   	visit 'home/new'
   end
 
-  it "should have a greeting message" do
+  #TODO : Put these tests in a functional spec
+
+  it "should have message" do
     expect(page).to have_content('What would you like to do?')
   end
   
   it "should have link to search page" do 
   	expect(page).to have_link('Search', href: '#')
-  end
-
-  it "should have link to logout" do 
-    expect(page).to have_link('Logout', href: "/home/logout")
-  end
-
+  end 
 end
