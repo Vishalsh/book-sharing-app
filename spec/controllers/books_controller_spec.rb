@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe BooksController do
 
+  before(:each) do
+    CASClient::Frameworks::Rails::Filter.fake('alladin')
+  end
+
   describe 'GET #new' do
     it 'should render the #new page' do
       get :new
