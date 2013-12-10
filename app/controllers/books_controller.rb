@@ -8,7 +8,7 @@ class BooksController < ApplicationController
     @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition))
 
     if @book.save
-      redirect_to book_path(@book)
+      redirect_to new_book_path, {notice: @book.title}
     else
       render template: 'books/new'
     end

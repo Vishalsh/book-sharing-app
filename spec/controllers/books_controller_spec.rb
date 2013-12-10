@@ -22,9 +22,9 @@ describe BooksController do
       end
     end
 
-    it "redirects to the show new book" do
+    it 'redirects to the add new book page with title of last added book' do
       post :create, book: FactoryGirl.attributes_for(:valid_book)
-      response.should redirect_to Book.last
+      response.should redirect_to(new_book_path),{notice: FactoryGirl.attributes_for(:valid_book)[:title] }
     end
 
     context 'with invalid attributes' do
