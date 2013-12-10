@@ -5,10 +5,10 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition))
+    @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition, :author))
 
     if @book.save
-      redirect_to new_book_path, {notice: @book.title}
+      redirect_to new_book_path, {notice: @book.title.upcase}
     else
       render template: 'books/new'
     end
