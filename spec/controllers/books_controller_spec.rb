@@ -27,9 +27,9 @@ describe BooksController do
       end
     end
 
-    it "redirects to the show new book" do
+    it 'redirects to the add new book page with title of last added book' do
       post :create, book: FactoryGirl.attributes_for(:valid_book)
-      response.should redirect_to Book.last
+      response.should redirect_to(new_book_path),{notice: FactoryGirl.attributes_for(:valid_book)[:title] }
     end
 
     context 'with invalid attributes' do
@@ -60,6 +60,62 @@ describe BooksController do
     it 'should render the #show page' do
       get :show, id: @book
       response.should render_template :show
+    end
+
+  end
+
+  describe 'GET #edit' do
+
+    it 'should render the edit page' do
+      get :edit, id: FactoryGirl.create(:valid_book)
+      response.should render_template :edit
+    end
+
+  end
+
+  describe 'PUT #update' do
+
+    before(:each) do
+      @book = FactoryGirl.create(:valid_book)
+    end
+
+    context 'with valid attributes' do
+
+      it 'located the requested @book' do
+        put :update, id: @book, book: FactoryGirl.attributes_for(:valid_book)
+        assigns(:book).should eq(@book)
+      end
+
+      it 'changes the book attributes' do
+        put :update, id: @book, book: FactoryGirl.attributes_for(:valid_book, title: 'Harry Potter and The Chamber of secrets')
+        @book.reload
+        @book.title.should eq('Harry Potter and The Chamber of secrets')
+      end
+
+      it 'should redirect to the updated contact' do
+        put :update, id: @book, book: FactoryGirl.attributes_for(:valid_book)
+        response.should redirect_to @book
+      end
+
+    end
+
+    context 'with invalid attributes' do
+      it 'located the requested @book' do
+        put :update, id: @book, book: FactoryGirl.attributes_for(:invalid_book)
+        assigns(:book).should eq(@book)
+      end
+    end
+
+    it "does not change @contact's attributes" do
+      put :update, id: @book,
+          book: FactoryGirl.attributes_for(:invalid_book, isbn: nil)
+      @book.reload
+      @book.title.should eq('Harry Potter and The Prisoner fo Askaban')
+    end
+
+    it "re-renders the edit method" do
+      put :update, id: @book, book: FactoryGirl.attributes_for(:invalid_book)
+      response.should render_template :edit
     end
 
   end

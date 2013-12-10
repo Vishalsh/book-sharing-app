@@ -63,3 +63,5 @@ gem "capistrano", "~> 2.15.5"
 gem 'capistrano-ext'
 
 gem 'bundler'
+
+gem "bootstrap-sass", "~> 3.0.3.0"

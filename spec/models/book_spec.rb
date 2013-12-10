@@ -6,7 +6,7 @@ describe Book do
     @book = FactoryGirl.build(:valid_book)
   end
 
-  it 'should valid with proper values' do
+  it 'should be valid with proper values' do
     @book.should be_valid
     @book.errors.size.should be(0)
   end
@@ -25,6 +25,11 @@ describe Book do
     expect{FactoryGirl.build(
         :book, title: 'abcd', description: 'hello world', isbn: '123456789', edition: '1'
     )}.to raise_error
+    end
+
+  it 'should not be valid if edition is not an integer' do
+    @book.edition = 'abc'
+    @book.should_not be_valid
   end
 
 end
