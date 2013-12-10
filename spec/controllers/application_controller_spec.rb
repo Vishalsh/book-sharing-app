@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe 'ApplicationController' do
-
-
+  
   controller do
     def index
       redirect_to '/hugga/pugga'

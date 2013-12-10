@@ -41,3 +41,5 @@ RSpec.configure do |config|
   config.order = "random"
   config.include Capybara::DSL
 end
+
+CASClient::Frameworks::Rails::Filter.fake('alladin')
