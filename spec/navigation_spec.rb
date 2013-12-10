@@ -10,6 +10,8 @@ describe "Navigation bar" do
   	visit 'home/new'
   end
 
+  #TODO : Put these tests in a functional spec
+
   it "should have message" do
     expect(page).to have_content('What would you like to do?')
   end

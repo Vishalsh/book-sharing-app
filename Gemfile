@@ -63,3 +63,5 @@ gem 'capistrano-ext'
 
 gem 'heroku'
 gem 'bundler'
+
+gem "bootstrap-sass", "~> 3.0.3.0"

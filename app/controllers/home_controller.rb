@@ -2,11 +2,10 @@ class HomeController < ApplicationController
 
   def index
     redirect_to '/home/new'
-
   end
 
   def new
-    @user = session[:cas_user]
+    #@user = session[:cas_user]
   end
 
 

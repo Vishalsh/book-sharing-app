@@ -1,0 +1,51 @@
+.navbar-brand {
+  padding: 5px 15px 16px;
+}
+
+.navbar-nav {
+  padding-top: 19px;
+  padding-left: 130px;
+}
+
+.navbar-nav > li {
+  padding-right: 20px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.navbar-inverse .navbar-nav > li:hover {
+  a {
+    background: white;
+    color: #101010;
+    border-radius: 6px;
+  }
+}
+
+.navbar-right {
+  padding-left: 0px;
+  #username {
+    font-size: 16px;
+    color: #999;
+    padding-top: 9px;
+    span {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+
+.navbar-toggle {
+  margin-top: 21px;
+}
+//******************************* Media Queries **************************************//
+
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    padding-left: 20px;
+  }
+}
