@@ -1,5 +1,5 @@
 #require 'capistrano/ext/multistage'
-require 'bundler/capistrano'
+#require 'bundler/capistrano'
 
 set :application, "booksharingapp"
 set :scm, :git
