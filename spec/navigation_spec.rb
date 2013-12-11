@@ -15,8 +15,21 @@ describe "Navigation bar" do
   #it "should have message" do
   #  expect(page).to have_content('What would you like to do?')
   #end
-  
-  it "should have link to search page" do 
-  	expect(page).to have_link('Search', href: '#')
-  end 
+
+  context "Should have links" do
+    it "should have link to search page" do
+      expect(page).to have_link('Search Book', href: '/search')
+    end
+
+    it "should have link to Manage Your Books page" do
+      expect(page).to have_link('Manage Your Books', href: '/books/own_books')
+    end
+
+    it "should have link to List All Book page" do
+      expect(page).to have_link('List All Books', href: '/books' )
+    end
+
+  end
+
+
 end

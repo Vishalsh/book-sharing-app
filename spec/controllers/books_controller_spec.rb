@@ -13,6 +13,34 @@ describe BooksController do
     end
   end
 
+  describe 'GET #index' do
+    it 'should render the #index page' do
+      get :index
+      response.should render_template :index
+    end
+
+    #it 'should fill the list of all books' do
+    #
+    #  aBook =FactoryGirl.create(:valid_book)
+    #
+    #  Book.all.should_not be_nil
+    #
+    #  get :index
+    #  @controller.allBooks.should_not be_nil
+    #  @controller.allBooks.should be_kind_of ActiveRecord::Relation
+    #
+    #  aBook.delete
+    #end
+
+  end
+
+  describe 'GET #own_books' do
+    it 'should render the #own_books page' do
+      get :own_books
+      response.should render_template :own_books
+    end
+  end
+
   describe 'POST #create' do
 
     context 'with valid attributes' do
