@@ -19,18 +19,12 @@ describe BooksController do
       response.should render_template :index
     end
 
-    #it 'should fill the list of all books' do
-    #
-    #  aBook =FactoryGirl.create(:valid_book)
-    #
-    #  Book.all.should_not be_nil
-    #
-    #  get :index
-    #  @controller.allBooks.should_not be_nil
-    #  @controller.allBooks.should be_kind_of ActiveRecord::Relation
-    #
-    #  aBook.delete
-    #end
+    it 'should get the list of all books' do
+      books = FactoryGirl.create(:valid_book)
+      books.should_not be_nil
+      get :index
+      assigns(:books).should eq([books])
+    end
 
   end
 

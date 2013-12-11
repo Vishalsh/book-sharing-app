@@ -1,3 +1,7 @@
+.navbar {
+  border-radius: 0;
+}
+
 .navbar-brand {
   padding: 5px 15px 16px;
 }
@@ -37,6 +41,10 @@
   }
 }
 
+body {
+  background: #f5f5f5;
+}
+
 .navbar-toggle {
   margin-top: 21px;
 }
@@ -48,6 +56,22 @@
 .alert {
   padding: 10px;
 }
+
+.book-blocks > .col-lg-4 {
+  padding: 6px;
+}
+.block {
+  background: white;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  padding: 15px;
+
+  span {
+    word-wrap: break-word;
+  }
+}
+
+
 //******************************* Media Queries **************************************//
 
 

@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
 
   def index
+    @books = Book.all
   end
 
   def own_books
@@ -14,8 +15,8 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition, :author))
 
-    if @book.save && BookOwner.new(user_id: session[:cas_user], book_id:@book.id).save
-      redirect_to new_book_path, {notice: @book.title.upcase}
+    if @book.save && BookOwner.new(user_id: session[:cas_user], book_id: @book.id).save
+      redirect_to new_book_path, {notice: @book.title}
     else
       render template: 'books/new'
     end
