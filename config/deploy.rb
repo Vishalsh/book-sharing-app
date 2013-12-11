@@ -1,6 +1,3 @@
-#require 'capistrano/ext/multistage'
-#require 'bundler/capistrano'
-
 set :application, "booksharingapp"
 set :scm, :git
 set :branch, "master"
