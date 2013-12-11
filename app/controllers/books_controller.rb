@@ -33,4 +33,8 @@ class BooksController < ApplicationController
 
   end
 
+  def show_user_book
+    @books = BookOwner.where(user_id: session[:cas_user])
+  end
+
 end
