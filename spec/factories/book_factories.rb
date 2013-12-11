@@ -1,7 +1,9 @@
 FactoryGirl.define do
+
   factory :valid_book, class: Book do |f|
     f.title 'Harry Potter and The Prisoner fo Askaban'
     f.description 'Harry Potter Epic'
+    f.author 'JK Rowling'
     f.isbn '123456789'
     f.edition 1
   end
@@ -9,6 +11,7 @@ FactoryGirl.define do
   factory :invalid_book, class: Book do |f|
     f.title ''
     f.description 'Harry Potter Epic'
+    f.author 'JK Rowling'
     f.isbn '123456789'
     f.edition 1
   end

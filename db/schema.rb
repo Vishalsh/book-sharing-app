@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20131209062515) do
     t.integer  "edition"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "author"
   end
 
 end
