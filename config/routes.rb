@@ -6,12 +6,12 @@ BookSharingApp::Application.routes.draw do
 
   match '/home/logout' , controller: 'home#logout', via: [:get, :post]
   get '/anonymous/index' , controller: 'anonymous#index'
-  #get '/manageyourbooks', controller: 'books#show_user_book'
+  get '/books/own_books', controller: 'books#own_books'
 
-  resources :books
-  resources :home
+  resources :search, only: [:index]
+  resources :books, :home
 
-  root 'books#new'
+  root 'search#index'
 
 
   # Example of regular route:
