@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212055526) do
+ActiveRecord::Schema.define(version: 20131212115257) do
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -24,10 +24,8 @@ ActiveRecord::Schema.define(version: 20131212055526) do
   end
 
   create_table "books_owners", id: false, force: true do |t|
-    t.integer "book_id",     null: false
-    t.integer "owner_id",    null: false
-    t.integer "book_id_id"
-    t.integer "owner_id_id"
+    t.integer "book_id",  null: false
+    t.integer "owner_id", null: false
   end
 
   create_table "owners", force: true do |t|

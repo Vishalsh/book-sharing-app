@@ -1,3 +1,17 @@
-<h1> List all your books here </h1>
+<div class='row'>
+  <div class='col-lg-4'>
+    <h1> List of your books </h1>
+  </div>
+  <div class='col-lg-8'>
+    <div class='pull-right'>
+      <a href='/books/new'>
+        <button class='btn btn-primary'>Share Another Book</button>
+      </a>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Add New Book', new_book_path %>
+
+
+<%= render 'books' %>
+

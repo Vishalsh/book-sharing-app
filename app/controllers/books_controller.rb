@@ -5,7 +5,12 @@ class BooksController < ApplicationController
   end
 
   def own_books
-
+    owner = Owner.where(name: session[:cas_user])
+    if owner
+      @books = owner.map{ |e| e.books}.inject(&:+)
+    else
+      @books = []
+    end
   end
 
   def new
@@ -39,11 +44,5 @@ class BooksController < ApplicationController
     else
       render 'edit'
     end
-
   end
-
-  def show_user_book
-    @books = Owner.where(user_id: session[:cas_user])
-  end
-
 end
