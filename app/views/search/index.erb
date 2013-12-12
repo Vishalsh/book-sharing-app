@@ -1,1 +1,29 @@
 <h1>Search the book here</h1>
+<%= form_tag search_index_path, :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+<% end %>
+
+<% @books.each do |book| %>
+<div>
+  <strong>Title:</strong>
+  <%= book.title %>
+</div>
+
+<div>
+  <strong>ISBN:</strong>
+  <%= book.isbn %>
+</div>
+
+<div>
+  <strong>Edition:</strong>
+  <%= book.edition %>
+</div>
+
+<div>
+  <strong>Description:</strong>
+  <%= book.description %>
+</div>
+<% end %>

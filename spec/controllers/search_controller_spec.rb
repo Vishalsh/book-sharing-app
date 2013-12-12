@@ -13,4 +13,11 @@ describe SearchController do
     end
   end
 
+    it 'should get the text input' do
+      books = FactoryGirl.create(:valid_book)
+      books.should_not be_nil
+      get :index
+      assigns(:books).should eq([books])
+    end
+
 end
