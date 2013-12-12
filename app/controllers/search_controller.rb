@@ -1,10 +1,7 @@
 class SearchController < ApplicationController
 
   def index
-    @books = Book.search(params[:search])
-    if @books.nil?
-
-    end
+    @books = Book.find_by_title(params[:search])
   end
 
 end

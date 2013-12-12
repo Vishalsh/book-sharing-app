@@ -32,6 +32,8 @@ describe Book do
     @book.should_not be_valid
   end
 
-
+  context "Search Books" do
+    it
+  end
 
 end
