@@ -43,9 +43,9 @@ describe BooksController do
         }.to change(Book, :count).by(1)
       end
 
-      it 'creates a new bookOwner' do
+      it 'creates a new owner' do
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
-        }.to change(BookOwner, :count).by(1)
+        }.to change(Owner, :count).by(1)
       end
     end
 
@@ -62,7 +62,7 @@ describe BooksController do
       end
     end
 
-    it "re-renders the new method" do
+    it 're-renders the new method' do
       post :create, book: FactoryGirl.attributes_for(:invalid_book)
       response.should render_template :new
     end

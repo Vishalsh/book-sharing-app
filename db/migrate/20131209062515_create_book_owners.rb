@@ -1,8 +1,7 @@
 class CreateBookOwners < ActiveRecord::Migration
   def self.up
     create_table :book_owners do |t|
-      t.string :user_id
-      t.references :book, index:true
+      t.string :name
       t.timestamps
     end
   end

@@ -25,11 +25,17 @@ describe Book do
     expect{FactoryGirl.build(
         :book, title: 'abcd', description: 'hello world', isbn: '123456789', edition: '1'
     )}.to raise_error
-    end
+  end
 
   it 'should not be valid if edition is not an integer' do
     @book.edition = 'abc'
     @book.should_not be_valid
+  end
+
+  context 'Already existing' do
+
+    it 'is being inserted by another user'
+    it 'is being inserted by the same user'
   end
 
 
