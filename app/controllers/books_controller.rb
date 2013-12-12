@@ -15,7 +15,8 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition, :author))
 
-    if @book.save && BookOwner.new(user_id: session[:cas_user], book_id: @book.id).save
+    if @book.save
+      @book.owners.create(name: session[:cas_user])
       redirect_to new_book_path, {notice: @book.title}
     else
       render template: 'books/new'
@@ -42,7 +43,7 @@ class BooksController < ApplicationController
   end
 
   def show_user_book
-    @books = BookOwner.where(user_id: session[:cas_user])
+    @books = Owner.where(user_id: session[:cas_user])
   end
 
 end

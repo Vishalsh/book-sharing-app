@@ -27,6 +27,10 @@
                 <label class='col-lg-6 col-md-6 col-sm-6 col-xs-6 control-label'>Description:</label>
                 <span class='col-lg-6 col-md-6 col-sm-6 col-xs-6'><%= book.description %></span>
               </div>
+              <div class='row'>
+                <label class='col-lg-6 col-md-6 col-sm-6 col-xs-6 control-label'>Owner:</label>
+                <span class='col-lg-6 col-md-6 col-sm-6 col-xs-6'><%= book.owners.map{ |e| e.name}.join ', ' %></span>
+              </div>
             </div>
           </div>
         </div>
