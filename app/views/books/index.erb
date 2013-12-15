@@ -1,3 +1,9 @@
 <h1>List of all books:</h1>
 
-<%= render 'books' %>
+<% if @books.empty? %>
+    <div class='alert alert-info'>
+      No books found.
+    </div>
+<% else %>
+    <%= render 'books' %>
+<% end %>
