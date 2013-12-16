@@ -43,12 +43,25 @@ describe BooksController do
         }.to change(Book, :count).by(1)
       end
 
-      it 'creates a new owner' do
+      it 'creates a new owner if the owneer does not exist' do
+        Owner.where("name like 'alladin'").should be_empty
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
         }.to change(Owner, :count).by(1)
+        Owner.where("name like 'alladin'").should_not be_empty
       end
     end
 
+    it 'does not create a new owner if the owner already exists' do
+        aBook = FactoryGirl.create(:valid_book)
+        aBook.owners.find_or_create_by(name: 'alladin')
+        expect do
+          post :create, book: FactoryGirl.attributes_for(:another_valid_book)
+        end.not_to change(Owner, :count)
+
+        # expect { post :create, book: FactoryGirl.attributes_for(:another_valid_book)
+        # }.not_to change(Owner, :count)
+    end
+    
     it 'redirects to the add new book page with title of last added book' do
       post :create, book: FactoryGirl.attributes_for(:valid_book)
       response.should redirect_to(new_book_path),{notice: FactoryGirl.attributes_for(:valid_book)[:title] }

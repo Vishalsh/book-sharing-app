@@ -21,7 +21,7 @@ class BooksController < ApplicationController
     @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition, :author))
 
     if @book.save
-      @book.owners.create(name: session[:cas_user])
+      @book.owners << Owner.find_or_create_by(name: session[:cas_user])
       redirect_to new_book_path, {notice: @book.title}
     else
       render template: 'books/new'

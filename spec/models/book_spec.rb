@@ -22,9 +22,14 @@ describe Book do
   end
 
   it 'should not valid with an isbn number already exists' do
-    expect{FactoryGirl.build(
-        :book, title: 'abcd', description: 'hello world', isbn: '123456789', edition: '1'
-    )}.to raise_error
+    expect{ @book.save }.to change(Book, :count).by(1)    
+    expect do
+     anotherBook = FactoryGirl.build( :valid_book)
+     anotherBook.should_not be_valid
+     anotherBook.errors.to_hash[:isbn].should_not be_nil
+     anotherBooks.save
+   end.to raise_error
+    
   end
 
   it 'should not be valid if edition is not an integer' do
