@@ -1,0 +1,20 @@
+.image {
+  height: 160px;
+  background: url('NoPhotoAvailable.jpg') no-repeat center;
+  background-size: contain;
+  margin-bottom: 10px;
+}
+
+.book-blocks > .col-lg-4 {
+  padding: 6px;
+}
+.block {
+  background: white;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  padding: 15px;
+
+  span {
+    word-wrap: break-word;
+  }
+}
