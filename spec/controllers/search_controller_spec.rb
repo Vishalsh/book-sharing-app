@@ -21,7 +21,7 @@ describe SearchController do
   it 'should return a book matching the title' do
     book = FactoryGirl.create(:valid_book)
     book.should_not be_nil
-    get(:index, {'search' => book.title})
+    get(:index, {'title' => book.title})
     assigns(:books).should eq([book])
   end
 

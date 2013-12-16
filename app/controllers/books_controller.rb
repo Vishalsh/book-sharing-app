@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   def own_books
     owner = Owner.where(name: session[:cas_user])
     if owner
-      @books = owner.map{ |e| e.books}.inject(&:+)
+      @books = owner.map{ |e| e.books}.inject([]) { |res,cur| res + cur}
     else
       @books = []
     end

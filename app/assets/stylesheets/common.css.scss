@@ -1,3 +1,11 @@
+body {
+  background: #f5f5f5;
+}
+
+.content {
+  margin: 0 10px;
+}
+
 .navbar {
   border-radius: 0;
 }
@@ -28,6 +36,10 @@
   }
 }
 
+.navbar-toggle {
+  margin-top: 21px;
+}
+
 .navbar-right {
   padding-left: 0px;
   #username {
@@ -41,20 +53,11 @@
   }
 }
 
-body {
-  background: #f5f5f5;
-}
 
-.navbar-toggle {
-  margin-top: 21px;
-}
-
-.content {
-  margin: 0 10px;
-}
+//******************************* Common fetch it some other file **************************************//
 
 .alert {
-  padding: 10px;
+  padding: 8px;
 }
 
 .book-blocks > .col-lg-4 {
