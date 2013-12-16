@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+git cclass HomeController < ApplicationController
 
   def index
     redirect_to '/home/new'
