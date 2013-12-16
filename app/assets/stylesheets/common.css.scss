@@ -6,51 +6,36 @@ body {
   margin: 0 10px;
 }
 
-.navbar {
-  border-radius: 0;
+.row {
+  margin: 0;
 }
 
-.navbar-brand {
-  padding: 5px 15px 16px;
+.header {
+  background: lightgray;
+  padding: 10px;
+  .logo {
+    background: url("logo.png") no-repeat;
+    height: 40px;
+    background-size: contain;
+  }
 }
 
-.navbar-nav {
-  padding-top: 19px;
-  padding-left: 130px;
+.search-form {
+  padding-top: 1px;
+  padding-left: 10px;
+}
+
+.navbar li:hover{
+  background: lightgray;
 }
 
 .navbar-nav > li {
-  padding-right: 20px;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-  padding: 10px;
   font-size: 16px;
+  padding-right: 10px;
 }
 
-.navbar-inverse .navbar-nav > li:hover {
-  a {
-    background: white;
-    color: #101010;
-    border-radius: 6px;
-  }
-}
-
-.navbar-toggle {
-  margin-top: 21px;
-}
-
-.navbar-right {
-  padding-left: 0px;
-  #username {
-    font-size: 16px;
-    color: #999;
-    padding-top: 9px;
-    span {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-  }
+.icon {
+  padding-left: 7px;
 }
 
 
@@ -82,8 +67,3 @@ h1 {
 //******************************* Media Queries **************************************//
 
 
-@media (max-width: 768px) {
-  .navbar-nav {
-    padding-left: 20px;
-  }
-}

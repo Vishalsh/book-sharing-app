@@ -17,17 +17,17 @@ describe "Navigation bar" do
   #end
 
   context "Should have links" do
-    it "should have link to search page" do
-      expect(page).to have_link('Search Book', href: '/search')
+    it "should have link to add new book" do
+      expect(page).to have_link('Add New Book', href: '/books/new')
     end
 
     it "should have link to Manage Your Books page" do
-      expect(page).to have_link('Manage Your Books', href: '/books/own_books')
+      expect(page).to have_link('All Books', href: '/books/own_books')
     end
 
-    it "should have link to List All Book page" do
-      expect(page).to have_link('List All Books', href: '/books' )
-    end
+    #it "should have link to List All Book page" do
+    #  expect(page).to have_link('List All Books', href: '/books' )
+    #end
 
   end
 
