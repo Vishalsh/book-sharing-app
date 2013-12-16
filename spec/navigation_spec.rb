@@ -12,11 +12,10 @@ describe "Navigation bar" do
 
   #TODO : Put these tests in a functional spec
 
-  #it "should have message" do
-  #  expect(page).to have_content('What would you like to do?')
-  #end
 
-  context "Should have links" do
+
+
+ context "Should have links" do
     it "should have link to search page" do
       expect(page).to have_link('Search Book', href: '/search')
     end
