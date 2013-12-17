@@ -43,7 +43,7 @@ describe BooksController do
         }.to change(Book, :count).by(1)
       end
 
-      it 'creates a new owner if the owneer does not exist' do
+      it 'creates a new owner if the owner does not exist' do
         Owner.where("name like 'alladin'").should be_empty
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
         }.to change(Owner, :count).by(1)
