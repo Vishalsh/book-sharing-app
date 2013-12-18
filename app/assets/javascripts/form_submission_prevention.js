@@ -1,6 +1,6 @@
 var setupSearchBox = function(){
    $(".search-form").on('submit', function(event) {
-       if ($(".search-box").val() == "") {
+       if ($("#search_box").val() == "") {
            event.preventDefault();
        }
    })
