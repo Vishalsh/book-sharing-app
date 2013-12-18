@@ -6,9 +6,11 @@ class BooksController < ApplicationController
 
   def own_books
     @book = Book.new
-    owner = Owner.where(name: session[:cas_user])
+
+    owner = Owner.where(name: session[:cas_user]).first
+
     if owner
-      @books = owner.map { |e| e.books }.inject([]) { |res, cur| res + cur }
+      @books = owner.books.uniq
     else
       @books = []
     end
