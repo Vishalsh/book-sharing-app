@@ -16,12 +16,23 @@
   <div class='col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4'>
     <%= form_tag search_index_path, class: 'search-form', method: 'get' do %>
         <div class="input-group">
-          <input type='text' name='title' class='form-control search-box' placeholder='Search Your Book'/>
-          <span class='input-group-addon'>
-            <button type='submit' class='btn'>
-              <span class='glyphicon glyphicon-search'></span>
-            </button>
-          </span>
+        <span class="input-group-btn">
+           <button class="btn btn-default" type='button dropdown-toggle' data-toggle='dropdown'>
+             <span id="selected_value">Title</span>
+             <span class="caret"></span>
+           </button>
+           <ul class='dropdown-menu' id="filter">
+             <li><a>Title</a></li>
+             <li><a>Author</a></li>
+             <li><a>Isbn</a></li>
+           </ul>
+        </span>
+          <input type='text' name='title' class='form-control' id='search_box' placeholder='Search Your Book By Title'/>
+        <span class='input-group-addon'>
+          <button type='submit' class='btn'>
+            <span class='glyphicon glyphicon-search'></span>
+          </button>
+        </span>
         </div>
     <% end %>
   </div>
@@ -70,7 +81,6 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <span class='icon glyphicon glyphicon-user'></span>
