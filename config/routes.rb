@@ -11,7 +11,7 @@ BookSharingApp::Application.routes.draw do
   resources :search, only: [:index]
   resources :books, :home
 
-  root 'search#index'
+  root 'books#own_books'
 
 
   # Example of regular route:

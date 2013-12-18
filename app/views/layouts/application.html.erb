@@ -10,13 +10,15 @@
 <body>
 
 <div class='header row'>
-  <div class='logo col-lg-4 col-md-4'></div>
-  <div class='search-form col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4'>
-    <%= form_tag search_index_path, :method => 'get' do %>
+  <div class='col-lg-4 col-md-4'>
+    <div class='logo'></div>
+  </div>
+  <div class='col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4'>
+    <%= form_tag search_index_path, class: 'search-form', method: 'get' do %>
         <div class="input-group">
-          <input type='text' name='title' class='form-control' placeholder='Search Your Book'/>
+          <input type='text' name='title' class='form-control search-box' placeholder='Search Your Book'/>
           <span class='input-group-addon'>
-            <button type='submit' class='btn btn-primary '>
+            <button type='submit' class='btn'>
               <span class='glyphicon glyphicon-search'></span>
             </button>
           </span>
@@ -39,51 +41,61 @@
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
       <li>
-        <a href="/books/own_books">All Books
+        <a href="/books/own_books">
           <span class='icon glyphicon glyphicon-retweet'></span>
+          All Books
+          <sup class='count count-own-books'>100</sup>
         </a>
       </li>
       <li>
-        <a href="#">Shared
-          <span class='icon glyphicon glyphicon-resize-full'></span>
+        <a href="">
+          <sup class='icon glyphicon glyphicon-resize-full'></sup>
+          Shared
+          <sup class='count count-shared-books'>100</sup>
         </a>
       </li>
       <li>
-        <a href="#">Borrowed
+        <a href="">
           <span class='icon glyphicon glyphicon glyphicon-resize-small'></span>
+          Borrowed
+          <sup class='count count-borrowed-books'>100</sup>
         </a>
       </li>
       <li>
-        <a href="/books/new">Add New Book
+        <a href="" data-toggle='modal' data-target='#addBookModal'>
           <span class='icon glyphicon glyphicon-plus'></span>
+          Add New Book
         </a>
       </li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li>
-        <a href="#">Home
-          <span class='icon glyphicon glyphicon-home'></span>
-        </a>
       </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <%= session[:cas_user] %>
           <span class='icon glyphicon glyphicon-user'></span>
+          <%= session[:cas_user] %>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#">Logout</a></li>
+          <li><a href="/home/logout">Logout</a></li>
         </ul>
       </li>
     </ul>
   </div>
-  <!-- /.navbar-collapse -->
 </nav>
 
+<%= render 'books/form' %>
 
 <div class='content'>
   <%= yield %>
+</div>
+
+<div class='row'>
+  <div class="footer">Copyright &copy 2013, <a href="http://www.thoughtworks.com">ThoughtWorks</a>, Inc. All rights
+    reserved.
+  </div>
+</div>
 </div>
 
 

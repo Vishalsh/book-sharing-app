@@ -1,10 +1,6 @@
 <% if @books.empty? %>
-    <div class='before-result-search-box'>
-      <%= render 'form' %>
-    </div>
-<% else %>
-    <div class='after-result-search-box'>
-      <%= render 'form' %>
+    <div class='alert alert-info'>
+      Sorry, No Books Found.
     </div>
 <% end %>
 
