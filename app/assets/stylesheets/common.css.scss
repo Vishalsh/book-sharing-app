@@ -1,5 +1,5 @@
 body {
-  background: #f5f5f5;
+  background: #ffffff;
 }
 
 .content {
@@ -25,7 +25,8 @@ body {
 }
 
 .navbar-default {
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(darkgray), to(gray));
+  background: -webkit-linear-gradient(top, darkgray, gray);
+  background: -moz-linear-gradient(top, darkgray, gray);
   border: 2px solid gray;
   margin: 0 10px 20px;
 
@@ -35,7 +36,7 @@ body {
   }
   .count {
     border: 1px solid gray;
-    padding: 2px;
+    padding: 4px;
     color: white;
     border-radius: 4px;
   }
@@ -46,7 +47,7 @@ body {
 }
 
 .count-shared-books {
-  background: #a8c74f;
+  background: forestgreen;
 }
 
 .count-borrowed-books {
@@ -88,12 +89,6 @@ body {
 
 
 //******************************* Common fetch it some other file **************************************//
-
-.alert {
-  padding: 8px;
-}
-
-
 
 h1 {
   margin: 0 0 20px;

@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   end
 
   def own_books
+    @book =Book.new
     owner = Owner.where(name: session[:cas_user])
     if owner
       @books = owner.map{ |e| e.books}.inject([]) { |res,cur| res + cur}
@@ -22,9 +23,9 @@ class BooksController < ApplicationController
 
     if @book.save
       @book.owners.create(name: session[:cas_user])
-      redirect_to new_book_path, {notice: @book.title}
+      redirect_to books_own_books_path, {notice: @book.title}
     else
-      render template: 'books/new'
+      render template: '/books/new'
     end
   end
 
