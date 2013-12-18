@@ -6,7 +6,6 @@ FactoryGirl.define do
     f.author 'JK Rowling'
     f.isbn '123456789'
     f.edition 1
-    f.current_owner 'alladin'
   end
 
   factory :another_valid_book, class: Book do |f|
@@ -15,7 +14,6 @@ FactoryGirl.define do
     f.author 'JKling'
     f.isbn '1234589'
     f.edition 2
-    f.current_owner 'alladin'
 
   end
 
@@ -25,7 +23,6 @@ FactoryGirl.define do
     f.author 'JK Rowling'
     f.isbn '123456789'
     f.edition 1
-    f.current_owner 'alladin'
      
   end
 
@@ -35,7 +32,6 @@ FactoryGirl.define do
     f.author 'JK Rowling'
     f.isbn '123456789'
     f.edition 1
-    f.current_owner 'mario'
   end
 
 end

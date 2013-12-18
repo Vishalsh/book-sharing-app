@@ -1,14 +1,11 @@
 class Book < ActiveRecord::Base
 
   validates :title, :description, :isbn, :edition, :author, presence: true
-  validates :isbn, uniqueness: true
+  #validates :isbn, uniqueness: true
   validates :edition, numericality: {only_integer: true}
   has_and_belongs_to_many :owners
-  attr_accessor :current_owner
 
-  after_save :associate_with_owner 
-
-  def self.find_by_title title
+ def self.find_by_title title
     if !title.nil? && !title.blank?
       Book.where("title LIKE ?" , "%" + title.to_s + "%")
     else
@@ -16,15 +13,21 @@ class Book < ActiveRecord::Base
     end
   end
 
-
-  private
-
-  def associate_with_owner
-    if @current_owner.nil?
-      raise "No Owner Error"
+  def save_or_update_with_owner
+    if block_given?
+      current_owner = yield()
     end
-    owners << Owner.find_or_create_by(name: @current_owner)
-  end
+    existing_book = Book.find_by(isbn: isbn)
+    
+    if existing_book 
+      existing_book.owners << Owner.find_or_create_by(name: current_owner)
+    else
+      if valid?
+        save
+        owners << Owner.find_or_create_by(name: current_owner)
+      end
+    end
+  end 
 
 
 

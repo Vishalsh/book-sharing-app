@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   end
 
   def own_books
+    @book = Book.new
     owner = Owner.where(name: session[:cas_user])
     if owner
       @books = owner.map { |e| e.books }.inject([]) { |res, cur| res + cur }
@@ -19,9 +20,8 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition, :author))
-    @book.current_owner = session[:cas_user]
 
-    if @book.save
+    if @book.save_or_update_with_owner {session[:cas_user]}
       redirect_to new_book_path, {notice: @book.title}
     else
       render template: 'books/new'
@@ -38,7 +38,6 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.current_owner = session[:cas_user]
 
     if @book.update(params[:book].permit(:title, :description, :isbn, :edition))
       redirect_to @book
