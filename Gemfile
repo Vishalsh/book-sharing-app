@@ -42,6 +42,7 @@ group :test, :development do
   gem "rspec-rails", "~> 2.14.0"
   gem "capybara"
   gem 'factory_girl_rails'
+  gem 'pry'
 end
 
 # Use ActiveModel has_secure_password
@@ -61,7 +62,6 @@ gem 'therubyracer', require: "v8"
 gem "capistrano", "~> 2.15.5"
 gem 'capistrano-ext'
 
-gem 'heroku'
 gem 'bundler'
 
 gem "bootstrap-sass", "~> 3.0.3.0"

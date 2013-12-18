@@ -1,5 +1,3 @@
-#require 'capistrano/ext/multistage'
-
 set :application, "booksharingapp"
 set :scm, :git
 set :branch, "master"
@@ -60,9 +58,15 @@ namespace :deploy do
   task :restart do
     run "sudo touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
   end
+
+  task :run_migrations, :roles => :db do
+    puts "RUNNING DB MIGRATIONS"
+    run "cd #{current_path}; rake db:migrate RAILS_ENV=development"
+  end
+
 end
 
 after "deploy", "deploy:symlink_config_files"
 after "deploy:symlink_config_files", "deploy:open_firewall_port"
-after "deploy:open_firewall_port", "deploy:migrate"
-after "deploy:migrate", "deploy:restart"
+after "deploy:open_firewall_port", "deploy:run_migrations"
+after "deploy:run_migrations", "deploy:restart"

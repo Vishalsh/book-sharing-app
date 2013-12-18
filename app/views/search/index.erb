@@ -1,0 +1,7 @@
+<% if @books.empty? %>
+    <div class='alert alert-info'>
+      Sorry, No Books Found.
+    </div>
+<% end %>
+
+<%= render 'books/books' %>

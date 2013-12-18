@@ -28,7 +28,6 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
@@ -43,3 +42,4 @@ RSpec.configure do |config|
 end
 
 CASClient::Frameworks::Rails::Filter.fake('alladin')
+

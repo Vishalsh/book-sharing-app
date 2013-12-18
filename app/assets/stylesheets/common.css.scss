@@ -1,0 +1,100 @@
+body {
+  background: #ffffff;
+}
+
+.content {
+  margin: 0 10px;
+}
+
+.row {
+  margin: 0;
+}
+
+.header {
+  padding: 10px;
+  .logo {
+    background: url("booksharelogo.png") no-repeat;
+    height: 55px;
+    background-size: contain;
+  }
+}
+
+.search-form {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.navbar-default {
+  background: -webkit-linear-gradient(top, lightgray, darkgray);
+  background: -moz-linear-gradient(top, darkgray, gray);
+  border: 2px solid gray;
+  margin: 0 10px 10px;
+
+  .navbar-nav > li > a {
+    color: white;
+    display: inline-block;
+  }
+  .count {
+    border: 1px solid gray;
+    padding: 4px;
+    color: white;
+    border-radius: 4px;
+  }
+}
+
+.count-own-books {
+  background: #38aadd;
+}
+
+.count-shared-books {
+  background: forestgreen;
+}
+
+.count-borrowed-books {
+  background: #c8232e;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: rgb(96, 96, 96);
+  sup {
+    color: rgb(96, 96, 96);
+  }
+}
+
+.navbar-nav > li {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input-group {
+  .input-group-addon {
+    padding: 0;
+    vertical-align: 0;
+  }
+  .btn {
+    background: darkgray;
+    border-radius: 0;
+  }
+  .glyphicon-search {
+    color: white;
+  }
+}
+
+.icon {
+  padding-right: 20px;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px 0px;
+}
+
+//******************************* Common fetch it some other file **************************************//
+
+h1 {
+  margin: 0 0 20px;
+}
+
+//******************************* Media Queries **************************************//
+
+

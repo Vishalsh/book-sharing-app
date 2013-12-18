@@ -2,48 +2,102 @@
 <html>
 <head>
   <title>BookSharingApp</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse" role="navigation">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
+<div class='header row'>
+  <div class='col-lg-4 col-md-4'>
+    <div class='logo'></div>
+  </div>
+  <div class='col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4'>
+    <%= form_tag search_index_path, class: 'search-form', method: 'get' do %>
+        <div class="input-group">
+          <input type='text' name='title' class='form-control search-box' placeholder='Search Your Book'/>
+          <span class='input-group-addon'>
+            <button type='submit' class='btn'>
+              <span class='glyphicon glyphicon-search'></span>
+            </button>
+          </span>
+        </div>
+    <% end %>
+  </div>
+</div>
 
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">
-      <h3>ShareYourBook</h3>
-    </a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav ">
-      <li><a href="#">Search Book</a> </li>
-      <li><a href="#">Manage Your Books</a></li>
-      <li><a href="#">List All Books</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li ><a href="/home/logout">Logout</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li id="username">Logged in as: <span> <%= session[:cas_user]%> </span> | </li>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="/books/own_books">
+          <span class='icon glyphicon glyphicon-retweet'></span>
+          All Books
+          <sup class='count count-own-books'>100</sup>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <sup class='icon glyphicon glyphicon-resize-full'></sup>
+          Shared
+          <sup class='count count-shared-books'>100</sup>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <span class='icon glyphicon glyphicon glyphicon-resize-small'></span>
+          Borrowed
+          <sup class='count count-borrowed-books'>100</sup>
+        </a>
+      </li>
+      <li>
+        <a href="" data-toggle='modal' data-target='#addBookModal'>
+          <span class='icon glyphicon glyphicon-plus'></span>
+          Add New Book
+        </a>
+      </li>
     </ul>
 
-  </div><!-- /.navbar-collapse -->
+    <ul class="nav navbar-nav navbar-right">
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span class='icon glyphicon glyphicon-user'></span>
+          <%= session[:cas_user] %>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="/home/logout">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </nav>
 
+<%= render 'books/form' %>
 
+<div class='content'>
+  <%= yield %>
+</div>
 
-<%= yield %>
+<div class='row'>
+  <div class="footer">Copyright &copy 2013, <a href="http://www.thoughtworks.com">ThoughtWorks</a>, Inc. All rights
+    reserved.
+  </div>
+</div>
+</div>
+
 
 </body>
 </html>

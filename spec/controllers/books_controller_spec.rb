@@ -2,10 +2,36 @@ require 'spec_helper'
 
 describe BooksController do
 
+  before(:each) do
+    CASClient::Frameworks::Rails::Filter.fake('alladin')
+  end
+
   describe 'GET #new' do
     it 'should render the #new page' do
       get :new
       response.should render_template :new
+    end
+  end
+
+  describe 'GET #index' do
+    it 'should render the #index page' do
+      get :index
+      response.should render_template :index
+    end
+
+    it 'should get the list of all books' do
+      books = FactoryGirl.create(:valid_book)
+      books.should_not be_nil
+      get :index
+      assigns(:books).should eq([books])
+    end
+
+  end
+
+  describe 'GET #own_books' do
+    it 'should render the #own_books page' do
+      get :own_books
+      response.should render_template :own_books
     end
   end
 
@@ -16,11 +42,29 @@ describe BooksController do
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
         }.to change(Book, :count).by(1)
       end
+
+      it 'creates a new owner if the owner does not exist' do
+        Owner.where("name like 'alladin'").should be_empty
+        expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
+        }.to change(Owner, :count).by(1)
+        Owner.where("name like 'alladin'").should_not be_empty
+      end
     end
 
-    it "redirects to the show new book" do
+    it 'does not create a new owner if the owner already exists' do
+        aBook = FactoryGirl.create(:valid_book)
+        aBook.owners.find_or_create_by(name: 'alladin')
+        expect do
+          post :create, book: FactoryGirl.attributes_for(:another_valid_book)
+        end.not_to change(Owner, :count)
+
+        # expect { post :create, book: FactoryGirl.attributes_for(:another_valid_book)
+        # }.not_to change(Owner, :count)
+    end
+    
+    it 'redirects to the add new book page with title of last added book' do
       post :create, book: FactoryGirl.attributes_for(:valid_book)
-      response.should redirect_to Book.last
+      response.should redirect_to(new_book_path),{notice: FactoryGirl.attributes_for(:valid_book)[:title] }
     end
 
     context 'with invalid attributes' do
@@ -31,7 +75,7 @@ describe BooksController do
       end
     end
 
-    it "re-renders the new method" do
+    it 're-renders the new method' do
       post :create, book: FactoryGirl.attributes_for(:invalid_book)
       response.should render_template :new
     end
