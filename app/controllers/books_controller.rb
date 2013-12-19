@@ -18,13 +18,16 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    respond_to do |format|
+      format.html { render partial: 'form' }
+    end
   end
 
   def create
     @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition, :author))
 
     if @book.save_or_update_with_owner {session[:cas_user]}
-      redirect_to new_book_path, {notice: @book.title}
+      redirect_to books_own_books_path, {notice: @book.title}
     else
       render template: 'books/new'
     end

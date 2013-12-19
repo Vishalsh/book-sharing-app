@@ -73,7 +73,7 @@
         </a>
       </li>
       <li>
-        <a href="" data-toggle='modal' data-target='#addBookModal'>
+        <a href="" data-toggle='modal' id='add_new_book'>
           <span class='icon glyphicon glyphicon-plus'></span>
           Add New Book
         </a>
@@ -94,8 +94,6 @@
     </ul>
   </div>
 </nav>
-
-<%= render 'books/form' %>
 
 <div class='content'>
   <%= yield %>
