@@ -9,7 +9,7 @@ describe BooksController do
   describe 'GET #new' do
     it 'should render the #new page' do
       get :new
-      response.should render_template :new
+      response.should render_template 'books/_form'
     end
   end
 

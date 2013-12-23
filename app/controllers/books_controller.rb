@@ -18,6 +18,9 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    respond_to do |format|
+      format.html { render partial: 'form' }
+    end
   end
 
   def create
