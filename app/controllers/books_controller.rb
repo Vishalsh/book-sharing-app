@@ -5,13 +5,13 @@ class BooksController < ApplicationController
   end
 
   def own_books
-    @book = Book.new
-
+    @book = Book.new #TODO: Modal thingy
     owner = Owner.where(name: session[:cas_user]).first
-
-    if owner
-      @books = owner.books.uniq
-    else
+    @copies = []
+   if owner
+      @books, @copies = owner.get_books_with_count_of_copies
+      render template: 'books/own_books'
+   else
       @books = []
     end
   end
@@ -24,7 +24,7 @@ class BooksController < ApplicationController
     @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition, :author))
 
     if @book.save_or_update_with_owner {session[:cas_user]}
-      redirect_to new_book_path, {notice: @book.title}
+      redirect_to books_own_books_path, {notice: @book.title}
     else
       render template: 'books/new'
     end
