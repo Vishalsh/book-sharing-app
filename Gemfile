@@ -64,4 +64,7 @@ gem 'capistrano-ext'
 
 gem 'bundler'
 
+gem 'googlebooks'
+gem "isbn_validation", "~> 1.1.1"
+
 gem "bootstrap-sass", "~> 3.0.3.0"
