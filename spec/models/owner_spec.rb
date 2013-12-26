@@ -20,7 +20,7 @@ describe Owner do
     end
   end
 
-  xit 'should not own a non-existing book' do
-  end
+  xit 'should return books of owner with count of their copies' do
 
+  end
 end

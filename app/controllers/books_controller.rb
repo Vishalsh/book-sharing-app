@@ -5,13 +5,13 @@ class BooksController < ApplicationController
   end
 
   def own_books
-    @book = Book.new
-
+    @book = Book.new #TODO: Modal thingy
     owner = Owner.where(name: session[:cas_user]).first
-
-    if owner
-      @books = owner.books.uniq
-    else
+    @copies = []
+   if owner
+      @books, @copies = owner.get_books_with_count_of_copies
+      render template: 'books/own_books'
+   else
       @books = []
     end
   end
