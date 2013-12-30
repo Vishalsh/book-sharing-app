@@ -16,6 +16,22 @@ class BooksController < ApplicationController
     end
   end
 
+  def get_by_isbn
+    isbn = params[:isbn]
+    book_matching_isbn = GoogleBooks.search('isbn' + isbn).first;
+    @possible_book = Book.new
+    @possible_book.title = book_matching_isbn.title
+    @possible_book.description = book_matching_isbn.description
+    @possible_book.isbn = book_matching_isbn.isbn
+    # @possible_book.edition = book_matching_isbn.edition
+    @possible_book.author = book_matching_isbn.authors 
+    binding.pry
+    render nothing: true
+    respond_to do |format|
+      format.json { render json: @possible_book, status: :OK}
+    end
+  end
+
   def new
     @book = Book.new
     respond_to do |format|
