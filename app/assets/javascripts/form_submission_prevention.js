@@ -1,9 +1,9 @@
-var setupSearchBox = function(){
-   $(".search-form").on('submit', function(event) {
-       if ($("#search_box").val() == "") {
-           event.preventDefault();
-       }
-   })
+var setupSearchBox = function () {
+    $(".search-form").on('submit', function (event) {
+        if ($("#search_box").val() == "") {
+            event.preventDefault();
+        }
+    })
 }
 
 $(document).ready(setupSearchBox);

@@ -40,12 +40,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(params[:book].permit(:title, :description, :isbn, :edition, :author))
-
+    @book = Book.new(title: params["book"]["title"], author: params["book"]["author"],isbn: params["book"]["isbn"],edition: params["book"]["edition"],description: params["book"]["description"] )
     if @book.save_or_update_with_owner {session[:cas_user]}
-      redirect_to books_own_books_path, {notice: @book.title}
+      respond_to do |format|    
+        format.json { render json: @book, status: :created }
+      end
     else
-      render template: 'books/new'
+      respond_to do |format|
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
     end
   end
 

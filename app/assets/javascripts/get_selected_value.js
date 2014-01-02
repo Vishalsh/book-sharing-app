@@ -4,7 +4,7 @@ var getSelectedValue = function () {
         var targetText = $(e.target).text()
 
         $('#selected_value').text(targetText)
-        $('#search_box').attr('placeholder',  'Search Your Book By ' + targetText)
+        $('#search_box').attr('placeholder', 'Search Your Book By ' + targetText)
     })
 
 }

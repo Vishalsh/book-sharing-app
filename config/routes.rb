@@ -7,10 +7,11 @@ BookSharingApp::Application.routes.draw do
   match '/home/logout' , controller: 'home#logout', via: [:get, :post]
   get '/anonymous/index' , controller: 'anonymous#index'
   get '/books/own_books', controller: 'books#own_books'
+  match '/books/create', controller: 'books#create', via: [:post]
+
   resources :books do
     get '/get_by_isbn/:isbn', to: 'books#get_by_isbn', :on => :collection
   end
-  # map.root :controller => "books", 
 
   resources :search, only: [:index]
   resources :books, :home

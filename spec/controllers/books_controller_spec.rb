@@ -39,45 +39,53 @@ describe BooksController do
 
     context 'with valid attributes' do
       it 'creates a new book' do
-        expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
+        expect { post :create, book: FactoryGirl.attributes_for(:valid_book), format: :json
         }.to change(Book, :count).by(1)
       end
 
       it 'creates a new owner if the owner does not exist' do
         Owner.where("name like 'alladin'").should be_empty
-        expect { post :create, book: FactoryGirl.attributes_for(:valid_book)
+        expect { post :create, book: FactoryGirl.attributes_for(:valid_book), format: :json
         }.to change(Owner, :count).by(1)
         Owner.where("name like 'alladin'").should_not be_empty
       end
     end
 
     it 'does not create a new owner if the owner already exists' do
-        aBook = FactoryGirl.create(:valid_book)
-        aBook.owners.find_or_create_by(name: 'alladin')
-        expect do
-          post :create, book: FactoryGirl.attributes_for(:another_valid_book)
-        end.not_to change(Owner, :count)
-
-        # expect { post :create, book: FactoryGirl.attributes_for(:another_valid_book)
-        # }.not_to change(Owner, :count)
+      aBook = FactoryGirl.create(:valid_book)
+      aBook.owners.find_or_create_by(name: 'alladin')
+      expect do
+        post :create, book: FactoryGirl.attributes_for(:another_valid_book), format: :json
+      end.not_to change(Owner, :count)
     end
-    
-    it 'redirects to the add new book page with title of last added book' do
-      post :create, book: FactoryGirl.attributes_for(:valid_book)
-      response.should redirect_to(books_own_books_path),{notice: FactoryGirl.attributes_for(:valid_book)[:title] }
+
+    it 'renders the created book as json' do
+      bookWithOutErrors = FactoryGirl.build(:valid_book)
+      post :create, book: bookWithOutErrors, format: :json
+      response.body.should include (bookWithOutErrors.author)
+    end
+
+    it 'respond with a 201' do
+      post :create, book: FactoryGirl.attributes_for(:valid_book), format: :json
+      response.status.should eq(201)
     end
 
     context 'with invalid attributes' do
-
       it 'does not creates a new book' do
-        expect { post :create, book: FactoryGirl.attributes_for(:invalid_book)
+        expect { post :create, book: FactoryGirl.attributes_for(:invalid_book), format: :json
         }.to_not change(Book, :count)
       end
     end
 
-    it 're-renders the new method' do
-      post :create, book: FactoryGirl.attributes_for(:invalid_book)
-      response.should render_template :new
+    it 'renders the errors as json' do
+      bookWithErrors = FactoryGirl.build(:invalid_book)
+      post :create, book: bookWithErrors, format: :json
+      expect(response.body).to eq("{\"title\":[\"can't be blank\"]}")
+    end
+
+    it 'respond with a 403' do
+      post :create, book: FactoryGirl.attributes_for(:invalid_book), format: :json
+      response.status.should eq(422)
     end
   end
 

@@ -1,71 +1,83 @@
-  <div class='modal fade' id='addBookModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-    <div class='modal-dialog'>
-      <div class='modal-content'>
-        <div class='modal-header'>
-          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-          <h4 class='modal-title' id='myModalLabel'>Add New Book</h4>
-        </div>
+<div class='modal fade' id='addBookModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+        <h4 class='modal-title' id='myModalLabel'>Add New Book</h4>
+      </div>
 
-        <%= form_for @book, remote: true do |f| %>
-            <div class='modal-body'>
-              <div class='form-horizontal'>
+      <%= form_for @book, remote: true do |f| %>
+          <div class='modal-body'>
 
+            <div class="alert alert-success">Book is being saved</div>
+            <div class="alert alert-info">
+              <div class="loader">Saving</div>
+            </div>
+            <div class="alert alert-danger">Error during saving of the form</div>
 
-                <% if @book.errors.any? %>
-                    <div class='row'>
-                      <div class='col-sm-offset-1 col-sm-1'></div>
-                      <div id='error_explanation' class='col-sm-10 '>
-                        <h2><%= pluralize(@book.errors.count, 'error') %> prohibited
-                          this post from being saved:</h2>
-                        <ul>
-                          <% @book.errors.full_messages.each do |msg| %>
-                              <li class='error'><%= msg %></li>
-                          <% end %>
-                        </ul>
-                      </div>
-                    </div>
-                <% end %>
+            <div class='form-horizontal'>
+              <div class='row'>
+                <div class='form-group'>
 
-                <div class='row'>
-                  <div class='form-group'>
+                  <%= f.label :isbn, class: 'col-sm-offset-1 col-sm-1 control-label' %>
+                  <div class='col-sm-3'>
+                    <%= f.text_field :isbn, class: 'form-control', id: 'book_isbn', required: 'true' %>
+                    <div class='errors isbn-errors'></div>
+                  </div>
 
-                    <%= f.label :isbn, class: 'col-sm-offset-1 col-sm-1 control-label' %>
-                    <div class='col-sm-3'>
-                      <%= f.text_field :isbn, class: 'form-control', id: 'book_isbn', required: 'true' %>
-                    </div>
-
-                    <button type='button' class='btn' id='search-button'>
+                  <div class="col-sm-1">
+                    <button type='button' class='btn' id='search_button'>
                       <span class='glyphicon glyphicon-search'></span>
                     </button>
+                  </div>
 
+                  <%= f.label :Title, class: 'col-sm-1 control-label' %>
+                  <div class='col-sm-3'>
+                    <%= f.text_field :title, class: 'form-control' %>
+                    <div class='errors title-errors'></div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class='row'>
+                <div class='form-group'>
+
+                  <%= f.label :author, class: 'col-sm-2 control-label' %>
+                  <div class='col-sm-3'>
+                    <%= f.text_field :author, class: 'form-control' %>
+                    <div class='errors author-errors'></div>
+                  </div>
+
+                  <%= f.label :edition, class: 'col-sm-2 control-label' %>
+                  <div class='col-sm-3'>
+                    <%= f.text_field :edition, class: 'form-control' %>
+                    <div class='errors edition-errors'></div>
+                  </div>
+
+                </div>
+              </div>
+
+
+              <div class='row'>
+                <div class='form-group'>
+                  <%= f.label :description, class: 'col-sm-2 control-label' %>
+                  <div class='col-sm-4'>
+                    <%= f.text_area :description, class: 'form-control' %>
+                    <div class='errors description-errors'></div>
                   </div>
                 </div>
+              </div>
 
-                <div class='row'>
-                  <div class='form-group'>
-                    <%= f.label :Title, class: 'col-sm-offset-1 col-sm-1 control-label' %>
-                    <div class='col-sm-3'>
-                      <%= f.text_field :title, id: 'title', class: 'form-control', required: 'true' %>
-                    </div>
+            </div>
+          </div>
 
-                    <%= f.label :author, class: 'col-sm-2 control-label' %>
-                    <div class='col-sm-3'>
-                      <%= f.text_field :author, id: 'author', class: 'form-control', required: 'true' %>
-                    </div>
-                  </div>
-                </div>
-
-                <div class='row'>
-                  <div class='form-group'>
-                    <%= f.label :description, class: 'col-sm-2 control-label' %>
-                    <div class='col-sm-4'>
-                      <%= f.text_area :description, id:'description', class: 'form-control', required: 'true' %>
-                    </div>
-                  </div>
-                </div>
-        <% end %>
-      </div>
+          <div class='modal-footer'>
+            <%= f.submit class: 'btn btn-primary save-form', id: 'save_and_add_another', value: 'Save And Add Another' %>
+            <%= f.submit class: 'btn btn-primary save-form', id: 'save_form', value: 'Save' %>
+          </div>
+      <% end %>
     </div>
   </div>
-
+</div>
 

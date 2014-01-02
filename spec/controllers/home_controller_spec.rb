@@ -3,7 +3,7 @@ require 'spec_helper'
 describe HomeController do
 
   before(:each) do
-    CASClient::Frameworks::Rails
+    CASClient::Frameworks::Rails::Filter.fake('alladin')
   end
   context 'index' do
     it 'should redirect to new page' do
