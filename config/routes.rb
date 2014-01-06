@@ -16,6 +16,9 @@ BookSharingApp::Application.routes.draw do
   resources :search, only: [:index]
   resources :books, :home
 
+  mount JasmineRails::Engine => '/jasmine' if defined?(JasmineRails)
+
+
   root 'books#own_books'
 
 
