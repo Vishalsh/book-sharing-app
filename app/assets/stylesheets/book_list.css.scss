@@ -6,13 +6,10 @@
 }
 
 .book-blocks {
-
+  height: 500px;
   > .col-lg-4 {
     padding: 6px;
   }
-
-  margin: 0 auto;
-  width: 90%;
 }
 
 .block {
@@ -20,7 +17,9 @@
   border: 1px solid #d6d6d6;
   border-radius: 4px;
   padding: 15px;
-  margin: 15px 0;
+  width: 285px;
+  float: left;
+  margin: 5px;
   span {
     word-wrap: break-word;
   }

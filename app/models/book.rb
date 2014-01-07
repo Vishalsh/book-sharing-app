@@ -5,12 +5,8 @@ class Book < ActiveRecord::Base
   validates :edition, numericality: {only_integer: true}
   has_and_belongs_to_many :owners
 
- def self.find_by_title title
-    if !title.nil? && !title.blank?
-      Book.where("title LIKE ?" , "%" + title.to_s + "%")
-    else
-      []
-    end
+ def self.filter_by filter, title
+    Book.where(filter + " LIKE ?" , "%" + title.to_s + "%")
   end
 
   def save_or_update_with_owner
