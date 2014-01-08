@@ -10,13 +10,11 @@ var getNewBookForm = function () {
             dataType: 'html',
             success: function (data) {
                 $(data).modal('show');
-                setTimeout(function () {
-                    $("#search_button").on('click', getBookInformation)
-                }, 500);
             },
             complete: function (data) {
                 setTimeout(function () {
                     $(".save-form").on('click', postMyForm)
+                    $("#search_button").on('click', searchFromGoogleBooks)
                 }, 500);
             }
         })
@@ -53,6 +51,21 @@ var postMyForm = function (e) {
 }
 
 
+var searchFromGoogleBooks = function () {
+    $.ajax({
+        url: '/books/get_by_isbn/:' + $('#book_isbn').val(),
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'html'
+    }).success(function (searchedBook) {
+            var searchedBookJson = JSON.parse(searchedBook)
+            $('#book_title').val(searchedBookJson.title)
+            $('#book_author').val(searchedBookJson.author)
+            $('#book_description').val(searchedBookJson.description)
+        });
+
+}
+
 var displayErrors = function (errors) {
     var errorJson = JSON.parse(errors.responseText);
     for (var key in errorJson) {
@@ -72,20 +85,6 @@ var checkForAddAnotherBook = function (currentSaveButton) {
         $(".form-control").val("")
         $(".alert-success").show();
     }
-}
-
-var getBookInformation = function () {
-
-    $.ajax({
-        url: '/books/get_by_isbn/:' + $('#book_isbn').val(),
-        type: 'GET',
-        crossDomain: true,
-        dataType: 'html'
-    }).success(function () {
-            $('#title').val('title')
-            $('#author').val('author')
-            $('#description').val('description')
-        });
 }
 
 

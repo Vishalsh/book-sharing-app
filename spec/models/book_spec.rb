@@ -35,7 +35,7 @@ describe Book do
         anotherBook = FactoryGirl.build(:valid_book)
         anotherBook.should_not be_valid
         anotherBook.errors.to_hash[:isbn].should_not be_nil
-        anotherBooks.save_or_update_with_owner
+        anotherBook.save_or_update_with_owner
       end.to raise_error
 
     end
@@ -45,14 +45,11 @@ describe Book do
       book.save_or_update_with_owner { 'alladin' }
       book = FactoryGirl.build(:valid_book_with_another_owner)
       book.save_or_update_with_owner { 'mario' }
-
       book = Book.find_by(isbn: book.isbn)
       book.owners.first.name.should == 'alladin'
       book.owners.last.name.should == 'mario'
     end
 
-
   end
 
-  it 'is being inserted by another user'
 end

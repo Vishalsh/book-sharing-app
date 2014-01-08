@@ -35,6 +35,28 @@ describe BooksController do
     end
   end
 
+  describe 'GET #get_by_isbn' do
+
+    before(:each) do
+      @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner fo Askaban",
+                                     description: "Harry Potter Epic", authors: "JK Rowling"
+      GoogleBooks.should_receive(:search).with('1234').and_return([@possible_book])
+      get(:get_by_isbn, {'isbn' => '1234'}, format: :json)
+    end
+
+    it 'should render the matching book as json' do
+      expect(response.body).to include (@possible_book.title)
+      expect(response.body).to include (@possible_book.description)
+      expect(response.body).to include (@possible_book.authors)
+    end
+
+    it 'should respond with 200' do
+
+      response.status.should eq(200)
+    end
+
+  end
+
   describe 'POST #create' do
 
     context 'with valid attributes' do

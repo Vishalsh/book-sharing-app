@@ -8,28 +8,20 @@ class BooksController < ApplicationController
     @book = Book.new #TODO: Modal thingy
     owner = Owner.where(name: session[:cas_user]).first
     @copies = []
-   if owner
+    if owner
       @books, @copies = owner.get_books_with_count_of_copies
       render template: 'books/own_books'
-   else
+    else
       @books = []
     end
   end
 
   def get_by_isbn
     isbn = params[:isbn]
-    book_matching_isbn = GoogleBooks.search('isbn' + isbn).first;
-    @possible_book = Book.new
-    @possible_book.title = book_matching_isbn.title
-    @possible_book.description = book_matching_isbn.description
-    @possible_book.isbn = book_matching_isbn.isbn
-    # @possible_book.edition = book_matching_isbn.edition
-    @possible_book.author = book_matching_isbn.authors 
-    binding.pry
-    render nothing: true
-    respond_to do |format|
-      format.json { render json: @possible_book, status: :OK}
-    end
+    book_matching_isbn = GoogleBooks.search(isbn).first;
+    possible_book = Book.new(title: book_matching_isbn.title, description: book_matching_isbn.description,
+                               author: book_matching_isbn.authors)
+    render json: possible_book, status: :ok
   end
 
   def new
@@ -40,14 +32,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(title: params["book"]["title"], author: params["book"]["author"],isbn: params["book"]["isbn"],edition: params["book"]["edition"],description: params["book"]["description"] )
-    if @book.save_or_update_with_owner {session[:cas_user]}
-      respond_to do |format|    
-        format.json { render json: @book, status: :created }
+    book = Book.new(title: params["book"]["title"], author: params["book"]["author"], isbn: params["book"]["isbn"],
+                     edition: params["book"]["edition"], description: params["book"]["description"])
+    if book.save_or_update_with_owner { session[:cas_user] }
+      respond_to do |format|
+        format.json { render json: book, status: :created }
       end
     else
       respond_to do |format|
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.json { render json: book.errors, status: :unprocessable_entity }
       end
     end
   end
