@@ -21,7 +21,8 @@ class BooksController < ApplicationController
     book_matching_isbn = GoogleBooks.search(isbn).first;
     possible_book = Book.new(title: book_matching_isbn.title, description: book_matching_isbn.description,
                                author: book_matching_isbn.authors)
-    render json: possible_book, status: :ok
+    render json: {possible_book: possible_book, image_link: book_matching_isbn.image_link}, status: :ok
+
   end
 
   def new

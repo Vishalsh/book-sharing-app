@@ -11,7 +11,7 @@ var getNewBookForm = function () {
             success: function (data) {
                 $(data).modal('show');
             },
-            complete: function (data) {
+            complete: function () {
                 setTimeout(function () {
                     $(".save-form").on('click', postMyForm)
                     $("#search_button").on('click', searchFromGoogleBooks)
@@ -59,11 +59,11 @@ var searchFromGoogleBooks = function () {
         dataType: 'html'
     }).success(function (searchedBook) {
             var searchedBookJson = JSON.parse(searchedBook)
-            $('#book_title').val(searchedBookJson.title)
-            $('#book_author').val(searchedBookJson.author)
-            $('#book_description').val(searchedBookJson.description)
+            $('#book_title').val(searchedBookJson.possible_book.title)
+            $('#book_author').val(searchedBookJson.possible_book.author)
+            $('#book_description').val(searchedBookJson.possible_book.description)
+            $("#book_image").attr("src", searchedBookJson.image_link)
         });
-
 }
 
 var displayErrors = function (errors) {
@@ -83,10 +83,10 @@ var checkForAddAnotherBook = function (currentSaveButton) {
     }
     else {
         $(".form-control").val("")
+        $("#book_image").attr("src", "")
         $(".alert-success").show();
     }
 }
-
 
 $(document).ready(function () {
     getNewBookForm();

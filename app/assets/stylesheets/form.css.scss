@@ -20,7 +20,7 @@ textarea.form-control {
 }
 
 .modal-dialog {
-  width: 60%;
+  width: 75%;
 }
 
 .loader {
@@ -40,3 +40,16 @@ textarea.form-control {
     padding-top: 5px;
   }
 }
+
+#search_button {
+  outline: none;
+}
+
+#book_image {
+  height: 250px;
+  width: 80%;
+  margin-left: 11%;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
