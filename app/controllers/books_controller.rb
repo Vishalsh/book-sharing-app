@@ -5,7 +5,6 @@ class BooksController < ApplicationController
   end
 
   def own_books
-    @book = Book.new #TODO: Modal thingy
     owner = Owner.where(name: session[:cas_user]).first
     @copies = []
     if owner
@@ -33,8 +32,9 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(title: params["book"]["title"], author: params["book"]["author"], isbn: params["book"]["isbn"],
-                     edition: params["book"]["edition"], description: params["book"]["description"])
+    image_url = params[:image_url] + '&printsec=' + params[:printsec] + '&img=' + params[:img] + '&zoom=' + params[:zoom] + '&source=' + params[:source]
+    book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
+                     edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
     if book.save_or_update_with_owner { session[:cas_user] }
       respond_to do |format|
         format.json { render json: book, status: :created }

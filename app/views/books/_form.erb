@@ -22,7 +22,7 @@
 
                     <%= f.label :isbn, class: 'col-sm-offset-1 col-sm-1 control-label' %>
                     <div class='col-sm-4'>
-                      <%= f.text_field :isbn, class: 'form-control', id: 'book_isbn', required: 'true' %>
+                      <%= f.text_field :isbn, class: 'form-control', id: 'book_isbn' %>
                       <div class='errors isbn-errors'></div>
                     </div>
 
@@ -32,37 +32,34 @@
                       </button>
                     </div>
 
-                    <%= f.label :Title, class: 'col-sm-1 control-label' %>
+                    <%= f.label :edition, class: 'col-sm-1 control-label' %>
                     <div class='col-sm-4'>
-                      <%= f.text_field :title, class: 'form-control' %>
-                      <div class='errors title-errors'></div>
+                      <%= f.text_field :edition, class: 'form-control' %>
+                      <div class='errors edition-errors'></div>
                     </div>
 
                   </div>
 
                   <div class='row'>
                     <div class='form-group'>
+                      <%= f.label :Title, class: 'col-sm-offset-1 col-sm-1 control-label', disabled: true %>
+                      <div class='col-sm-4'>
+                        <%= f.text_field :title, class: 'form-control' %>
+                        <div class='errors title-errors'></div>
+                      </div>
 
-                      <%= f.label :author, class: 'col-sm-offset-1 col-sm-1 control-label' %>
+                      <%= f.label :author, class: 'col-sm-2 control-label', disabled: true %>
                       <div class='col-sm-4'>
                         <%= f.text_field :author, class: 'form-control' %>
                         <div class='errors author-errors'></div>
                       </div>
-
-                      <%= f.label :edition, class: 'col-sm-2 control-label' %>
-                      <div class='col-sm-4'>
-                        <%= f.text_field :edition, class: 'form-control' %>
-                        <div class='errors edition-errors'></div>
-                      </div>
-
                     </div>
                   </div>
 
-
                   <div class='row'>
                     <div class='form-group'>
-                      <%= f.label :description, class: 'col-sm-2 control-label' %>
-                      <div class='col-sm-8'>
+                      <%= f.label :description, class: 'col-sm-2 control-label', disabled: true %>
+                      <div class='col-sm-10'>
                         <%= f.text_area :description, class: 'form-control' %>
                         <div class='errors description-errors'></div>
                       </div>

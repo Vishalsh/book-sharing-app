@@ -1,12 +1,15 @@
 .image {
-  height: 160px;
-  background: url('NoPhotoAvailable.jpg') no-repeat center;
-  background-size: contain;
-  margin-bottom: 10px;
+  text-align: center;
+  img {
+    height: 190px;
+    width: 220px;
+    margin-bottom: 10px;
+  }
 }
 
 .book-blocks {
-  height: 500px;
+  width: 90%;
+  margin: 0 auto;
   > .col-lg-4 {
     padding: 6px;
   }

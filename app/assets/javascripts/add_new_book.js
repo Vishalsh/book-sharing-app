@@ -27,7 +27,8 @@ var postMyForm = function (e) {
     var currentSaveButton = $(this)
     $(".alert-info").show();
     hideErrors();
-    var valuesToSubmit = $("#new_book").serialize();
+    var image_url = $("#book_image").attr("src");
+    var valuesToSubmit = $("#new_book").serialize() + "&image_url=" + image_url;
 
     $.ajax({
         url: '/books/create',
