@@ -1,21 +1,49 @@
-<div>
-  <strong>Title:</strong>
-  <%= @book.title %>
+<div class="row">
+  <div class="col-lg-4">
+    <img src="<%= @book.image_url %>"/>
+  </div>
+
+
+  <div class="col-lg-8">
+
+
+    <div class="row">
+      <label class="col-lg-3">Title:</label>
+      <%= @book.title %>
+    </div>
+
+    <div class="row">
+      <label class="col-lg-3">Authors:</label>
+      <%= @book.author %>
+    </div>
+
+    <div class="row">
+      <label class="col-lg-3">ISBN:</label>
+      <%= @book.isbn %>
+    </div>
+
+    <div class="row">
+      <label class="col-lg-3">Edition:</label>
+      <%= @book.edition %>
+    </div>
+
+    <div class="row">
+      <label class="col-lg-3">Description:</label>
+      <%= @book.description %>
+    </div>
+
+
+    <div class="row">
+      <label class="col-lg-3">Lent to:</label>
+      <% @book.lenders.each do |lender| %>
+        <%= lender.name %>
+        <%= lender.date_of_lending %>
+      <% end %>
+    </div>
+
+  </div>
 </div>
 
-<div>
-  <strong>ISBN:</strong>
-  <%= @book.isbn %>
-</div>
+<li><a href="#" data-toggle='modal' id="add_new_lender">Add New Lender</a></li>
 
-<div>
-  <strong>Edition:</strong>
-  <%= @book.edition %>
-</div>
 
-<div>
-  <strong>Description:</strong>
-  <%= @book.description %>
-</div>
-
-<%= link_to 'edit', edit_book_path(@book) %>

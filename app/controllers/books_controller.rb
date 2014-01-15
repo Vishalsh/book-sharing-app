@@ -19,7 +19,7 @@ class BooksController < ApplicationController
     isbn = params[:isbn]
     book_matching_isbn = GoogleBooks.search(isbn).first;
     possible_book = Book.new(title: book_matching_isbn.title, description: book_matching_isbn.description,
-                               author: book_matching_isbn.authors)
+                             author: book_matching_isbn.authors)
     render json: {possible_book: possible_book, image_link: book_matching_isbn.image_link}, status: :ok
 
   end
@@ -34,7 +34,7 @@ class BooksController < ApplicationController
   def create
     image_url = params[:image_url] + '&printsec=' + params[:printsec] + '&img=' + params[:img] + '&zoom=' + params[:zoom] + '&source=' + params[:source]
     book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
-                     edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
+                    edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
     if book.save_or_update_with_owner { session[:cas_user] }
       respond_to do |format|
         format.json { render json: book, status: :created }

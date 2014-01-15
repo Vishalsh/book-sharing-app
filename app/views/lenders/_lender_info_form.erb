@@ -1,0 +1,55 @@
+<div class='modal fade' id='lender_info_modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+        <h4 class='modal-title'>Update Lender Information</h4>
+      </div>
+
+      <%= form_for @lender, remote: true do |f| %>
+
+          <div class='modal-body'>
+
+            <div class="alert alert-success">Book is being saved</div>
+            <div class="alert alert-info">
+              <div class="loader">Saving</div>
+            </div>
+            <div class="alert alert-danger">Error during saving of the form</div>
+            
+            <div class='form-horizontal'>
+              <div class='row'>
+                <div class="col-lg-6">
+                  <div class='form-group'>
+                    <%= f.label :name, class: 'col-lg-3 control-label' %>
+                    <div class='col-lg-8'>
+                      <%= f.text_field :name, class: 'form-control' %>
+                      <div class='errors name-errors'></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class='form-group'>
+                    <%= f.label :date_of_lending, class: 'col-lg-3 control-label' %>
+                    <div class='col-lg-8'>
+                      <div class="input-group">
+                        <%= f.text_field :date_of_lending, class: 'form-control' %>
+                        <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                      </div>
+                      <div class='errors date_of_lending-errors'></div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class='modal-footer'>
+            <%= submit_tag 'Save', class: 'btn btn-primary save-form', id: 'save_form' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

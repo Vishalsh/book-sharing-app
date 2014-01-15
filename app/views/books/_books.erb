@@ -3,8 +3,21 @@
       <div class='col-lg-3 col-md-4 col-sm-6'>
         <div class='block'>
           <div class='image'>
-            <img src= "<%= book.image_url %>" />
+            <img src="<%= book.image_url %>"/>
           </div>
+
+          <div class="edit-book-icon">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class=" glyphicon glyphicon-pencil"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/books/<%=book.id%>"><span class="glyphicon glyphicon-edit"></span> View details</a></li>
+              </ul>
+            </li>
+          </div>
+
+          <input type="hidden" name="hidden_text" />
           <div class='row'>
             <label class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6 control-label'>Title:</label>
             <span class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6'><%= book.title %></span>
@@ -25,7 +38,12 @@
             <label class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6 control-label'>Owner:</label>
             <span class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6'><%= book.owners.map { |e| e.name }.join ', ' %></span>
           </div>
+          <div class='row'>
+            <label class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6 control-label'>No of copies:</label>
+            <span class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6'><%= @copies[book.isbn] %></span>
+          </div>
         </div>
       </div>
   <% end %>
 </div>
+

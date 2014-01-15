@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109114921) do
+ActiveRecord::Schema.define(version: 20140113050849) do
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -24,9 +24,23 @@ ActiveRecord::Schema.define(version: 20140109114921) do
     t.string   "image_url"
   end
 
+  create_table "books_lenders", id: false, force: true do |t|
+    t.integer "book_id",      null: false
+    t.integer "lender_id",    null: false
+    t.integer "book_id_id"
+    t.integer "lender_id_id"
+  end
+
   create_table "books_owners", id: false, force: true do |t|
     t.integer "book_id",  null: false
     t.integer "owner_id", null: false
+  end
+
+  create_table "lenders", force: true do |t|
+    t.string   "name"
+    t.string   "date_of_lending"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "owners", force: true do |t|

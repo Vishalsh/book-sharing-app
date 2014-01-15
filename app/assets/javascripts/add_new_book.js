@@ -27,6 +27,7 @@ var postMyForm = function (e) {
     var currentSaveButton = $(this)
     $(".alert-info").show();
     hideErrors();
+    hideAlerts();
     var image_url = $("#book_image").attr("src");
     var valuesToSubmit = $("#new_book").serialize() + "&image_url=" + image_url;
 
@@ -72,6 +73,10 @@ var displayErrors = function (errors) {
     for (var key in errorJson) {
         $("." + key + "-errors").text(errorJson[key]);
     }
+}
+
+var hideAlerts = function() {
+    $(".alert").hide();
 }
 
 var hideErrors = function () {

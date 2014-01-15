@@ -29,16 +29,14 @@ textarea.form-control {
   padding-left: 28px;
 }
 
-#new_book {
+.alert {
+  display: none;
+}
 
-  .alert {
-    display: none;
-  }
-  .errors {
-    color: #a94442;
-    padding-left: 5px;
-    padding-top: 5px;
-  }
+.errors {
+  color: #a94442;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 
 #search_button {
@@ -52,3 +50,17 @@ textarea.form-control {
   overflow: hidden;
 }
 
+#lenderInfoModal .form-group {
+  margin-bottom: 0;
+}
+
+.input-group {
+  width: 100%;
+  .input-group-addon {
+    padding: 7px;
+  }
+}
+
+#lender_info_modal .form-group {
+  margin-bottom: 0;
+}

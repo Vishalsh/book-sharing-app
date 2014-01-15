@@ -39,7 +39,7 @@ describe BooksController do
 
     before(:each) do
       @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner fo Askaban",
-                                     description: "Harry Potter Epic", authors: "JK Rowling"
+                                      description: "Harry Potter Epic", authors: "JK Rowling"
       GoogleBooks.should_receive(:search).with('1234').and_return([@possible_book])
       get(:get_by_isbn, {'isbn' => '1234'}, format: :json)
     end
@@ -59,58 +59,54 @@ describe BooksController do
 
   describe 'POST #create' do
 
-    before(:each) do
-      @book_image_url = {image_url: 'abcd?','printsec' => 'defg', 'img' => '1', 'zoom' => '1', 'source' => 'gbapi' }
-    end
-
     context 'with valid attributes' do
       it 'creates a new book' do
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
-                 image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
-                 format: :json
+                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
+                      format: :json
         }.to change(Book, :count).by(1)
       end
 
       it 'creates a new owner if the owner does not exist' do
         Owner.where("name like 'alladin'").should be_empty
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
-                 image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
-                 format: :json
+                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
+                      format: :json
         }.to change(Owner, :count).by(1)
         Owner.where("name like 'alladin'").should_not be_empty
       end
-    end
 
-    it 'does not create a new owner if the owner already exists' do
-      aBook = FactoryGirl.create(:valid_book)
-      aBook.owners.find_or_create_by(name: 'alladin')
-      expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
-               image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
-               format: :json
-      }.not_to change(Owner, :count)
-    end
+      it 'does not create a new owner if the owner already exists' do
+        aBook = FactoryGirl.create(:valid_book)
+        aBook.owners.find_or_create_by(name: 'alladin')
+        expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
+                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
+                      format: :json
+        }.not_to change(Owner, :count)
+      end
 
-    it 'renders the created book as json' do
-      bookWithOutErrors = FactoryGirl.build(:valid_book)
-       post :create, book: bookWithOutErrors,
-           image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
-           format: :json
+      it 'renders the created book as json' do
+        bookWithOutErrors = FactoryGirl.build(:valid_book)
+        post :create, book: bookWithOutErrors,
+             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
+             format: :json
 
-      response.body.should include (bookWithOutErrors.author)
-    end
+        response.body.should include (bookWithOutErrors.author)
+      end
 
-    it 'respond with a 201' do
-       post :create, book: FactoryGirl.attributes_for(:valid_book),
-          image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
-          format: :json
-      response.status.should eq(201)
+      it 'respond with a 201' do
+        post :create, book: FactoryGirl.attributes_for(:valid_book),
+             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
+             format: :json
+        response.status.should eq(201)
+      end
     end
 
     context 'with invalid attributes' do
       it 'does not creates a new book' do
         expect { post :create, book: FactoryGirl.attributes_for(:invalid_book),
-                 image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
-                 format: :json
+                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
+                      format: :json
         }.to_not change(Book, :count)
       end
     end
