@@ -50,17 +50,15 @@ textarea.form-control {
   overflow: hidden;
 }
 
-#lenderInfoModal .form-group {
-  margin-bottom: 0;
-}
-
-.input-group {
-  width: 100%;
-  .input-group-addon {
-    padding: 7px;
+#lender_info_modal {
+  .form-group {
+    margin-bottom: 0;
+  }
+  .input-group {
+    width: 100%;
+    .input-group-addon {
+      padding: 7px;
+    }
   }
 }
 
-#lender_info_modal .form-group {
-  margin-bottom: 0;
-}

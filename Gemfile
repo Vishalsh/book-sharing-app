@@ -44,6 +44,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'jasmine-rails'
+  gem 'simplecov', :require => false
 end
 
 # Use ActiveModel has_secure_password
