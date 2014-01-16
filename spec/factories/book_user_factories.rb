@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
 
-  factory :valid_book_owner, class: Owner do |f|
+  factory :valid_book_user, class: User do |f|
     name "MyString"
   end
 

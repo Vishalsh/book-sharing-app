@@ -19,7 +19,7 @@ var getNewBookForm = function () {
             }
         })
     });
-}
+}   
 
 
 var postMyForm = function (e) {

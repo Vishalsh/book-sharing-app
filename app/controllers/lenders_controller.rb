@@ -22,6 +22,12 @@ class LendersController < ApplicationController
     end
   end
 
+  def edit
+    @lender = Lender.find(params[:id])
+    respond_to do |format|
+      format.html { render partial: 'lender_info_form' }
+    end
+  end
 
   def update_lender
     #@lender = Lender.new(name: params[:name], date_of_lending: params[:date_of_lending])

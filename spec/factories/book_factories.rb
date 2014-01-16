@@ -26,7 +26,7 @@ FactoryGirl.define do
      
   end
 
-  factory :valid_book_with_another_owner, class: Book do |f|
+  factory :valid_book_with_another_user, class: Book do |f|
     f.title 'Harry Potter and The Prisoner fo Askaban'
     f.description 'Harry Potter Epic'
     f.author 'JK Rowling'

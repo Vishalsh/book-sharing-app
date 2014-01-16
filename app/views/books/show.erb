@@ -6,44 +6,73 @@
 
   <div class="col-lg-8">
 
-
     <div class="row">
       <label class="col-lg-3">Title:</label>
-      <%= @book.title %>
+
+      <div class="col-lg-9">
+        <%= @book.title %>
+      </div>
     </div>
 
     <div class="row">
       <label class="col-lg-3">Authors:</label>
-      <%= @book.author %>
+
+      <div class="col-lg-9">
+        <%= @book.author %>
+      </div>
     </div>
 
     <div class="row">
       <label class="col-lg-3">ISBN:</label>
-      <%= @book.isbn %>
+
+      <div class="col-lg-9">
+        <%= @book.isbn %>
+      </div>
     </div>
 
     <div class="row">
       <label class="col-lg-3">Edition:</label>
-      <%= @book.edition %>
+
+      <div class="col-lg-9">
+        <%= @book.edition %>
+      </div>
     </div>
 
     <div class="row">
       <label class="col-lg-3">Description:</label>
-      <%= @book.description %>
+
+      <div class="col-lg-9">
+        <%= @book.description %>
+      </div>
     </div>
 
 
     <div class="row">
       <label class="col-lg-3">Lent to:</label>
-      <% @book.lenders.each do |lender| %>
-        <%= lender.name %>
-        <%= lender.date_of_lending %>
-      <% end %>
     </div>
 
+    <table class="table">
+
+      <tr>
+        <th>Name</th>
+        <th>Date of lending</th>
+        <th></th>
+      </tr>
+
+      <tbody>
+      <% @lenders.each do |lender| %>
+          <tr>
+            <td><%= lender.name %></td>
+            <td><%= lender.date_of_lending %></td>
+            <td><a href="#" class='edit_lender lender-form-link glyphicon glyphicon-pencil' data-id="<%= lender.id %>" data-toggle='modal'></a></td>
+          </tr>
+      <% end %>
+      </tbody>
+
+    </table>
   </div>
 </div>
 
-<li><a href="#" data-toggle='modal' id="add_new_lender">Add New Lender</a></li>
+<li><a href="#" data-toggle='modal' class="add-new-lender lender-form-link">Add New Lender</a></li>
 
 

@@ -1,26 +1,26 @@
 require 'spec_helper'
 
-describe Owner do
+describe User do
 
   before(:each) do
-    @owner = FactoryGirl.build(:valid_book_owner)
+    @user = FactoryGirl.build(:valid_book_user)
   end
 
   it 'should be valid with proper values' do
-    @owner.should_not be_nil
-    @owner.should be_valid
-    @owner.errors.size.should be(0)
+    @user.should_not be_nil
+    @user.should be_valid
+    @user.errors.size.should be(0)
   end
 
   context 'Validations' do
-    it 'should not be valid without owner_name' do
-      @owner.name = nil
-      @owner.should_not be_valid
-      @owner.errors.to_hash[:name].should_not be_nil
+    it 'should not be valid without user_name' do
+      @user.name = nil
+      @user.should_not be_valid
+      @user.errors.to_hash[:name].should_not be_nil
     end
   end
 
-  xit 'should return books of owner with count of their copies' do
+  xit 'should return books of user with count of their copies' do
 
   end
 end

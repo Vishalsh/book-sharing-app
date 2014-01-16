@@ -5,10 +5,10 @@ class BooksController < ApplicationController
   end
 
   def own_books
-    owner = Owner.where(name: session[:cas_user]).first
+    user = User.where(name: session[:cas_user]).first
     @copies = []
-    if owner
-      @books, @copies = owner.get_books_with_count_of_copies
+    if user
+      @books, @copies = user.get_books_with_count_of_copies
       render template: 'books/own_books'
     else
       @books = []
@@ -35,7 +35,7 @@ class BooksController < ApplicationController
     image_url = params[:image_url] + '&printsec=' + params[:printsec] + '&img=' + params[:img] + '&zoom=' + params[:zoom] + '&source=' + params[:source]
     book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
                     edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
-    if book.save_or_update_with_owner { session[:cas_user] }
+    if book.save_or_update_with_user { session[:cas_user] }
       respond_to do |format|
         format.json { render json: book, status: :created }
       end
@@ -44,10 +44,12 @@ class BooksController < ApplicationController
         format.json { render json: book.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   def show
     @book = Book.find(params[:id])
+    @lenders = Lender.all
   end
 
   def edit

@@ -67,22 +67,22 @@ describe BooksController do
         }.to change(Book, :count).by(1)
       end
 
-      it 'creates a new owner if the owner does not exist' do
-        Owner.where("name like 'alladin'").should be_empty
+      it 'creates a new user if the user does not exist' do
+        User.where("name like 'alladin'").should be_empty
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
                       image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
                       format: :json
-        }.to change(Owner, :count).by(1)
-        Owner.where("name like 'alladin'").should_not be_empty
+        }.to change(User, :count).by(1)
+        User.where("name like 'alladin'").should_not be_empty
       end
 
-      it 'does not create a new owner if the owner already exists' do
+      it 'does not create a new user if the user already exists' do
         aBook = FactoryGirl.create(:valid_book)
-        aBook.owners.find_or_create_by(name: 'alladin')
+        aBook.users.find_or_create_by(name: 'alladin')
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
                       image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
                       format: :json
-        }.not_to change(Owner, :count)
+        }.not_to change(User, :count)
       end
 
       it 'renders the created book as json' do

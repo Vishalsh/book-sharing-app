@@ -1,11 +1,16 @@
 var getLenderForm = function () {
-    $("#add_new_lender").on('click', function (e) {
+
+    var url;
+
+    $(".lender-form-link").on('click', function (e) {
 
         $("#lender_info_modal").remove();
 
+        url = getAjaxUrl(this,  e);
+
         $.ajax({
 
-            url: '/lenders/new',
+            url: url,
             type: 'GET',
             crossDomain: true,
             dataType: 'html',
@@ -25,7 +30,6 @@ var getLenderForm = function () {
     })
 }
 
-
 var postLenderForm = function(e) {
     e.preventDefault();
     var valuesToSubmit = $("#new_lender").serialize();
@@ -42,6 +46,7 @@ var postLenderForm = function(e) {
             $(".alert-info").hide();
             $(".alert-success").show();
             $(".form-control").val("");
+            history.go(0);
         },
 
         error: function (errors) {
@@ -50,8 +55,16 @@ var postLenderForm = function(e) {
             $(".alert-danger").show();
             displayErrors(errors)
         }
-
     })
+}
+
+var getAjaxUrl = function(self, e) {
+    if ($(self).hasClass("add-new-lender")) {
+        return '/lenders/new';
+    }
+    else {
+        return '/lenders/'+$(e.target).attr("data-id")+'/edit';
+    }
 }
 
 var hideErrors = function () {
@@ -70,3 +83,4 @@ var displayErrors = function (errors) {
 }
 
 $(document).ready(getLenderForm);
+$(document).on('page:load', getLenderForm);

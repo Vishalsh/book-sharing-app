@@ -12,7 +12,7 @@
                 <span class=" glyphicon glyphicon-pencil"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="/books/<%=book.id%>"><span class="glyphicon glyphicon-edit"></span> View details</a></li>
+                <li><a href="/books/<%=book.id%>"><span class="glyphicon glyphicon-eye-open"></span> View details</a></li>
               </ul>
             </li>
           </div>
@@ -36,7 +36,7 @@
           </div>
           <div class='row'>
             <label class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6 control-label'>Owner:</label>
-            <span class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6'><%= book.owners.map { |e| e.name }.join ', ' %></span>
+            <span class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6'><%= book.users.map { |e| e.name }.join ', ' %></span>
           </div>
           <div class='row'>
             <label class='col-lg-offset-2 col-lg-4 col-md-6 col-sm-6 col-xs-6 control-label'>No of copies:</label>
