@@ -3,7 +3,7 @@
 FactoryGirl.define do
 
   factory :valid_book_user, class: User do |f|
-    name "MyString"
+    name "alladin"
   end
 
 end

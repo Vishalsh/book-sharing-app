@@ -7,16 +7,16 @@ BookSharingApp::Application.routes.draw do
   match '/home/logout' , controller: 'home#logout', via: [:get, :post]
   get '/anonymous/index' , controller: 'anonymous#index'
   get '/books/own_books', controller: 'books#own_books'
-  post '/lenders/update_lender', controller: 'lenders#update_lender'
+  post '/borrowers/update_borrower', controller: 'borrowers#update_borrower'
   match '/books/create', controller: 'books#create', via: [:post]
-  match '/lenders/create', controller: 'lenders#create', via: [:post]
+  match '/borrowers/create', controller: 'borrowers#create', via: [:post]
 
   resources :books do
     get '/get_by_isbn/:isbn', to: 'books#get_by_isbn', :on => :collection
   end
 
   resources :search, only: [:index]
-  resources :books, :home, :lenders
+  resources :books, :home, :borrowers
 
   mount JasmineRails::Engine => '/jasmine' if defined?(JasmineRails)
 

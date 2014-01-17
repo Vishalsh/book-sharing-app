@@ -1,8 +1,9 @@
 <div class="row">
+
+  <input type="hidden" value= "<%= @book.id %>" class="book-id"/>
   <div class="col-lg-4">
     <img src="<%= @book.image_url %>"/>
   </div>
-
 
   <div class="col-lg-8">
 
@@ -52,19 +53,17 @@
     </div>
 
     <table class="table">
-
       <tr>
         <th>Name</th>
-        <th>Date of lending</th>
+        <th>Date of borrowing</th>
         <th></th>
       </tr>
-
       <tbody>
-      <% @lenders.each do |lender| %>
+      <% @book_borrowers.each do |book_borrower| %>
           <tr>
-            <td><%= lender.name %></td>
-            <td><%= lender.date_of_lending %></td>
-            <td><a href="#" class='edit_lender lender-form-link glyphicon glyphicon-pencil' data-id="<%= lender.id %>" data-toggle='modal'></a></td>
+            <td><%= book_borrower.borrower.name %></td>
+            <td><%= book_borrower.date_of_borrowing %></td>
+            <td><span class="glyphicon glyphicon-pencil"></span></td>
           </tr>
       <% end %>
       </tbody>
@@ -73,6 +72,6 @@
   </div>
 </div>
 
-<li><a href="#" data-toggle='modal' class="add-new-lender lender-form-link">Add New Lender</a></li>
+<li><a href="#" data-toggle='modal' class="add-new-borrower borrower-form-link">Add New Borrower</a></li>
 
 

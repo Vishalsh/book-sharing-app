@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116090924) do
+ActiveRecord::Schema.define(version: 20140116113047) do
+
+  create_table "book_borrowers", force: true do |t|
+    t.integer  "book_id"
+    t.integer  "owner_id"
+    t.integer  "borrower_id"
+    t.string   "date_of_borrowing"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -24,23 +33,9 @@ ActiveRecord::Schema.define(version: 20140116090924) do
     t.string   "image_url"
   end
 
-  create_table "books_lenders", id: false, force: true do |t|
-    t.integer "book_id",      null: false
-    t.integer "lender_id",    null: false
-    t.integer "book_id_id"
-    t.integer "lender_id_id"
-  end
-
   create_table "books_owners", id: false, force: true do |t|
     t.integer "book_id", null: false
     t.integer "user_id", null: false
-  end
-
-  create_table "lenders", force: true do |t|
-    t.string   "name"
-    t.string   "date_of_lending"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

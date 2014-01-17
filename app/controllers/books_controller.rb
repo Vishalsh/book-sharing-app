@@ -39,6 +39,7 @@ class BooksController < ApplicationController
       respond_to do |format|
         format.json { render json: book, status: :created }
       end
+
     else
       respond_to do |format|
         format.json { render json: book.errors, status: :unprocessable_entity }
@@ -49,7 +50,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @lenders = Lender.all
+    owner_id = User.where(name: session[:cas_user]).pluck(:id).first
+    @book_borrowers = BookBorrower.where(book_id: @book.id, owner_id: owner_id).includes(:borrower)
   end
 
   def edit

@@ -4,7 +4,6 @@ class Book < ActiveRecord::Base
   validates :edition, numericality: {only_integer: true}
 
   has_and_belongs_to_many :users, join_table: :books_owners
-  has_and_belongs_to_many :lenders
 
   def self.filter_by filter, title
     Book.where(filter + " LIKE ?", "%" + title.to_s + "%")

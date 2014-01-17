@@ -1,12 +1,12 @@
-var getLenderForm = function () {
+var getBorrowerForm = function () {
 
     var url;
 
-    $(".lender-form-link").on('click', function (e) {
+    $(".borrower-form-link").on('click', function (e) {
 
-        $("#lender_info_modal").remove();
+        $("#borrower_info_modal").remove();
 
-        url = getAjaxUrl(this,  e);
+        url = getAjaxUrl(this, e);
 
         $.ajax({
 
@@ -20,8 +20,8 @@ var getLenderForm = function () {
 
             complete: function () {
                 setTimeout(function () {
-                    $("#save_form").on('click', postLenderForm)
-                    $("#lender_date_of_lending").datepicker({
+                    $("#save_form").on('click', postBorrowerForm)
+                    $("#date_of_borrowing").datepicker({
                         format: 'dd/mm/yyyy'
                     });
                 }, 500)
@@ -30,14 +30,14 @@ var getLenderForm = function () {
     })
 }
 
-var postLenderForm = function(e) {
+var postBorrowerForm = function(e) {
     e.preventDefault();
-    var valuesToSubmit = $("#new_lender").serialize();
+    var valuesToSubmit = $("#borrower_info_form").serialize() + "&book_id=" + $(".book-id").val();
     hideAlerts();
     hideErrors();
     $(".alert-info").show();
     $.ajax({
-        url: '/lenders/create',
+        url: '/borrowers/create',
         type: 'POST',
         data: valuesToSubmit,
         dataType: 'json',
@@ -59,11 +59,11 @@ var postLenderForm = function(e) {
 }
 
 var getAjaxUrl = function(self, e) {
-    if ($(self).hasClass("add-new-lender")) {
-        return '/lenders/new';
+    if ($(self).hasClass("add-new-borrower")) {
+        return '/borrowers/new';
     }
     else {
-        return '/lenders/'+$(e.target).attr("data-id")+'/edit';
+        return '/borrowers/'+$(e.target).attr("data-id")+'/edit';
     }
 }
 
@@ -82,5 +82,5 @@ var displayErrors = function (errors) {
     }
 }
 
-$(document).ready(getLenderForm);
-$(document).on('page:load', getLenderForm);
+$(document).ready(getBorrowerForm);
+$(document).on('page:load', getBorrowerForm);
