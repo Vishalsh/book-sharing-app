@@ -9,7 +9,7 @@ describe BorrowersController do
   describe 'GET #new' do
     it 'should render the #new page' do
       get :new
-      response.should render_template 'borrowers/_borrower_info_form'
+      response.should render_template 'borrowers/_add_borrower_form'
     end
   end
 
@@ -60,6 +60,24 @@ describe BorrowersController do
         response.status.should eq(422)
       end
 
+    end
+
+  end
+
+  describe 'DELETE #destroy' do
+
+    before(:each) do
+      @book_borrower = FactoryGirl.create(:valid_book_borrower)
+      @book = FactoryGirl.create(:valid_book)
+    end
+
+    it 'should delete the book borrower when book is returned' do
+      expect { delete :destroy, id: @book_borrower.id, book_id: @book.id}.to change(BookBorrower, :count).by(-1)
+    end
+
+    it 'should redirect to the book page' do
+      delete :destroy, id: @book_borrower.id, book_id: @book.id
+      response.should redirect_to book_path(@book)
     end
 
   end

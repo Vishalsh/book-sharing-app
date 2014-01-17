@@ -2,12 +2,11 @@ class BorrowersController < ApplicationController
 
   def new
     respond_to do |format|
-      format.html { render partial: 'borrower_info_form' }
+      format.html { render partial: 'add_borrower_form' }
     end
   end
 
   def create
-
     owner_id = User.where(name: session[:cas_user]).pluck(:id).first
     borrower = User.find_or_create_by(name: params[:name])
     borrower_id = borrower.id
@@ -24,11 +23,10 @@ class BorrowersController < ApplicationController
     end
   end
 
-  def edit
-    @borrower = Borrower.find(params[:id])
-    respond_to do |format|
-      format.html { render partial: 'borrower_info_form' }
-    end
+  def destroy
+    @book_borrower = BookBorrower.find(params[:id])
+    @book_borrower.destroy
+    redirect_to book_path(params[:book_id])
   end
 
 end

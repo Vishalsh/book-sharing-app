@@ -1,6 +1,6 @@
 <div class="row">
 
-  <input type="hidden" value= "<%= @book.id %>" class="book-id"/>
+  <input type="hidden" class="book-id" value=<%= @book.id %> >
   <div class="col-lg-4">
     <img src="<%= @book.image_url %>"/>
   </div>
@@ -63,7 +63,9 @@
           <tr>
             <td><%= book_borrower.borrower.name %></td>
             <td><%= book_borrower.date_of_borrowing %></td>
-            <td><span class="glyphicon glyphicon-pencil"></span></td>
+            <td>
+              <a data-method="delete" href="/borrowers/<%=book_borrower.id%>?book_id=<%=@book.id%>" class="glyphicon glyphicon-trash"></a>
+            </td>
           </tr>
       <% end %>
       </tbody>
@@ -72,6 +74,6 @@
   </div>
 </div>
 
-<li><a href="#" data-toggle='modal' class="add-new-borrower borrower-form-link">Add New Borrower</a></li>
+<li><a href="#" data-toggle='modal' id="add_new_borrower">Add New Borrower</a></li>
 
 

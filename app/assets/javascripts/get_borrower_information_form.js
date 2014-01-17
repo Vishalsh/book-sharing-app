@@ -1,16 +1,12 @@
 var getBorrowerForm = function () {
 
-    var url;
-
-    $(".borrower-form-link").on('click', function (e) {
+    $("#add_new_borrower").on('click', function (e) {
 
         $("#borrower_info_modal").remove();
 
-        url = getAjaxUrl(this, e);
-
         $.ajax({
 
-            url: url,
+            url: '/borrowers/new',
             type: 'GET',
             crossDomain: true,
             dataType: 'html',
@@ -58,14 +54,6 @@ var postBorrowerForm = function(e) {
     })
 }
 
-var getAjaxUrl = function(self, e) {
-    if ($(self).hasClass("add-new-borrower")) {
-        return '/borrowers/new';
-    }
-    else {
-        return '/borrowers/'+$(e.target).attr("data-id")+'/edit';
-    }
-}
 
 var hideErrors = function () {
     $(".errors").text('');
