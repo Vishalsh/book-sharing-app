@@ -18,4 +18,15 @@ describe 'ApplicationController' do
     get(:index).should redirect_to '/hugga/pugga'
   end
 
+  it 'should get the count of own, shared and borrowed books' do
+    CASClient::Frameworks::Rails::Filter.fake('alladin')
+    user = FactoryGirl.create(:valid_book_user)
+    user.books << FactoryGirl.create(:valid_book)
+    FactoryGirl.create(:valid_book_borrower)
+    get :index
+    assigns(:own_books).should eq(1)
+    assigns(:shared_books).should eq(1)
+    assigns(:borrowed_books).should eq(1)
+  end
+
 end

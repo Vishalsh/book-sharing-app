@@ -56,21 +56,21 @@
         <a href="/books/own_books">
           <span class='icon glyphicon glyphicon-retweet'></span>
           All Books
-          <sup class='count count-own-books'><%= @number %></sup>
+          <sup class='count count-own-books'><%= @own_books %></sup>
         </a>
       </li>
       <li>
         <a href="/books/shared_books">
           <sup class='icon glyphicon glyphicon-resize-full'></sup>
           Shared
-          <sup class='count count-shared-books'>100</sup>
+          <sup class='count count-shared-books'><%= @shared_books %></sup>
         </a>
       </li>
       <li>
         <a href="/books/borrowed_books">
           <span class='icon glyphicon glyphicon glyphicon-resize-small'></span>
           Borrowed
-          <sup class='count count-borrowed-books'>100</sup>
+          <sup class='count count-borrowed-books'><%= @borrowed_books %></sup>
         </a>
       </li>
       <li>

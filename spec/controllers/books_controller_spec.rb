@@ -47,8 +47,8 @@ describe BooksController do
     it 'should not get the books that are not shared by the logged in user' do
       FactoryGirl.create(:valid_book_user)
       FactoryGirl.create(:valid_book_borrower)
-      first_book = FactoryGirl.create(:valid_book)
-      second_book = FactoryGirl.create(:another_valid_book)
+      first_book = FactoryGirl.build(:valid_book)
+      second_book = FactoryGirl.build(:another_valid_book)
       get :shared_books
       assigns(:books).should_not include(second_book)
     end
