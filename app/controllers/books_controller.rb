@@ -10,9 +10,14 @@ class BooksController < ApplicationController
     if user
       @books, @copies = user.get_books_with_count_of_copies
       render template: 'books/own_books'
-    else
-      @books = []
     end
+  end
+
+  def shared_books
+    owner_id = User.where(name: session[:cas_user]).pluck(:id).first
+    borrowed_book_ids = BookBorrower.where(owner_id: owner_id).pluck(:book_id)
+    @books = Book.where(id: borrowed_book_ids)
+    render template: 'books/shared_books'
   end
 
   def get_by_isbn

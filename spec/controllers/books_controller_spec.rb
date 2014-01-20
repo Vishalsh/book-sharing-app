@@ -35,6 +35,30 @@ describe BooksController do
     end
   end
 
+  describe 'GET #shared books' do
+    it 'should get a list of books that is shared by the logged in owner' do
+      FactoryGirl.create(:valid_book_user)
+      book_borrower = FactoryGirl.create(:valid_book_borrower)
+      book = FactoryGirl.create(:valid_book)
+      get :shared_books
+      assigns(:books).should include(book)
+    end
+
+    it 'should not get a list of books that is not shared by the logged in owner' do
+      FactoryGirl.create(:valid_book_user)
+      book_borrower = FactoryGirl.create(:valid_book_borrower)
+      first_book = FactoryGirl.create(:valid_book)
+      second_book = FactoryGirl.create(:another_valid_book)
+      get :shared_books
+      assigns(:books).should_not include(second_book)
+    end
+
+    it 'should render the #shared_books page' do
+      get :shared_books
+      response.should render_template :shared_books
+    end
+  end
+
   describe 'GET #get_by_isbn' do
 
     before(:each) do
@@ -51,7 +75,6 @@ describe BooksController do
     end
 
     it 'should respond with 200' do
-
       response.status.should eq(200)
     end
 
@@ -135,6 +158,13 @@ describe BooksController do
     it 'assigns the new book to @book' do
       get :show, id: @book
       assigns(:book).should eq(@book)
+    end
+
+    it 'should fetch the borrowers of the book related to the logged in user' do
+      FactoryGirl.create(:valid_book_user)
+      book_borrower = FactoryGirl.create(:valid_book_borrower)
+      get :show, id: @book
+      assigns(:book_borrowers).should include(book_borrower)
     end
 
     it 'should render the #show page' do
