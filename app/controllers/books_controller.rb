@@ -20,6 +20,13 @@ class BooksController < ApplicationController
     render template: 'books/shared_books'
   end
 
+  def borrowed_books
+    borrower_id = User.where(name: session[:cas_user]).pluck(:id).first
+    borrowed_book_ids = BookBorrower.where(borrower_id: borrower_id).pluck(:book_id)
+    @books = Book.where(id: borrowed_book_ids)
+    render template: 'books/borrowed_books'
+  end
+
   def get_by_isbn
     isbn = params[:isbn]
     book_matching_isbn = GoogleBooks.search(isbn).first;

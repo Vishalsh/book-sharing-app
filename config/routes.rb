@@ -8,6 +8,7 @@ BookSharingApp::Application.routes.draw do
   get '/anonymous/index' , controller: 'anonymous#index'
   get '/books/own_books', controller: 'books#own_books'
   get '/books/shared_books', controller: 'books#shared_books'
+  get '/books/borrowed_books', controller: 'books#borrowed_books'
   post '/borrowers/update_borrower', controller: 'borrowers#update_borrower'
   match '/books/create', controller: 'books#create', via: [:post]
   match '/borrowers/create', controller: 'borrowers#create', via: [:post]
