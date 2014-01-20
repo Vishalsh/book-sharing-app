@@ -1,6 +1,12 @@
-var toggleArrow = function() {
-    $(".right-caret").click(function(e) {
-        $(e.target).toggleClass("caret");
+var toggleArrow = function () {
+    $("body").click(function (e) {
+        if ($(e.target).hasClass("right-caret")) {
+            $(e.target).toggleClass("caret");
+        }
+        else {
+            $(".right-caret").removeClass("caret");
+        }
+
     })
 }
 

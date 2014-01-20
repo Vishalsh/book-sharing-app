@@ -7,7 +7,7 @@
 
 .edit-book-icon {
   position: relative;
-  top: 117px;
+  top: 128px;
   left: 270px;
 }
 
@@ -24,8 +24,13 @@ a {
   }
 }
 
-.block {
+.book-data {
+  height: 110px;
+  overflow-y: scroll;
+  margin-bottom: 15px;
+}
 
+.block {
   .right-caret {
     display: inline-block;
     width: 0;
@@ -55,7 +60,6 @@ a {
   border-radius: 4px;
   padding-bottom: 5px;
   width: 285px;
-  height: 362px;
   float: left;
   span {
     word-wrap: break-word;
