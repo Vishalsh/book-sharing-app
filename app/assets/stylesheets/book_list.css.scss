@@ -1,16 +1,14 @@
 .image {
-  text-align: center;
   img {
-    height: 190px;
-    width: 220px;
-    margin-bottom: 10px;
+    height: 220px;
+    width: 100%;
   }
 }
 
 .edit-book-icon {
   position: relative;
-  top: -206px;
-  left: 244px;
+  top: 117px;
+  left: 270px;
 }
 
 li {
@@ -26,23 +24,38 @@ a {
   }
 }
 
-.book-blocks {
-  width: 90%;
-  margin: 0 auto;
-  > .col-lg-4 {
-    padding: 6px;
-  }
+.right-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-left: 6px solid gray;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 6px solid gray;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
 }
 
 .block {
   background: #fbfbfb;
   border: 1px solid #d6d6d6;
   border-radius: 4px;
-  padding: 15px;
+  padding-bottom: 5px;
   width: 285px;
+  height: 362px;
   float: left;
-  margin: 5px;
   span {
     word-wrap: break-word;
+    text-align: justify;
   }
 }
