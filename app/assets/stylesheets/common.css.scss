@@ -22,6 +22,7 @@
   }
 }
 
+
 .search-form {
   padding-top: 30px;
 }
@@ -68,7 +69,7 @@
 }
 
 .navbar-default .navbar-nav > .open {
-  a, &> a:hover, &> a:focus {
+  > a, & > a:hover, & > a:focus {
     color: #2C67A1;
     background-color: transparent;
   }
@@ -98,11 +99,20 @@
       padding-left: 0;
     }
   }
+}
 
-  .dropdown-toggle {
-
+.dropdown-menu {
+  min-width: 130px;
+  > li > a {
+    color: darkgray;
+    &:hover {
+      color: darkgray;
+    }
   }
+}
 
+.navbar-right .dropdown-menu li a {
+  color: darkgray;
 }
 
 .input-group {
@@ -114,7 +124,7 @@
     border-bottom-left-radius: 3px;
   }
 
-  .form-control {
+  #search_box {
     border: 0;
     padding: 6px 23px;
   }
@@ -146,6 +156,11 @@
   }
 }
 
+.username:hover {
+  color: white !important;
+}
+
+
 .icon {
   padding-right: 20px;
 }
@@ -157,8 +172,14 @@
 
 //******************************* Common fetch it some other file **************************************//
 
-h1 {
-  margin: 0 0 20px;
+.btn-primary {
+  background: url("background.png");
+  background-size: contain;
+  border: none;
+  font-weight: bold;
+  &:hover {
+    outline: none;
+  }
 }
 
 //******************************* Media Queries **************************************//
