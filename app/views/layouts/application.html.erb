@@ -11,14 +11,14 @@
 
 <div class='header row'>
   <div class='col-lg-4 col-md-4'>
-    <div class='logo'></div>
+    <div class='logo'>Book Share</div>
   </div>
-  <div class='col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4'>
+  <div class='col-lg-offset-4 col-lg-3 col-md-offset-2 col-md-4'>
     <%= form_tag search_index_path, class: 'search-form', method: 'get' do %>
         <div class="input-group">
         <span class="input-group-btn">
            <button class="btn btn-default" type='button dropdown-toggle' data-toggle='dropdown'>
-             <span id="selected_value">Title</span>
+             <span id="selected_value">title</span>
              <span class="caret"></span>
            </button>
            <ul class='dropdown-menu' id="filter">
@@ -50,7 +50,7 @@
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="collapse navbar-collapse row" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
       <li>
         <a href="/books/own_books">
