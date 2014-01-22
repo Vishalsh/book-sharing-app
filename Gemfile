@@ -40,11 +40,14 @@ end
 
 group :test, :development do
   gem "rspec-rails", "~> 2.14.0"
-  gem "capybara"
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'jasmine-rails'
   gem 'simplecov', :require => false
+  gem 'spinach'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'site_prism'
 end
 
 # Use ActiveModel has_secure_password
