@@ -39,8 +39,14 @@ textarea.form-control {
   padding-top: 5px;
 }
 
+.search-book {
+  padding: 0;
+}
+
 #search_button {
   outline: none;
+  background: url("background.png");
+  color: white;
 }
 
 #book_image {
@@ -62,3 +68,25 @@ textarea.form-control {
   }
 }
 
+//******************************* Media Queries **************************************//
+
+@media (max-width: 768px) {
+  #book_image {
+    margin-left: 19%;
+  }
+}
+
+@media (max-width: 992px) {
+  
+  .modal-dialog {
+    margin: 0 auto;
+  }
+  #addBookModal {
+    .form-group {
+      margin-bottom: 0;
+    }
+    .form-control {
+      margin-bottom: 15px;
+    }
+  }
+}

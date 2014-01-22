@@ -18,20 +18,20 @@
 
             <div class='form-horizontal'>
               <div class='row'>
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-5">
                   <div class='form-group'>
-                    <%= label_tag 'name', nil, class: 'col-lg-3 control-label' %>
-                    <div class='col-lg-8'>
+                    <%= label_tag 'name', nil, class: 'col-lg-2 col-md-2 control-label' %>
+                    <div class='col-lg-8 col-md-10'>
                       <%= text_field_tag 'name', nil, class: 'form-control'%>
                       <div class='errors borrower_id-errors'></div>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-7">
                   <div class='form-group'>
-                    <%= label_tag 'date_of_borrowing', nil, class: 'col-lg-3 control-label' %>
-                    <div class='col-lg-8'>
+                    <%= label_tag 'date_of_borrowing', nil, class: 'col-lg-4 col-md-4 control-label' %>
+                    <div class='col-lg-8 col-md-8'>
                       <div class="input-group">
                         <%= text_field_tag 'date_of_borrowing', nil, class: 'form-control' %>
                         <span class="input-group-addon glyphicon glyphicon-calendar"></span>
