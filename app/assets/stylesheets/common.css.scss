@@ -27,7 +27,6 @@ body {
   }
 }
 
-
 .search-form {
   padding-top: 30px;
 }
@@ -64,6 +63,15 @@ body {
 
 .count-borrowed-books {
   background: rgb(185, 101, 100);
+}
+
+.navbar-default .navbar-toggle {
+  background: white;
+  border: none;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background: white;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -165,7 +173,6 @@ body {
   color: white !important;
 }
 
-
 .icon {
   padding-right: 20px;
 }
@@ -180,8 +187,6 @@ body {
   }
 }
 
-//******************************* Common fetch it some other file **************************************//
-
 .btn-primary {
   background: url("background.png");
   background-size: contain;
@@ -194,4 +199,28 @@ body {
 
 //******************************* Media Queries **************************************//
 
+@media (max-width: 768px) {
+
+  .search-form {
+    padding-top: 10px;
+  }
+
+  .input-group {
+    .input-group-btn {
+      padding: 6px 0;
+    }
+  }
+
+  .navbar-nav > li:first-child a {
+    padding-left: 30px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+
+  .navbar-nav > li > a {
+    padding: 0 10px;
+  }
+
+}
 
