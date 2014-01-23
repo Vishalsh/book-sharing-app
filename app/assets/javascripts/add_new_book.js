@@ -78,6 +78,7 @@ var searchTitleGoogleBooks = function () {
         dataType: 'html'
     }).success(function (searchedBook) {
             var searchedBookJson = JSON.parse(searchedBook)
+            $('#book_isbn').val(searchedBookJson.possible_book.isbn)
             $('#book_title').val(searchedBookJson.possible_book.title)
             $('#book_author').val(searchedBookJson.possible_book.author)
             $('#book_description').val(searchedBookJson.possible_book.description)

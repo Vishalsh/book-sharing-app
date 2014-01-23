@@ -41,7 +41,7 @@ class BooksController < ApplicationController
     title = params[:title]
     response_book = GoogleBooks.search(title).first;
     possible_book = Book.new(title: response_book.title, description: response_book.description,
-                             author: response_book.authors)
+                             author: response_book.authors, isbn: response_book.isbn_10)
     render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
   end
 
