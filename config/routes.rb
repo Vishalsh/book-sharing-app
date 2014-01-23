@@ -15,6 +15,7 @@ BookSharingApp::Application.routes.draw do
 
   resources :books do
     get '/get_by_isbn/:isbn', to: 'books#get_by_isbn', :on => :collection
+    get '/get_by_title/:title', to: 'books#get_by_title', :on => :collection
   end
 
   resources :search, only: [:index]

@@ -37,6 +37,14 @@ class BooksController < ApplicationController
     render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
   end
 
+  def get_by_title
+    title = params[:title]
+    response_book = GoogleBooks.search(title).first;
+    possible_book = Book.new(title: response_book.title, description: response_book.description,
+                             author: response_book.authors)
+    render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
+  end
+
   def new
     @book = Book.new
     respond_to do |format|
