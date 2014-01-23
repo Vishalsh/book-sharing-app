@@ -1,18 +1,45 @@
 .image-div {
   text-align: center;
-  margin-top: 10px;
-  img {
-    height: 270px;
-    width: 80%;
+  padding: 0px;
+  margin: 0 20px;
+}
+
+.book-details {
+  text-align: justify;
+  h2 {
+    margin: 0;
+    color: gray;
   }
+  .book-info {
+    padding: 8px 0 8px;
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+
+  .heading {
+    color: rgb(60, 60, 60);
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(115, 172, 201);
+  }
+
 }
 
 .book-info {
-  margin: 10px 0 15px !important;
+  h3 {
+    margin: 0 0 15px 0;
+  }
+  .table > tbody > tr {
+    > th{
+      border-top: none;
+    }
+    > td {
+      border-top: 1px solid rgb(115, 172, 201)
+    }
+  }
 }
 
-#add_new_borrower {
-  color: #eeeeee;
-  font-weight: bold;
+#add_new_borrower .btn{
+  margin-bottom: 15px;
 }
 
