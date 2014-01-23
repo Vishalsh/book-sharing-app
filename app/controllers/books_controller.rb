@@ -29,10 +29,12 @@ class BooksController < ApplicationController
 
   def get_by_isbn
     isbn = params[:isbn]
-    book_matching_isbn = GoogleBooks.search(isbn).first;
-    possible_book = Book.new(title: book_matching_isbn.title, description: book_matching_isbn.description,
-                             author: book_matching_isbn.authors)
-    render json: {possible_book: possible_book, image_link: book_matching_isbn.image_link}, status: :ok
+    response_book = GoogleBooks.search(isbn).first;
+    if response_book.isbn_10 == isbn
+    possible_book = Book.new(title: response_book.title, description: response_book.description,
+                             author: response_book.authors)
+    end
+    render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
   end
 
   def new

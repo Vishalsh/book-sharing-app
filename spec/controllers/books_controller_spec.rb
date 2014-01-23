@@ -79,10 +79,10 @@ describe BooksController do
   describe 'GET #get_by_isbn' do
 
     before(:each) do
-      @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner fo Askaban",
-                                      description: "Harry Potter Epic", authors: "JK Rowling"
-      GoogleBooks.should_receive(:search).with('1234').and_return([@possible_book])
-      get(:get_by_isbn, {'isbn' => '1234'}, format: :json)
+      @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner of Azkaban",
+                                      description: "Harry Potter Epic", authors: "JK Rowling", isbn_10: '1234567890'
+      GoogleBooks.should_receive(:search).with('1234567890').and_return([@possible_book])
+      get :get_by_isbn, isbn: '1234567890', format: :json
     end
 
     it 'should render the matching book as json' do

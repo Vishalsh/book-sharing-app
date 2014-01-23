@@ -55,7 +55,7 @@ var postMyForm = function (e) {
 
 var searchFromGoogleBooks = function () {
     $.ajax({
-        url: '/books/get_by_isbn/:' + $('#book_isbn').val(),
+        url: '/books/get_by_isbn/' + $('#book_isbn').val(),
         type: 'GET',
         crossDomain: true,
         dataType: 'html'
