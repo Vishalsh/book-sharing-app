@@ -237,7 +237,7 @@ describe BooksController do
       put :update, id: @book,
           book: FactoryGirl.attributes_for(:invalid_book, isbn: nil)
       @book.reload
-      @book.title.should eq('Harry Potter and The Prisoner fo Askaban')
+      @book.title.should eq('Harry Potter and The Prisoner fo Azkaban')
     end
 
     it "re-renders the edit method" do

@@ -26,6 +26,13 @@ describe Book do
     @book.should_not be_valid
   end
 
+  it 'should not be valid if ISBN is not 10 characters' do
+    @book.isbn = '123123131232313'
+    @book.should_not be_valid
+    @book.isbn = '123123123'
+    @book.should_not be_valid
+  end
+
   context 'Already existing' do
 
     it 'should not valid with an isbn number already exists' do
