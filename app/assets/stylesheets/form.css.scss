@@ -43,7 +43,13 @@ textarea.form-control {
   padding: 0;
 }
 
-#search_button {
+#ISBN_search_button {
+  outline: none;
+  background: url("background.png");
+  color: white;
+}
+
+#title_search_button {
   outline: none;
   background: url("background.png");
   color: white;

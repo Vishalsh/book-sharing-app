@@ -11,7 +11,7 @@ var getNewBookForm = function () {
             success: function (data) {
                 $(data).modal('show');
                 setTimeout(function () {
-                    $("#search_button").on('click', getBookInformation)
+                    $("#ISBN_search_button").on('click', getBookInformationByISBN)
                 }, 500);
             },
             complete: function (data) {
@@ -74,10 +74,24 @@ var checkForAddAnotherBook = function (currentSaveButton) {
     }
 }
 
-var getBookInformation = function () {
+var getBookInformationByISBN = function () {
 
     $.ajax({
         url: '/books/get_by_isbn/:' + $('#book_isbn').val(),
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'html'
+    }).success(function () {
+            $('#title').val('title')
+            $('#author').val('author')
+            $('#description').val('description')
+        });
+}
+
+var getBookInformationBytitle = function () {
+
+    $.ajax({
+        url: '/books/get_by_title/:' + $('#book_title').val(),
         type: 'GET',
         crossDomain: true,
         dataType: 'html'

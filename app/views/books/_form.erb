@@ -19,7 +19,7 @@
               <div class='row'>
                 <div class="col-lg-8 col-md-9 col-sm-8">
                   <div class='form-group'>
-
+                    <div class ='row'>
                     <%= f.label :isbn, class: 'col-lg-offset-1 col-lg-1 col-md-1 col-sm-2 col-xs-2 control-label' %>
                     <div class='col-lg-4 col-md-4 col-sm-9 col-xs-9'>
                       <%= f.text_field :isbn, class: 'form-control', id: 'book_isbn' %>
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 search-book">
-                      <button type='button' class='btn' id='search_button'>
+                      <button type='button' class='btn' id='ISBN_search_button'>
                         <span class='glyphicon glyphicon-search'></span>
                       </button>
                     </div>
@@ -37,35 +37,36 @@
                       <%= f.text_field :edition, class: 'form-control' %>
                       <div class='errors edition-errors'></div>
                     </div>
-
-                  </div>
-
-                  <div class='row'>
-                    <div class='form-group'>
+                    </div>
+                    <div class='row'>
                       <%= f.label :Title, class: 'col-lg-offset-1 col-lg-1 col-md-1 col-sm-2 col-xs-2 control-label', disabled: true %>
                       <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10'>
                         <%= f.text_field :title, class: 'form-control' %>
                         <div class='errors title-errors'></div>
                       </div>
 
-                      <%= f.label :author, class: 'col-lg-2 col-md-3 col-sm-2 col-xs-2 control-label', disabled: true %>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 search-book">
+                      <button type='button' class='btn' id='title_search_button'>
+                        <span class='glyphicon glyphicon-search'></span>
+                      </button>
+                    </div>
+
+                      <%= f.label :author, class: 'col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label', disabled: true %>
                       <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10'>
                         <%= f.text_field :author, class: 'form-control' %>
                         <div class='errors author-errors'></div>
                       </div>
-                    </div>
                   </div>
 
-                  <div class='row'>
-                    <div class='form-group'>
-                      <%= f.label :description, class: 'col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label', disabled: true %>
-                      <div class='col-lg-10 col-md-10 col-sm-9 col-xs-9'>
-                        <%= f.text_area :description, class: 'form-control' %>
-                        <div class='errors description-errors'></div>
+                    <div class='row'>
+                        <%= f.label :description, class: 'col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label', disabled: true %>
+                        <div class='col-lg-10 col-md-10 col-sm-9 col-xs-9'>
+                          <%= f.text_area :description, class: 'form-control' %>
+                          <div class='errors description-errors'></div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
                 <div class="col-lg-4 col-md-3 col-sm-4">
                   <img id="book_image" src="" />
