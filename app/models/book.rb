@@ -1,8 +1,8 @@
 class Book < ActiveRecord::Base
 
-  validates :title, :description,:edition, :author, presence: true
+  validates :title, :description, :author, presence: true
   validates :isbn, :isbn_format => true
-  validates :edition, numericality: {only_integer: true}
+  validates :edition, numericality: {only_integer: true}, :allow_nil => true
 
   has_and_belongs_to_many :users, join_table: :books_owners
 

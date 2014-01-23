@@ -12,7 +12,7 @@ describe Book do
   end
 
   context "Validations" do
-    [:title, :description, :isbn, :edition, :author].each do |attr|
+    [:title, :description, :isbn, :author].each do |attr|
       it "should not be valid without #{attr}" do
         @book[attr] = nil
         @book.should_not be_valid
