@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_own_books_count
-    user = User.where(name: session[:cas_user]).first
-    if user
-     return user.books.count
+    owner = User.where(name: session[:cas_user]).first
+    if owner
+      return owner.books.uniq.count
     end
     0
   end
