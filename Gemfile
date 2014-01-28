@@ -69,8 +69,6 @@ gem 'capistrano-ext'
 
 gem 'bundler'
 
-gem "jquery-ui-rails", "~> 4.1.1"
-
 gem 'bootstrap-datepicker-rails'
 
 gem 'googlebooks'

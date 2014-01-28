@@ -1,6 +1,7 @@
 class BorrowersController < ApplicationController
 
   def new
+    @users = User.pluck(:name)
     respond_to do |format|
       format.html { render partial: 'add_borrower_form' }
     end

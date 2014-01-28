@@ -54,43 +54,49 @@
       </div>
     </div>
 
-    <div class="row book-info">
-      <h3 class="col-lg-12 heading">Lent to:</h3>
+    <% if !@isOnwerViewingBook %>
+        <div class="row book-info">
+          <h3 class="heading col-lg-12">Owners:</h3>
 
-      <div class="col-lg-12">
+          <div class="col-lg-12">
+            <% @book.owners.uniq.each do |owner| %>
+                <%= owner.name %> (<%= @copies[owner.name] %>)
+            <% end %>
+          </div>
+        </div>
+    <% end %>
 
-        <% if !@book_borrowers.empty? %>
-            <table class="table">
-              <tr>
-                <th>Name</th>
-                <th>Date of borrowing</th>
-                <th></th>
-              </tr>
-              <tbody>
-              <% @book_borrowers.each do |book_borrower| %>
+
+    <% if @isOnwerViewingBook %>
+        <div class="row book-info">
+          <h3 class="col-lg-12 heading">Lent to:</h3>
+
+          <div class="col-lg-12">
+
+            <% if !@book_borrowers.empty? %>
+                <table class="table">
                   <tr>
-                    <td><%= book_borrower.borrower.name %></td>
-                    <td><%= book_borrower.date_of_borrowing %></td>
-                    <td>
-                      <a data-method="delete" href="/borrowers/<%= book_borrower.id %>?book_id=<%= @book.id %>" class="glyphicon glyphicon-trash"></a>
-                    </td>
+                    <th>Name</th>
+                    <th>Date of borrowing</th>
+                    <th></th>
                   </tr>
-              <% end %>
-              </tbody>
-            </table>
-        <% end %>
-      </div>
-    </div>
-
+                  <tbody>
+                  <% @book_borrowers.each do |book_borrower| %>
+                      <tr>
+                        <td><%= book_borrower.borrower.name %></td>
+                        <td><%= book_borrower.date_of_borrowing %></td>
+                        <td>
+                          <a data-method="delete" href="/borrowers/<%= book_borrower.id %>?book_id=<%= @book.id %>" class="glyphicon glyphicon-trash"></a>
+                        </td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
   </div>
-
-
-</div>
-
-
-
-
-
 </div>
 
 

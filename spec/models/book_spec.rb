@@ -53,8 +53,8 @@ describe Book do
       book = FactoryGirl.build(:valid_book_with_another_user)
       book.save_or_update_with_user { 'mario' }
       book = Book.find_by(isbn: book.isbn)
-      book.users.first.name.should == 'alladin'
-      book.users.last.name.should == 'mario'
+      book.owners.first.name.should == 'alladin'
+      book.owners.last.name.should == 'mario'
     end
 
   end

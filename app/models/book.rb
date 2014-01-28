@@ -4,7 +4,7 @@ class Book < ActiveRecord::Base
   validates :isbn, :isbn_format => true
   validates :edition, numericality: {only_integer: true}, :allow_nil => true
 
-  has_and_belongs_to_many :users, join_table: :books_owners
+  has_and_belongs_to_many :owners, class_name: User, join_table: :books_owners
 
   def self.filter_by filter, title
     Book.where(filter + " LIKE ?", "%" + title.to_s + "%")
@@ -19,10 +19,10 @@ class Book < ActiveRecord::Base
       existing_book = Book.find_by(isbn: isbn)
 
       if existing_book
-        existing_book.users << User.find_or_create_by(name: current_user)
+        existing_book.owners << User.find_or_create_by(name: current_user)
       else
         save
-        users << User.find_or_create_by(name: current_user)
+        owners << User.find_or_create_by(name: current_user)
       end
     end
   end

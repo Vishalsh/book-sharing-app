@@ -6,9 +6,8 @@ class BooksController < ApplicationController
 
   def own_books
     user = User.where(name: session[:cas_user]).first
-    @copies = []
     if user
-      @books, @copies = user.get_books_with_count_of_copies
+      @books = user.books.uniq
       render template: 'books/own_books'
     end
   end
@@ -73,6 +72,9 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     owner_id = User.where(name: session[:cas_user]).pluck(:id).first
     @book_borrowers = BookBorrower.where(book_id: @book.id, owner_id: owner_id).includes(:borrower)
+    bookOwners = @book.owners
+    @copies = bookOwners.group(:name).count
+    @isOnwerViewingBook = bookOwners.pluck(:name).include?(session[:cas_user])
   end
 
   def edit

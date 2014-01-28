@@ -33,6 +33,14 @@ describe BooksController do
       get :own_books
       response.should render_template :own_books
     end
+
+    it 'should list all the books of the logged in users' do
+      book = FactoryGirl.create(:valid_book)
+      book.owners << FactoryGirl.build(:valid_book_user)
+      get :own_books
+      assigns(:books).should eq([book])
+    end
+
   end
 
   describe 'GET #shared books' do
@@ -139,7 +147,7 @@ describe BooksController do
 
       it 'does not create a new user if the user already exists' do
         aBook = FactoryGirl.create(:valid_book)
-        aBook.users.find_or_create_by(name: 'alladin')
+        aBook.owners.find_or_create_by(name: 'alladin')
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
                       image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi',
                       format: :json
