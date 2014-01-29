@@ -14,6 +14,7 @@ var getNewBookForm = function () {
             complete: function () {
                 setTimeout(function () {
                     $(".save-form").on('click', postMyForm)
+                    $('#tags').tagsinput()
                     $("#ISBN_search_button").on('click', searchISBNGoogleBooks)
                     $("#title_search_button").on('click', searchTitleGoogleBooks)
                 }, 500);
@@ -47,7 +48,7 @@ var postMyForm = function (e) {
             $(".alert-info").hide();
             $(".alert-success").hide();
             $(".alert-danger").show();
-            displayErrors(errors)
+            displayErrors(errors);
         }
 
     })

@@ -30,8 +30,8 @@ class BooksController < ApplicationController
     isbn = params[:isbn]
     response_book = GoogleBooks.search(isbn).first;
     if response_book.isbn_10 == isbn
-    possible_book = Book.new(title: response_book.title, description: response_book.description,
-                             author: response_book.authors)
+      possible_book = Book.new(title: response_book.title, description: response_book.description,
+                               author: response_book.authors)
     end
     render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
   end
@@ -55,20 +55,20 @@ class BooksController < ApplicationController
     image_url = params[:image_url] + '&printsec=' + params[:printsec] + '&img=' + params[:img] + '&zoom=' + params[:zoom] + '&source=' + params[:source]
     book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
                     edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
-    if book.save_or_update_with_user_and_tag(session[:cas_user], params[:tag])
+
+    if book.save_or_update_with_user_and_tags(session[:cas_user], params[:tags])
       respond_to do |format|
         format.json { render json: book, status: :created }
       end
 
     else
-      if Tag.new(name: params[:tag]).invalid?
-        book.errors['tag'] = "can't be blank"
+      if params[:tags].blank?
+        book.errors['tags'] = "can't be blank"
       end
       respond_to do |format|
         format.json { render json: book.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   def show

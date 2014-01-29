@@ -11,9 +11,9 @@ class Book < ActiveRecord::Base
     Book.where(filter + " LIKE ?", "%" + title.to_s + "%")
   end
 
-  def save_or_update_with_user_and_tag(current_user, tag)
+  def save_or_update_with_user_and_tags(current_user, book_tags)
 
-    if self.valid? && Tag.new(name: tag).valid?
+    if self.valid? && !book_tags.blank?
       existing_book = Book.find_by(isbn: isbn)
 
       if existing_book
@@ -21,7 +21,10 @@ class Book < ActiveRecord::Base
       else
         save
         owners << User.find_or_create_by(name: current_user)
-        tags << Tag.find_or_create_by(name: tag)
+        tags_array = book_tags.split(',')
+        tags_array.each { |tag|
+          tags << Tag.find_or_create_by(name: tag)
+        }
       end
     end
   end

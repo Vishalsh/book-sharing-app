@@ -36,22 +36,22 @@ describe Book do
   context 'Already existing' do
 
     it 'should not valid with an isbn number already exists' do
-      expect { @book.save_or_update_with_user_and_tag('alladin', 'abcd') }.to change(Book, :count).by(1)
+      expect { @book.save_or_update_with_user_and_tags('alladin', 'abcd') }.to change(Book, :count).by(1)
 
       expect do
         anotherBook = FactoryGirl.build(:valid_book)
         anotherBook.should_not be_valid
         anotherBook.errors.to_hash[:isbn].should_not be_nil
-        anotherBook.save_or_update_with_user_and_tag
+        anotherBook.save_or_update_with_user_and_tags
       end.to raise_error
 
     end
 
     it 'different user should be able to add a book with an existing isbn' do
       book = FactoryGirl.build(:valid_book)
-      book.save_or_update_with_user_and_tag('alladin', 'abcd')
+      book.save_or_update_with_user_and_tags('alladin', 'abcd')
       book = FactoryGirl.build(:valid_book_with_another_user)
-      book.save_or_update_with_user_and_tag('mario', 'defg')
+      book.save_or_update_with_user_and_tags('mario', 'defg')
       book = Book.find_by(isbn: book.isbn)
       book.owners.first.name.should == 'alladin'
       book.owners.last.name.should == 'mario'

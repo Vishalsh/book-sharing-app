@@ -15,4 +15,5 @@
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require turbolinks
+//= require bootstrap-tagsinput
 //= require_tree . 
