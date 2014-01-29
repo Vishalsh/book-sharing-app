@@ -55,7 +55,6 @@ var postMyForm = function (e) {
 
 
 var searchISBNGoogleBooks = function () {
-    binding.pry
     $.ajax({
         url: '/books/get_by_isbn/' + $('#book_isbn').val(),
         type: 'GET',

@@ -5,17 +5,15 @@ class Book < ActiveRecord::Base
   validates :edition, numericality: {only_integer: true}, :allow_nil => true
 
   has_and_belongs_to_many :owners, class_name: User, join_table: :books_owners
+  has_and_belongs_to_many :tags
 
   def self.filter_by filter, title
     Book.where(filter + " LIKE ?", "%" + title.to_s + "%")
   end
 
-  def save_or_update_with_user
-    if block_given?
-      current_user = yield()
-    end
+  def save_or_update_with_user_and_tag(current_user, tag)
 
-    if valid?
+    if self.valid? && Tag.new(name: tag).valid?
       existing_book = Book.find_by(isbn: isbn)
 
       if existing_book
@@ -23,6 +21,7 @@ class Book < ActiveRecord::Base
       else
         save
         owners << User.find_or_create_by(name: current_user)
+        tags << Tag.find_or_create_by(name: tag)
       end
     end
   end
