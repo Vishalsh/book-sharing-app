@@ -285,4 +285,27 @@ describe BooksController do
 
   end
 
+  describe 'DELETE #destroy' do
+
+    before(:each) do
+      @book = FactoryGirl.create(:valid_book)
+      @book.owners << FactoryGirl.build(:valid_book_user)
+    end
+
+    it 'should delete the book for the logged in user' do
+      expect { delete :destroy, id: @book.id}.to change(@book.owners, :count).by_at_least(-1)
+    end
+
+    it 'should redirect to the book page' do
+      delete :destroy, id: @book.id
+      response.should redirect_to books_own_books_path
+    end
+
+    it 'should delete the borrowers of that book' do
+
+    end
+
+  end
+
+
 end

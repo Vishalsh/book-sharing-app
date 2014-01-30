@@ -93,4 +93,20 @@ class BooksController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    book = Book.find(params[:id])
+    user = User.where(name: session[:cas_user]).first
+    book.owners.delete(user)
+
+    #book_borrower = BookBorrower.where('book_id = :bookId AND owner_id = :ownerId', {bookId: book.id, ownerId: user.id})
+    #
+    #if book_borrower
+    #  book_borrower.each { |borrower|
+    #    borrower.destroy
+    #  }
+    #end
+    redirect_to books_own_books_path
+  end
+
 end
