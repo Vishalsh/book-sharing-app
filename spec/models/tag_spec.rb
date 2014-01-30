@@ -19,5 +19,12 @@ describe User do
       @tag.errors.to_hash[:name].should_not be_nil
     end
   end
-  
+
+  context 'search' do
+    it 'should search for the tag' do
+      tag = FactoryGirl.create(:valid_tag)
+      expect(Tag.filter_by('rails').name).to eq(tag.name)
+    end
+  end
+
 end

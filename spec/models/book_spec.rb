@@ -59,4 +59,13 @@ describe Book do
 
   end
 
+  context 'search' do
+    it 'should search for the tag' do
+      book = FactoryGirl.create(:valid_book)
+      expect(Book.filter_by('title', 'Harry Potter')).to eq([book])
+      expect(Book.filter_by('author', 'JK')).to eq([book])
+      expect(Book.filter_by('isbn', '0545')).to eq([book])
+    end
+  end
+
 end

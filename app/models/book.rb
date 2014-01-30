@@ -7,8 +7,8 @@ class Book < ActiveRecord::Base
   has_and_belongs_to_many :owners, class_name: User, join_table: :books_owners
   has_and_belongs_to_many :tags
 
-  def self.filter_by filter, title
-    Book.where(filter + " LIKE ?", "%" + title.to_s + "%")
+  def self.filter_by filter, value
+    Book.where(filter + " LIKE ?", "%" + value.to_s + "%")
   end
 
   def save_or_update_with_user_and_tags(current_user, book_tags)
