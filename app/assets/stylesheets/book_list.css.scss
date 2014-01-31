@@ -47,15 +47,14 @@ a {
       color: gray;
       padding: 7px 80px;
     }
-    span {
-      font-size: 15px;
-      position: relative;
-      top: 2px;
-    }
   }
   .dropdown-menu {
     left: 22%;
     top: 29px;
     background: rgb(231, 238, 243);
+  }
+
+  .link-text {
+    padding-left: 5px;
   }
 }

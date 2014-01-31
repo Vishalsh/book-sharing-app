@@ -117,10 +117,14 @@ body {
 
 .dropdown-menu {
   min-width: 130px;
-  > li > a {
-    color: gray;
-    &:hover {
+  > li {
+    text-align: left;
+    > a {
       color: gray;
+      padding: 3px 11px;
+      &:hover {
+        color: gray;
+      }
     }
   }
 }
@@ -136,6 +140,10 @@ body {
     border: 0;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
+  }
+
+  .btn:active {
+    box-shadow: none !important;
   }
 
   #search_box {

@@ -293,7 +293,7 @@ describe BooksController do
     end
 
     it 'should delete the book for the logged in user' do
-      expect { delete :destroy, id: @book.id}.to change(@book.owners, :count).by_at_least(-1)
+      expect { delete :destroy, id: @book.id}.to change(@book.owners, :count).by (-1)
     end
 
     it 'should redirect to the book page' do

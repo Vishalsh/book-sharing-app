@@ -66,8 +66,16 @@
         </div>
     <% end %>
 
-
     <% if @isOnwerViewingBook %>
+
+        <div class="row book-info">
+          <h3 class="heading col-lg-12">No of copies:</h3>
+
+          <div class="col-lg-12">
+            <%= @copies[session[:cas_user]] %>
+          </div>
+        </div>
+
         <div class="row book-info">
           <h3 class="col-lg-12 heading">Lent to:</h3>
 

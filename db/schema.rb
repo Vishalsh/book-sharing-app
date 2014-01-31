@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128114344) do
+ActiveRecord::Schema.define(version: 20140131125651) do
 
   create_table "book_borrowers", force: true do |t|
     t.integer  "book_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140128114344) do
     t.string   "image_url"
   end
 
-  create_table "books_owners", id: false, force: true do |t|
+  create_table "books_owners", force: true do |t|
     t.integer "book_id", null: false
     t.integer "user_id", null: false
   end
