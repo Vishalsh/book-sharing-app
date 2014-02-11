@@ -1,8 +1,10 @@
-<div class="row">
-  <a href="#" data-toggle='modal' id="add_new_borrower" class="">
-    <button class="btn btn-primary pull-right">+ Add New Borrower</button>
-  </a>
-</div>
+<% if !@noMoreBorrowers %>
+    <div class="row">
+      <a href="#" data-toggle='modal' id="add_new_borrower">
+        <button class="btn btn-primary pull-right">+ Add New Borrower</button>
+      </a>
+    </div>
+<% end %>
 
 <div class="row book-details">
 

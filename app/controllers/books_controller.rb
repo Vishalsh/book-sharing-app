@@ -78,6 +78,7 @@ class BooksController < ApplicationController
     bookOwners = @book.owners
     @copies = bookOwners.group(:name).count
     @isOnwerViewingBook = bookOwners.pluck(:name).include?(session[:cas_user])
+    @noMoreBorrowers = true if @book_borrowers.length == @copies['vishalsh']
   end
 
   def edit
@@ -98,7 +99,6 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     user = User.where(name: session[:cas_user]).first
     book.owners.find_by_sql('delete from books_owners where id = (select id from books_owners where book_id =' + book.id.to_s + ' and user_id = ' + user.id.to_s + ' limit 1 )')
-
     redirect_to books_own_books_path
   end
 
