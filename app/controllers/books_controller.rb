@@ -29,7 +29,7 @@ class BooksController < ApplicationController
   def get_by_isbn
     isbn = params[:isbn]
     response_book = GoogleBooks.search(isbn).first;
-    if response_book.isbn_10 == isbn
+    if response_book.isbn_10 == isbn || response_book.isbn_13 == isbn
       possible_book = Book.new(title: response_book.title, description: response_book.description,
                                author: response_book.authors)
     end

@@ -13,15 +13,15 @@ var getNewBookForm = function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $(".save-form").on('click', postMyForm)
+                    $(".save-form").click(postMyForm)
                     $('#tags').tagsinput()
-                    $("#ISBN_search_button").on('click', searchISBNGoogleBooks)
-                    $("#title_search_button").on('click', searchTitleGoogleBooks)
+                    $("#title_search_button").click(searchGoogleBooksByTitle)
+                    $("#ISBN_search_button").click(searchGoogleBooksByISBN)
                 }, 500);
             }
         })
     });
-}   
+}
 
 
 var postMyForm = function (e) {
@@ -55,35 +55,41 @@ var postMyForm = function (e) {
 }
 
 
-var searchISBNGoogleBooks = function () {
-    $.ajax({
-        url: '/books/get_by_isbn/' + $('#book_isbn').val(),
-        type: 'GET',
-        crossDomain: true,
-        dataType: 'html'
-    }).success(function (searchedBook) {
-            var searchedBookJson = JSON.parse(searchedBook)
-            $('#book_title').val(searchedBookJson.possible_book.title)
-            $('#book_author').val(searchedBookJson.possible_book.author)
-            $('#book_description').val(searchedBookJson.possible_book.description)
-            $("#book_image").attr("src", searchedBookJson.image_link)
-        });
+var searchGoogleBooksByISBN = function () {
+    if ($(this).is(":checked")) {
+        $.ajax({
+            url: '/books/get_by_isbn/' + $('#book_isbn').val(),
+            type: 'GET',
+            crossDomain: true,
+            dataType: 'html'
+        }).success(function (searchedBook) {
+                displaySearchedBookValues(searchedBook);
+            });
+    }
 }
 
-var searchTitleGoogleBooks = function () {
-    $.ajax({
-        url: '/books/get_by_title/' + $('#book_title').val(),
-        type: 'GET',
-        crossDomain: true,
-        dataType: 'html'
-    }).success(function (searchedBook) {
-            var searchedBookJson = JSON.parse(searchedBook)
-            $('#book_isbn').val(searchedBookJson.possible_book.isbn)
-            $('#book_title').val(searchedBookJson.possible_book.title)
-            $('#book_author').val(searchedBookJson.possible_book.author)
-            $('#book_description').val(searchedBookJson.possible_book.description)
-            $("#book_image").attr("src", searchedBookJson.image_link)
-        });
+var searchGoogleBooksByTitle = function () {
+    if ($(this).is(":checked")) {
+        $.ajax({
+            url: '/books/get_by_title/' + $('#book_title').val(),
+            type: 'GET',
+            crossDomain: true,
+            dataType: 'html'
+        }).success(function (searchedBook) {
+                displaySearchedBookValues(searchedBook);
+            });
+    }
+}
+
+var displaySearchedBookValues = function (searchedBook) {
+    var searchedBookJson = JSON.parse(searchedBook)
+    $('#book_title').val(searchedBookJson.possible_book.title)
+    $('#book_author').val(searchedBookJson.possible_book.author)
+    $('#book_description').val(searchedBookJson.possible_book.description)
+    $('#book_isbn').val(searchedBookJson.possible_book.isbn)
+    $("#book_image").attr("src", searchedBookJson.image_link)
+    $("#ISBN_search_button").prop('checked', false);
+    $("#title_search_button").prop('checked', false);
 }
 
 var displayErrors = function (errors) {
@@ -93,7 +99,7 @@ var displayErrors = function (errors) {
     }
 }
 
-var hideAlerts = function() {
+var hideAlerts = function () {
     $(".alert").hide();
 }
 

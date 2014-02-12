@@ -28,9 +28,7 @@
                       </div>
 
                       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 search-book">
-                        <button type='button' class='btn' id='title_search_button'>
-                          <span class='glyphicon glyphicon-search'></span>
-                        </button>
+                        <input type='checkbox' name='search_by_title' id='title_search_button' />
                       </div>
 
                       <%= f.label :edition, class: 'col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
@@ -50,9 +48,7 @@
                       </div>
 
                       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 search-book">
-                        <button type='button' class='btn' id='ISBN_search_button'>
-                          <span class='glyphicon glyphicon-search'></span>
-                        </button>
+                        <input type='checkbox' name='search_by_isbn' id='ISBN_search_button' />
                       </div>
 
                       <%= f.label :author, class: 'col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label', disabled: true %>
