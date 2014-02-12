@@ -17,6 +17,9 @@ var getNewBookForm = function () {
                     $('#tags').tagsinput()
                     $("#search_by_title").click(searchGoogleBooksByTitle)
                     $("#search_by_isbn").click(searchGoogleBooksByISBN)
+                    disableCheckboxes();
+                    $("#book_title").keyup(enableSearchByTitleCheckbox);
+                    $("#book_isbn").keyup(enableSearchByIsbnCheckbox);
                 }, 500);
             }
         })
@@ -50,7 +53,6 @@ var postMyForm = function (e) {
             $(".alert-danger").show();
             displayErrors(errors);
         }
-
     })
 }
 
@@ -61,10 +63,18 @@ var searchGoogleBooksByISBN = function () {
             url: '/books/get_by_isbn/' + $('#book_isbn').val(),
             type: 'GET',
             crossDomain: true,
-            dataType: 'html'
-        }).success(function (searchedBook) {
+            dataType: 'html',
+            success: function (searchedBook) {
                 displaySearchedBookValues(searchedBook);
-            });
+            },
+            error: function(error) {
+                $(".isbn-errors").text(error.responseText)
+                $("#search_by_isbn").attr('checked', false);
+                $(".form-control").val("")
+                disableCheckboxes()
+            }
+
+        })
     }
 }
 
@@ -74,10 +84,11 @@ var searchGoogleBooksByTitle = function () {
             url: '/books/get_by_title/' + $('#book_title').val(),
             type: 'GET',
             crossDomain: true,
-            dataType: 'html'
-        }).success(function (searchedBook) {
+            dataType: 'html',
+            success: function (searchedBook) {
                 displaySearchedBookValues(searchedBook);
-            });
+            }
+        })
     }
 }
 
@@ -88,6 +99,32 @@ var displaySearchedBookValues = function (searchedBook) {
     $('#book_description').val(searchedBookJson.possible_book.description)
     $('#book_isbn').val(searchedBookJson.possible_book.isbn)
     $("#book_image").attr("src", searchedBookJson.image_link)
+    $("#errors").text('')
+    $("#search_by_title").attr('checked', false);
+    $("#search_by_isbn").attr('checked', false);
+}
+
+var disableCheckboxes = function () {
+    $("#search_by_title").attr('disabled', true);
+    $("#search_by_isbn").attr('disabled', true);
+}
+
+var enableSearchByTitleCheckbox = function () {
+    if ($(this).val() != '') {
+        $("#search_by_title").attr('disabled', false);
+    }
+    else {
+        $("#search_by_title").attr('disabled', true);
+    }
+}
+
+var enableSearchByIsbnCheckbox = function () {
+    if ($(this).val() != '') {
+        $("#search_by_isbn").attr('disabled', false);
+    }
+    else {
+        $("#search_by_isbn").attr('disabled', true);
+    }
 }
 
 var displayErrors = function (errors) {

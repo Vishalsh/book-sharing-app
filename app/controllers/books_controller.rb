@@ -31,9 +31,11 @@ class BooksController < ApplicationController
     response_book = GoogleBooks.search(isbn).first;
     if response_book.isbn_10 == isbn || response_book.isbn_13 == isbn
       possible_book = Book.new(title: response_book.title, description: response_book.description,
-                               author: response_book.authors)
+                               author: response_book.authors, isbn: response_book.isbn_10)
+      render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
+    else
+      render text: 'Not a valid Isbn', status: :unprocessable_entity
     end
-    render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
   end
 
   def get_by_title

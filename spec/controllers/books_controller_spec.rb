@@ -86,21 +86,31 @@ describe BooksController do
 
   describe 'GET #get_by_isbn' do
 
-    before(:each) do
+    context 'with valid isbn' do
+      before(:each) do
+        @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner of Azkaban",
+                                        description: "Harry Potter Epic", authors: "JK Rowling", isbn_10: '1234567890'
+        GoogleBooks.should_receive(:search).with('1234567890').and_return([@possible_book])
+        get :get_by_isbn, isbn: '1234567890', format: :json
+      end
+
+      it 'should render the matching book as json' do
+        expect(response.body).to include (@possible_book.title)
+        expect(response.body).to include (@possible_book.description)
+        expect(response.body).to include (@possible_book.authors)
+      end
+
+      it 'should respond with 200' do
+        response.status.should eq(200)
+      end
+    end
+
+    it 'should render the error text if the isbn is not valid' do
       @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner of Azkaban",
                                       description: "Harry Potter Epic", authors: "JK Rowling", isbn_10: '1234567890'
-      GoogleBooks.should_receive(:search).with('1234567890').and_return([@possible_book])
-      get :get_by_isbn, isbn: '1234567890', format: :json
-    end
-
-    it 'should render the matching book as json' do
-      expect(response.body).to include (@possible_book.title)
-      expect(response.body).to include (@possible_book.description)
-      expect(response.body).to include (@possible_book.authors)
-    end
-
-    it 'should respond with 200' do
-      response.status.should eq(200)
+      GoogleBooks.should_receive(:search).with('1234').and_return([@possible_book])
+      get :get_by_isbn, isbn: '1234', format: :json
+      response.body.should include 'Not a valid Isbn'
     end
 
   end
@@ -299,7 +309,7 @@ describe BooksController do
     end
 
     it 'should delete the book for the logged in user' do
-      expect { delete :destroy, id: @book.id}.to change(@book.owners, :count).by (-1)
+      expect { delete :destroy, id: @book.id }.to change(@book.owners, :count).by (-1)
     end
 
     it 'should redirect to the book page' do
