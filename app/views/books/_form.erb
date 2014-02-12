@@ -28,7 +28,7 @@
                       </div>
 
                       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 search-book">
-                        <input type='checkbox' name='search_by_title' id='title_search_button' />
+                        <%= check_box_tag :search_by_title %>
                       </div>
 
                       <%= f.label :edition, class: 'col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
@@ -48,7 +48,7 @@
                       </div>
 
                       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 search-book">
-                        <input type='checkbox' name='search_by_isbn' id='ISBN_search_button' />
+                        <%= check_box_tag 'search_by_isbn' %>
                       </div>
 
                       <%= f.label :author, class: 'col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label', disabled: true %>

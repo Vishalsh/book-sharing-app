@@ -129,17 +129,23 @@ describe BooksController do
   describe 'POST #create' do
 
     context 'with valid attributes' do
-      it 'creates a new book' do
+      it 'creates a new book with image available from google books when book is searched from google api' do
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
-                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic',
+                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic', search_by_title: 'on',
                       format: :json
+        }.to change(Book, :count).by(1)
+      end
+
+      it 'should create a new book if book data is entered manually with no Image available image' do
+        expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
+                      image_url: 'no_img_found.png', tags: 'Harry Potter, epic', format: :json
         }.to change(Book, :count).by(1)
       end
 
       it 'creates a new user if the user does not exist' do
         User.where("name like 'alladin'").should be_empty
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
-                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic',
+                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic', search_by_title: 'on',
                       format: :json
         }.to change(User, :count).by(1)
         User.where("name like 'alladin'").should_not be_empty
@@ -149,7 +155,7 @@ describe BooksController do
         aBook = FactoryGirl.create(:valid_book)
         aBook.owners.find_or_create_by(name: 'alladin')
         expect { post :create, book: FactoryGirl.attributes_for(:valid_book),
-                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic',
+                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic', search_by_title: 'on',
                       format: :json
         }.not_to change(User, :count)
       end
@@ -157,7 +163,7 @@ describe BooksController do
       it 'renders the created book as json' do
         bookWithOutErrors = FactoryGirl.build(:valid_book)
         post :create, book: bookWithOutErrors,
-             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic',
+             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic', search_by_title: 'on',
              format: :json
 
         response.body.should include (bookWithOutErrors.author)
@@ -165,7 +171,7 @@ describe BooksController do
 
       it 'respond with a 201' do
         post :create, book: FactoryGirl.attributes_for(:valid_book),
-             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic',
+             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic', search_by_title: 'on',
              format: :json
         response.status.should eq(201)
       end
@@ -174,28 +180,28 @@ describe BooksController do
     context 'with invalid attributes' do
       it 'does not creates a new book' do
         expect { post :create, book: FactoryGirl.attributes_for(:invalid_book),
-                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic',
+                      image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic', search_by_title: 'on',
                       format: :json
         }.to_not change(Book, :count)
       end
 
       it 'renders the errors as json' do
         post :create, book: FactoryGirl.attributes_for(:invalid_book),
-             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic',
+             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic', search_by_title: 'on',
              format: :json
         expect(response.body).to eq("{\"title\":[\"can't be blank\"]}")
       end
 
       it 'respond with a 403' do
         post :create, book: FactoryGirl.attributes_for(:invalid_book),
-             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic',
+             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: 'Harry Potter, epic', search_by_title: 'on',
              format: :json
         response.status.should eq(422)
       end
 
       it 'renders the error for tag if it is blank' do
         post :create, book: FactoryGirl.attributes_for(:valid_book),
-             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', tags: '',
+             image_url: 'abcd?', printsec: 'defg', img: '1', zoom: '1', source: 'gbapi', search_by_title: 'on', tags: '',
              format: :json
         expect(response.body).to eq("{\"tags\":[\"can't be blank\"]}")
       end

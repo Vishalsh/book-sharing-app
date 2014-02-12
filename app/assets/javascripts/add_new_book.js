@@ -15,8 +15,8 @@ var getNewBookForm = function () {
                 setTimeout(function () {
                     $(".save-form").click(postMyForm)
                     $('#tags').tagsinput()
-                    $("#title_search_button").click(searchGoogleBooksByTitle)
-                    $("#ISBN_search_button").click(searchGoogleBooksByISBN)
+                    $("#search_by_title").click(searchGoogleBooksByTitle)
+                    $("#search_by_isbn").click(searchGoogleBooksByISBN)
                 }, 500);
             }
         })
@@ -88,8 +88,6 @@ var displaySearchedBookValues = function (searchedBook) {
     $('#book_description').val(searchedBookJson.possible_book.description)
     $('#book_isbn').val(searchedBookJson.possible_book.isbn)
     $("#book_image").attr("src", searchedBookJson.image_link)
-    $("#ISBN_search_button").prop('checked', false);
-    $("#title_search_button").prop('checked', false);
 }
 
 var displayErrors = function (errors) {

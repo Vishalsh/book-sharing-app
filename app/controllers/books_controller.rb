@@ -52,9 +52,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    image_url = params[:image_url] + '&printsec=' + params[:printsec] + '&img=' + params[:img] + '&zoom=' + params[:zoom] + '&source=' + params[:source]
-    book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
-                    edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
+    if params[:search_by_title] || params[:search_by_isbn]
+      image_url = params[:image_url] + '&printsec=' + params[:printsec] + '&img=' + params[:img] + '&zoom=' + params[:zoom] + '&source=' + params[:source]
+      book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
+                      edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
+
+    else
+      book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
+                      edition: params['book']['edition'], description: params['book']['description'], image_url: '/assets/no_img_found.png')
+    end
 
     if book.save_or_update_with_user_and_tags(session[:cas_user], params[:tags])
       respond_to do |format|
