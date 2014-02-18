@@ -215,10 +215,6 @@ describe BooksController do
       response.should redirect_to books_own_books_path
     end
 
-    it 'should delete the borrowers of that book' do
-
-    end
-
   end
 
 

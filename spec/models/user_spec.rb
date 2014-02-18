@@ -20,7 +20,4 @@ describe User do
     end
   end
 
-  xit 'should return books of user with count of their copies' do
-
-  end
 end
