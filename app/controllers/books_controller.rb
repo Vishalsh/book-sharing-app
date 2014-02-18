@@ -54,7 +54,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    if params[:search_by_title] || params[:search_by_isbn]
+    if params[:search_from_api]
       image_url = params[:image_url] + '&printsec=' + params[:printsec] + '&img=' + params[:img] + '&zoom=' + params[:zoom] + '&source=' + params[:source]
       book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
                       edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)

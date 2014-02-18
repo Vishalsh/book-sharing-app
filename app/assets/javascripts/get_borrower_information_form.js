@@ -55,20 +55,20 @@ var postBorrowerForm = function(e) {
 }
 
 
-var hideErrors = function () {
-    $(".errors").text('');
-}
-
-var hideAlerts = function() {
-    $(".alert").hide();
-}
-
-var displayErrors = function (errors) {
-    var errorJson = JSON.parse(errors.responseText);
-    for (var key in errorJson) {
-        $("." + key + "-errors").text(errorJson[key]);
-    }
-}
+//var hideErrors = function () {
+//    $(".errors").text('');
+//}
+//
+//var hideAlerts = function() {
+//    $(".alert").hide();
+//}
+//
+//var displayErrors = function (errors) {
+//    var errorJson = JSON.parse(errors.responseText);
+//    for (var key in errorJson) {
+//        $("." + key + "-errors").text(errorJson[key]);
+//    }
+//}
 
 $(document).ready(getBorrowerForm);
 $(document).on('page:load', getBorrowerForm);

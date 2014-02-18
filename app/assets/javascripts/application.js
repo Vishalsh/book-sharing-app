@@ -15,5 +15,6 @@
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require turbolinks
+//= require jquery.autocomplete.js
 //= require bootstrap-tagsinput
 //= require_tree . 

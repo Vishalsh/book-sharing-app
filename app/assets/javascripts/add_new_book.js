@@ -15,17 +15,69 @@ var getNewBookForm = function () {
                 setTimeout(function () {
                     $(".save-form").click(postMyForm)
                     $('#tags').tagsinput()
-                    $("#search_by_title").click(searchGoogleBooksByTitle)
-                    $("#search_by_isbn").click(searchGoogleBooksByISBN)
-                    disableCheckboxes();
-                    $("#book_title").keyup(enableSearchByTitleCheckbox);
-                    $("#book_isbn").keyup(enableSearchByIsbnCheckbox);
+                    $('#book_title').focus();
+                    $('#book_title').on('input', searchTitleRelatedBooks);
+                    $('#search_from_api').click(toggleSubmitButtonDisabling)
                 }, 500);
             }
         })
     });
 }
 
+var toggleSubmitButtonDisabling = function () {
+    if ((!$('#search_from_api').is(':checked')) || (!$("#book_title").val() == "")) {
+        $(".save-form").attr('disabled', false)
+    }
+    else {
+        $(".save-form").attr('disabled', true)
+    }
+}
+
+var searchTitleRelatedBooks = function () {
+    toggleSubmitButtonDisabling();
+    var searched_books_titles;
+    if ($('#search_from_api').is(':checked') && $(this).val().length >= 3) {
+        $.getJSON('https://www.googleapis.com/books/v1/volumes?q=' + $(this).val(), function (response) {
+            $.each(response.items, function (key, val) {
+                if (!searched_books_titles)
+                    searched_books_titles = []
+                searched_books_titles.push(val.volumeInfo.title);
+            });
+        })
+            .complete(function () {
+                $('#book_title').autocomplete({
+                    lookup: searched_books_titles,
+                    onSelect: function (suggestion) {
+                        searchGoogleBooksByTitle(suggestion.value)
+                    }
+                })
+            })
+    }
+}
+
+var searchGoogleBooksByTitle = function (title) {
+    $(".fetching-info").show()
+    $.ajax({
+        url: '/books/get_by_title/' + title,
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'html',
+        success: function (searchedBook) {
+            $(".fetching-info").hide()
+            displaySearchedBookValues(searchedBook);
+        }
+    })
+}
+
+var displaySearchedBookValues = function (searchedBook) {
+    var searchedBookJson = JSON.parse(searchedBook)
+    $('#book_title').val(searchedBookJson.possible_book.title)
+    $('#book_author').val(searchedBookJson.possible_book.author)
+    $('#book_description').val(searchedBookJson.possible_book.description)
+    $('#book_isbn').val(searchedBookJson.possible_book.isbn)
+    $("#book_image").attr("src", searchedBookJson.image_link)
+    $("#errors").text('')
+}
 
 var postMyForm = function (e) {
     e.preventDefault();
@@ -54,77 +106,6 @@ var postMyForm = function (e) {
             displayErrors(errors);
         }
     })
-}
-
-
-var searchGoogleBooksByISBN = function () {
-    if ($(this).is(":checked")) {
-        $.ajax({
-            url: '/books/get_by_isbn/' + $('#book_isbn').val(),
-            type: 'GET',
-            crossDomain: true,
-            dataType: 'html',
-            success: function (searchedBook) {
-                displaySearchedBookValues(searchedBook);
-            },
-            error: function(error) {
-                $(".isbn-errors").text(error.responseText)
-                $("#search_by_isbn").attr('checked', false);
-                $(".form-control").val("")
-                disableCheckboxes()
-            }
-
-        })
-    }
-}
-
-var searchGoogleBooksByTitle = function () {
-    if ($(this).is(":checked")) {
-        $.ajax({
-            url: '/books/get_by_title/' + $('#book_title').val(),
-            type: 'GET',
-            crossDomain: true,
-            dataType: 'html',
-            success: function (searchedBook) {
-                displaySearchedBookValues(searchedBook);
-            }
-        })
-    }
-}
-
-var displaySearchedBookValues = function (searchedBook) {
-    var searchedBookJson = JSON.parse(searchedBook)
-    $('#book_title').val(searchedBookJson.possible_book.title)
-    $('#book_author').val(searchedBookJson.possible_book.author)
-    $('#book_description').val(searchedBookJson.possible_book.description)
-    $('#book_isbn').val(searchedBookJson.possible_book.isbn)
-    $("#book_image").attr("src", searchedBookJson.image_link)
-    $("#errors").text('')
-    $("#search_by_title").attr('checked', false);
-    $("#search_by_isbn").attr('checked', false);
-}
-
-var disableCheckboxes = function () {
-    $("#search_by_title").attr('disabled', true);
-    $("#search_by_isbn").attr('disabled', true);
-}
-
-var enableSearchByTitleCheckbox = function () {
-    if ($(this).val() != '') {
-        $("#search_by_title").attr('disabled', false);
-    }
-    else {
-        $("#search_by_title").attr('disabled', true);
-    }
-}
-
-var enableSearchByIsbnCheckbox = function () {
-    if ($(this).val() != '') {
-        $("#search_by_isbn").attr('disabled', false);
-    }
-    else {
-        $("#search_by_isbn").attr('disabled', true);
-    }
 }
 
 var displayErrors = function (errors) {

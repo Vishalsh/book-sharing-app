@@ -5,6 +5,7 @@
 
 .alert {
   padding: 8px;
+  margin: 5px 10px;
 }
 
 .form-horizontal {
@@ -17,6 +18,15 @@
 
 textarea.form-control {
   height: 120px;
+}
+
+.modal-body {
+  padding: 0;
+  padding-top: 10px;
+}
+
+.modal-footer {
+  margin-top: 10px;
 }
 
 .modal-dialog {
@@ -50,18 +60,6 @@ textarea.form-control {
 
 .label-info {
   background-color: #3a87ad;
-}
-
-#ISBN_search_button {
-  outline: none;
-  background: url("background.png");
-  color: white;
-}
-
-#title_search_button {
-  outline: none;
-  background: url("background.png");
-  color: white;
 }
 
 #book_image {

@@ -13,6 +13,9 @@
             <div class="alert alert-info">
               <div class="loader">Saving</div>
             </div>
+            <div class="alert alert-info fetching-info">
+              <div class="loader">Fetching book information</div>
+            </div>
             <div class="alert alert-danger">Error during saving of the form</div>
 
             <div class='form-horizontal'>
@@ -21,37 +24,28 @@
                   <div class='form-group'>
                     <div class='row'>
 
-                      <%= f.label :Title, class: 'col-lg-offset-1 col-lg-1 col-md-1 col-sm-2 col-xs-2 control-label', disabled: true %>
-                      <div class='col-lg-4 col-md-4 col-sm-9 col-xs-9'>
-                        <%= f.text_field :title, class: 'form-control' %>
+                      <%= f.label :title, class: 'col-lg-offset-1 col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
+                      <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10'>
+                        <%= f.text_field :title, class: 'form-control', autocomplete: false %>
                         <div class='errors title-errors'></div>
                       </div>
 
-                      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 search-book">
-                        <%= check_box_tag :search_by_title %>
-                      </div>
-
-                      <%= f.label :edition, class: 'col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
+                      <%= f.label :edition, class: 'col-lg-offset-1 col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
                       <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10 '>
                         <%= f.text_field :edition, class: 'form-control' %>
-                        <div class='errors edition-errors'></div>
                       </div>
                     </div>
                   </div>
 
                   <div class='row'>
                     <div class='form-group'>
-                      <%= f.label :isbn, class: 'col-lg-offset-1 col-lg-1 col-md-1 col-sm-2 col-xs-2 control-label' %>
-                      <div class='col-lg-4 col-md-4 col-sm-9 col-xs-9'>
+                      <%= f.label :isbn, class: 'col-lg-offset-1 col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
+                      <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10'>
                         <%= f.text_field :isbn, class: 'form-control', id: 'book_isbn' %>
                         <div class='errors isbn-errors'></div>
                       </div>
 
-                      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 search-book">
-                        <%= check_box_tag 'search_by_isbn' %>
-                      </div>
-
-                      <%= f.label :author, class: 'col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label', disabled: true %>
+                      <%= f.label :author, class: 'col-lg-offset-1 col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
                       <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10'>
                         <%= f.text_field :author, class: 'form-control' %>
                         <div class='errors author-errors'></div>
@@ -62,13 +56,13 @@
                   <div class='row'>
                     <div class="form-group">
 
-                      <%= label_tag 'tag', nil, class: 'col-lg-offset-1 col-lg-1 col-md-1 col-sm-2 col-xs-2 control-label', disabled: true %>
-                      <div class='col-lg-4 col-md-4 col-sm-9 col-xs-9'>
+                      <%= label_tag 'tag', nil, class: 'col-lg-offset-1 col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
+                      <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10'>
                         <%= text_field_tag 'tags', nil, class: 'form-control', 'data-role' => 'tagsinput' %>
                         <div class='errors tags-errors'></div>
                       </div>
 
-                      <%= f.label :description, class: 'col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label', disabled: true %>
+                      <%= f.label :description, class: 'col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label' %>
                       <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10'>
                         <%= f.text_area :description, class: 'form-control' %>
                         <div class='errors description-errors'></div>
@@ -82,12 +76,18 @@
                 </div>
               </div>
             </div>
+
+            <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+              <%= check_box_tag :search_from_api, nil, checked: true %>
+              <label for="search_from_api">Automatically search from google book api</label>
+            </div>
+
           </div>
 
 
           <div class='modal-footer'>
-            <%= f.submit class: 'btn btn-primary save-form', id: 'save_and_add_another', value: 'Save And Add Another' %>
-            <%= f.submit class: 'btn btn-primary save-form', id: 'save_form', value: 'Save' %>
+            <%= f.submit class: 'btn btn-primary save-form', id: 'save_and_add_another', value: 'Save And Add Another', disabled: true %>
+            <%= f.submit class: 'btn btn-primary save-form', id: 'save_form', value: 'Save', disabled: true %>
           </div>
       <% end %>
     </div>
