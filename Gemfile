@@ -42,7 +42,6 @@ group :test, :development do
   gem "rspec-rails", "~> 2.14.0"
   gem 'factory_girl_rails'
   gem 'pry'
-  gem 'jasmine-rails'
   gem 'simplecov', :require => false
   gem 'spinach'
   gem 'capybara'

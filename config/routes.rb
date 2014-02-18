@@ -14,7 +14,6 @@ BookSharingApp::Application.routes.draw do
   match '/borrowers/create', controller: 'borrowers#create', via: [:post]
 
   resources :books do
-    get '/get_by_isbn/:isbn', to: 'books#get_by_isbn', :on => :collection
     get '/get_by_title/:title', to: 'books#get_by_title', :on => :collection
   end
 
