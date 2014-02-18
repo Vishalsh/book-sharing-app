@@ -1,9 +1,5 @@
 class BooksController < ApplicationController
 
-  def index
-    @books = Book.all
-  end
-
   def own_books
     user = User.where(name: session[:cas_user]).first
     if user
@@ -24,18 +20,6 @@ class BooksController < ApplicationController
     borrowed_book_ids = BookBorrower.where(borrower_id: borrower_id).pluck(:book_id)
     @books = Book.where(id: borrowed_book_ids)
     render template: 'books/borrowed_books'
-  end
-
-  def get_by_isbn
-    isbn = params[:isbn]
-    response_book = GoogleBooks.search(isbn).first;
-    if response_book.isbn_10 == isbn || response_book.isbn_13 == isbn
-      possible_book = Book.new(title: response_book.title, description: response_book.description,
-                               author: response_book.authors, isbn: response_book.isbn_10)
-      render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
-    else
-      render text: 'Not a valid Isbn', status: :unprocessable_entity
-    end
   end
 
   def get_by_title
@@ -87,20 +71,6 @@ class BooksController < ApplicationController
     @copies = bookOwners.group(:name).count
     @isOnwerViewingBook = bookOwners.pluck(:name).include?(session[:cas_user])
     @noMoreBorrowers = true if @book_borrowers.length == @copies['vishalsh']
-  end
-
-  def edit
-    @book = Book.find(params[:id])
-  end
-
-  def update
-    @book = Book.find(params[:id])
-
-    if @book.update(params[:book].permit(:title, :description, :isbn, :edition))
-      redirect_to @book
-    else
-      render 'edit'
-    end
   end
 
   def destroy

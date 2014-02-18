@@ -13,21 +13,6 @@ describe BooksController do
     end
   end
 
-  describe 'GET #index' do
-    it 'should render the #index page' do
-      get :index
-      response.should render_template :index
-    end
-
-    it 'should get the list of all books' do
-      books = FactoryGirl.create(:valid_book)
-      books.should_not be_nil
-      get :index
-      assigns(:books).should eq([books])
-    end
-
-  end
-
   describe 'GET #own_books' do
     it 'should render the #own_books page' do
       get :own_books
@@ -80,37 +65,6 @@ describe BooksController do
     it 'should render the #borrowed_books page' do
       get :borrowed_books
       response.should render_template :borrowed_books
-    end
-
-  end
-
-  describe 'GET #get_by_isbn' do
-
-    context 'with valid isbn' do
-      before(:each) do
-        @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner of Azkaban",
-                                        description: "Harry Potter Epic", authors: "JK Rowling", isbn_10: '1234567890'
-        GoogleBooks.should_receive(:search).with('1234567890').and_return([@possible_book])
-        get :get_by_isbn, isbn: '1234567890', format: :json
-      end
-
-      it 'should render the matching book as json' do
-        expect(response.body).to include (@possible_book.title)
-        expect(response.body).to include (@possible_book.description)
-        expect(response.body).to include (@possible_book.authors)
-      end
-
-      it 'should respond with 200' do
-        response.status.should eq(200)
-      end
-    end
-
-    it 'should render the error text if the isbn is not valid' do
-      @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner of Azkaban",
-                                      description: "Harry Potter Epic", authors: "JK Rowling", isbn_10: '1234567890'
-      GoogleBooks.should_receive(:search).with('1234').and_return([@possible_book])
-      get :get_by_isbn, isbn: '1234', format: :json
-      response.body.should include 'Not a valid Isbn'
     end
 
   end
@@ -241,62 +195,6 @@ describe BooksController do
     it 'should render the #show page' do
       get :show, id: @book
       response.should render_template :show
-    end
-
-  end
-
-  describe 'GET #edit' do
-
-    it 'should render the edit page' do
-      get :edit, id: FactoryGirl.create(:valid_book)
-      response.should render_template :edit
-    end
-
-  end
-
-  describe 'PUT #update' do
-
-    before(:each) do
-      @book = FactoryGirl.create(:valid_book)
-    end
-
-    context 'with valid attributes' do
-
-      it 'located the requested @book' do
-        put :update, id: @book, book: FactoryGirl.attributes_for(:valid_book)
-        assigns(:book).should eq(@book)
-      end
-
-      it 'changes the book attributes' do
-        put :update, id: @book, book: FactoryGirl.attributes_for(:valid_book, title: 'Harry Potter and The Chamber of secrets')
-        @book.reload
-        @book.title.should eq('Harry Potter and The Chamber of secrets')
-      end
-
-      it 'should redirect to the updated contact' do
-        put :update, id: @book, book: FactoryGirl.attributes_for(:valid_book)
-        response.should redirect_to @book
-      end
-
-    end
-
-    context 'with invalid attributes' do
-      it 'located the requested @book' do
-        put :update, id: @book, book: FactoryGirl.attributes_for(:invalid_book)
-        assigns(:book).should eq(@book)
-      end
-    end
-
-    it "does not change @contact's attributes" do
-      put :update, id: @book,
-          book: FactoryGirl.attributes_for(:invalid_book, isbn: nil)
-      @book.reload
-      @book.title.should eq('Harry Potter and The Prisoner fo Azkaban')
-    end
-
-    it "re-renders the edit method" do
-      put :update, id: @book, book: FactoryGirl.attributes_for(:invalid_book)
-      response.should render_template :edit
     end
 
   end
