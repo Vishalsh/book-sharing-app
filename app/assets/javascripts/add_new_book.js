@@ -17,7 +17,8 @@ var getNewBookForm = function () {
                     $('#tags').tagsinput()
                     $('#book_title').focus();
                     $('#book_title').on('input', searchTitleRelatedBooks);
-                    $('#search_from_api').click(toggleSubmitButtonDisabling)
+                    $('#search_from_api').click(toggleSubmitButtonDisabling);
+                    enableAutocomplete();
                 }, 500);
             }
         })
@@ -33,26 +34,36 @@ var toggleSubmitButtonDisabling = function () {
     }
 }
 
+
 var searchTitleRelatedBooks = function () {
     toggleSubmitButtonDisabling();
-    var searched_books_titles;
+    var searched_books_titles = [];
+
     if ($('#search_from_api').is(':checked') && $(this).val().length >= 3) {
-        $.getJSON('https://www.googleapis.com/books/v1/volumes?q=' + $(this).val(), function (response) {
-            $.each(response.items, function (key, val) {
-                if (!searched_books_titles)
-                    searched_books_titles = []
-                searched_books_titles.push(val.volumeInfo.title);
-            });
+
+        $.ajax({
+            url: 'https://www.googleapis.com/books/v1/volumes?q=' + $(this).val(),
+            type: 'GET',
+            crossDomain: true,
+            dataType: 'json',
+            success: function (searchedBooks) {
+                $.each(searchedBooks.items, function (key, val) {
+                    searched_books_titles.push(val.volumeInfo.title);
+                });
+                $('#book_title').autocomplete().setOptions({lookup: searched_books_titles});
+
+            }
         })
-            .complete(function () {
-                $('#book_title').autocomplete({
-                    lookup: searched_books_titles,
-                    onSelect: function (suggestion) {
-                        searchGoogleBooksByTitle(suggestion.value)
-                    }
-                })
-            })
+
     }
+}
+
+var enableAutocomplete = function () {
+    $('#book_title').autocomplete({
+        onSelect: function (suggestion) {
+            searchGoogleBooksByTitle(suggestion.value)
+        }
+    })
 }
 
 var searchGoogleBooksByTitle = function (title) {
