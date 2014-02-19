@@ -1,11 +1,11 @@
+@import "mixins/colors";
+
 li {
   list-style: none;
 }
 
 a {
-  //  color: black;
   &:hover {
-    color: black;
     text-decoration: none;
   }
 }
@@ -15,10 +15,7 @@ a {
   overflow-y: scroll;
   padding-bottom: 10px;
   margin: 7px;
-  border-bottom: 1px solid gray;
-  #title, #author {
-    color: gray;
-  }
+  border-bottom: 1px solid $body_text_color;
 }
 
 .block {
@@ -35,8 +32,7 @@ a {
   }
 
   &:hover {
-    -webkit-box-shadow: 0 12px 30px rgba(84, 137, 181, 0.5);
-    box-shadow: 0 12px 30px rgba(84, 137, 181, 0.5);
+    box-shadow: 0 12px 30px $book_block_box_shadow_color;
   }
 }
 
@@ -44,14 +40,14 @@ a {
   .dropdown {
     font-weight: bold;
     > a {
-      color: gray;
+      color: $body_text_color;
       padding: 7px 80px;
     }
   }
   .dropdown-menu {
     left: 22%;
     top: 29px;
-    background: rgb(231, 238, 243);
+    background: $body_background_color;
   }
 
   .link-text {

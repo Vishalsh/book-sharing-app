@@ -1,3 +1,5 @@
+@import "mixins/colors";
+
 .image-div {
   text-align: center;
   padding: 0px;
@@ -18,9 +20,9 @@
   }
 
   .heading {
-    color: rgb(60, 60, 60);
+    color: $book_info_heading_color;
     padding-bottom: 10px;
-    border-bottom: 2px solid rgb(115, 172, 201);
+    border-bottom: 2px solid $book_info_border_color;
   }
 
 }
@@ -34,7 +36,7 @@
       border-top: none;
     }
     > td {
-      border-top: 1px solid rgb(115, 172, 201)
+      border-top: 1px solid $book_info_border_color;
     }
   }
 }

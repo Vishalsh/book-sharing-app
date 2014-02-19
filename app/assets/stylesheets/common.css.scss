@@ -1,6 +1,9 @@
+@import "mixins/colors";
+@import "mixins/images";
+
 body {
-  background-color: rgb(231, 238, 243);
-  color: gray;
+  background-color: $body_background_color;
+  color: $body_text_color;
 }
 
 .content {
@@ -12,11 +15,11 @@ body {
 }
 
 .header {
-  background: url("background.png") repeat-y;
+  background: $theme_image repeat-y;
   background-size: contain;
   padding: 10px 0 10px;
   .logo {
-    background: url("logo_image.png") no-repeat;
+    background: $logo_image no-repeat;
     height: 65px;
     background-size: contain;
     padding-left: 134px;
@@ -37,54 +40,54 @@ body {
 }
 
 .navbar-default {
-  background: url("background.png") repeat-y;
+  background: $theme_image repeat-y;
   background-size: contain;
   border: none;
-  border-top: 1px solid white;
+  border-top: 1px solid $nav_bar_text_color;
   border-radius: 0;
 
   .navbar-nav > li > a {
-    color: white;
+    color: $nav_bar_text_color;
   }
   .count {
-    border: 1px solid white;
+    border: 1px solid $nav_bar_text_color;
     padding: 3px;
-    color: white;
+    color: $nav_bar_text_color;
     border-radius: 4px;
   }
 }
 
 .count-own-books {
-  background: #38aadd;
+  background: $count_own_books_background_color;
 }
 
 .count-shared-books {
-  background: rgb(103, 150, 102);
+  background: $count_shared_books_background_color;
 }
 
 .count-borrowed-books {
-  background: rgb(185, 101, 100);
+  background: $count_borrowed_books_background_color;
 }
 
 .navbar-default .navbar-toggle {
-  background: white;
+  background: $nav_bar_text_color;
   border: none;
 }
 
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-  background: white;
+  background: $nav_bar_text_color;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: rgb(27, 73, 156);
+  color: $nav_bar_anchor_hover_color;
   sup {
-    color: rgb(27, 73, 156);
+    color: $nav_bar_anchor_hover_color;
   }
 }
 
 .navbar-default .navbar-nav > .open {
   > a, & > a:hover, & > a:focus {
-    color: #2C67A1;
+    color: $nav_bar_anchor_hover_color;
     background-color: transparent;
   }
 }
@@ -99,7 +102,7 @@ body {
     & > a {
       color: white;
       padding: 0 30px;
-      border-right: 1px solid whitesmoke;
+      border-right: 1px solid $nav_bar_text_color;
     }
   }
   & > li:last-child {
@@ -120,22 +123,22 @@ body {
   > li {
     text-align: left;
     > a {
-      color: gray;
+      color: $body_text_color;
       padding: 3px 11px;
       &:hover {
-        color: gray;
+        color: $body_text_color;
       }
     }
   }
 }
 
 .navbar-right .dropdown-menu li a {
-  color: darkgray;
+  color: $body_text_color;
 }
 
 .input-group {
   .input-group-btn {
-    background: white;
+    background: $nav_bar_text_color;
     padding: 7px 0;
     border: 0;
     border-top-left-radius: 3px;
@@ -158,17 +161,17 @@ body {
   .input-group-btn:first-child > .btn {
     padding: 0 20px;
     border: 0;
-    border-right: 1px solid darkgray;
+    border-right: 1px solid $body_text_color;
     outline: none;
     margin-right: -2px;
-    color: darkgray;
+    color: $body_text_color;
   }
 
   .btn {
     border-radius: 0;
     outline: none;
-    background: white;
-    color: darkgray
+    background: $nav_bar_text_color;
+    color: $body_text_color
   }
   #filter > li {
     cursor: pointer;
@@ -179,7 +182,7 @@ body {
 }
 
 .username:hover {
-  color: white !important;
+  color: $nav_bar_text_color !important;
 }
 
 .icon {
@@ -197,7 +200,7 @@ body {
 }
 
 .btn-primary {
-  background: url("background.png");
+  background: $theme_image;
   background-size: contain;
   border: none;
   font-weight: bold;

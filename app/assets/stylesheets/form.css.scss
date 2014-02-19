@@ -1,7 +1,5 @@
-#error_explanation {
-  color: red;
-  padding-left: 0px;
-}
+@import "mixins/colors";
+@import "mixins/images";
 
 .alert {
   padding: 8px;
@@ -34,7 +32,7 @@ textarea.form-control {
 }
 
 .loader {
-  background: url("loader.gif") no-repeat;
+  background: $loader_image no-repeat;
   background-size: contain;
   padding-left: 28px;
 }
@@ -44,7 +42,7 @@ textarea.form-control {
 }
 
 .errors {
-  color: #a94442;
+  color: $error_color;
   padding-left: 5px;
   padding-top: 5px;
 }
@@ -59,7 +57,7 @@ textarea.form-control {
 }
 
 .label-info {
-  background-color: #3a87ad;
+  background-color: $label_info_color;
 }
 
 #book_image {
