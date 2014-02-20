@@ -33,6 +33,7 @@
                       <%= f.label :edition, class: 'col-lg-offset-1 col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label' %>
                       <div class='col-lg-4 col-md-4 col-sm-9 col-xs-10 '>
                         <%= f.text_field :edition, class: 'form-control' %>
+                        <div class="errors edition-errors"></div>
                       </div>
                     </div>
                   </div>
@@ -72,22 +73,23 @@
                 </div>
 
                 <div class="col-lg-4 col-md-3 col-sm-4">
-                  <img id="book_image" src=""/>
+                  <img id="book_image" src="/assets/book_image.png"/>
                 </div>
               </div>
             </div>
 
-            <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-              <%= check_box_tag :search_from_api, nil, checked: true %>
-              <label for="search_from_api">Automatically search from google book api</label>
-            </div>
+            <!--<div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">-->
+              <!--<%= check_box_tag :search_from_api, nil, checked: true %>-->
+              <!--<label for="search_from_api">Automatically search from google book api</label>-->
+            <!--</div>-->
 
           </div>
 
 
           <div class='modal-footer'>
-            <%= f.submit class: 'btn btn-primary save-form', id: 'save_and_add_another', value: 'Save And Add Another', disabled: true %>
-            <%= f.submit class: 'btn btn-primary save-form', id: 'save_form', value: 'Save', disabled: true %>
+            <%= f.submit class: 'btn btn-primary', id: 'reset', value: 'Reset' %>
+            <%= f.submit class: 'btn btn-primary save-form', id: 'save_and_add_another', value: 'Save And Add Another' %>
+            <%= f.submit class: 'btn btn-primary save-form', id: 'save_form', value: 'Save' %>
           </div>
       <% end %>
     </div>

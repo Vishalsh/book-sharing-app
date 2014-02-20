@@ -14,10 +14,10 @@ var getNewBookForm = function () {
             complete: function () {
                 setTimeout(function () {
                     $(".save-form").click(postMyForm)
+                    $("#reset").click(reset)
                     $('#tags').tagsinput()
                     $('#book_title').focus();
                     $('#book_title').on('input', searchTitleRelatedBooks);
-                    $('#search_from_api').click(toggleSubmitButtonDisabling);
                     enableAutocomplete();
                 }, 500);
             }
@@ -25,22 +25,10 @@ var getNewBookForm = function () {
     });
 }
 
-var toggleSubmitButtonDisabling = function () {
-    if ((!$('#search_from_api').is(':checked')) || (!$("#book_title").val() == "")) {
-        $(".save-form").attr('disabled', false)
-    }
-    else {
-        $(".save-form").attr('disabled', true)
-    }
-}
-
-
 var searchTitleRelatedBooks = function () {
-    toggleSubmitButtonDisabling();
-    var searched_books_titles = [];
 
-    if ($('#search_from_api').is(':checked') && $(this).val().length >= 3) {
-
+    if ($(this).val().length >= 3) {
+        var searched_books_titles = [];
         $.ajax({
             url: 'https://www.googleapis.com/books/v1/volumes?q=' + $(this).val(),
             type: 'GET',
@@ -51,10 +39,8 @@ var searchTitleRelatedBooks = function () {
                     searched_books_titles.push(val.volumeInfo.title);
                 });
                 $('#book_title').autocomplete().setOptions({lookup: searched_books_titles});
-
             }
         })
-
     }
 }
 
@@ -132,6 +118,12 @@ var hideAlerts = function () {
 
 var hideErrors = function () {
     $(".errors").text('');
+}
+
+var reset = function() {
+    e.preventDefault()
+    $(".form-control").val("")
+    $("#book_image").attr("src", "/assets/book_image.png")
 }
 
 var checkForAddAnotherBook = function (currentSaveButton) {

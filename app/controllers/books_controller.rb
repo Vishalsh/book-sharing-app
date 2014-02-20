@@ -38,14 +38,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    if params[:search_from_api]
+    image_url = '/assets/book_image.png'
+    if params[:image_url] == image_url
+      book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
+                      edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
+    else
+
       image_url = params[:image_url] + '&printsec=' + params[:printsec] + '&img=' + params[:img] + '&zoom=' + params[:zoom] + '&source=' + params[:source]
       book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
                       edition: params['book']['edition'], description: params['book']['description'], image_url: image_url)
-
-    else
-      book = Book.new(title: params['book']['title'], author: params['book']['author'], isbn: params['book']['isbn'],
-                      edition: params['book']['edition'], description: params['book']['description'], image_url: '/assets/no_img_found.png')
     end
 
     if book.save_or_update_with_user_and_tags(session[:cas_user], params[:tags])

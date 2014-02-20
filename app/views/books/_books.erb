@@ -2,32 +2,17 @@
   <% @books.each do |book| %>
       <div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>
         <div class='block'>
-          <div class='image'>
-            <img src="<%= book.image_url %>"/>
-          </div>
+          <a href="/books/<%= book.id %>">
+            <div class='image'>
+              <img src="<%= book.image_url %>"/>
+            </div>
 
-          <div class="book-data">
-            <div id="title"><%= book.title %></div>
-            By
-            <div id="author"><%= book.author %></div>
-          </div>
-
-          <div class="book-more-details">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">+ more
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="/books/<%= book.id %>">
-                  <span class="glyphicon glyphicon-eye-open"></span>
-                  <span class="link-text">View details</span>
-                </a></li>
-                <li><a href="/books/<%= book.id %>" data-method="delete">
-                  <span class="glyphicon glyphicon-trash"></span>
-                  <span class="link-text">Delete</span>
-                </a></li>
-              </ul>
-            </li>
-          </div>
+            <div class="book-data">
+              <div id="title"><%= book.title %></div>
+              By
+              <div id="author"><%= book.author %></div>
+            </div>
+          </a>
         </div>
       </div>
   <% end %>
