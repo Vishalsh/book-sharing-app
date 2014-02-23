@@ -18,10 +18,10 @@
     <%= form_tag search_index_path, class: 'search-form', method: 'get' do %>
         <div class="input-group">
         <span class="input-group-btn">
-           <button class="btn btn-default" type='button dropdown-toggle' data-toggle='dropdown'>
+           <div class="btn btn-default" type='button dropdown-toggle' data-toggle='dropdown'>
              <span id="selected_value">title</span>
              <span class="caret"></span>
-           </button>
+           </div>
            <ul class='dropdown-menu' id="filter">
              <li><a>title</a></li>
              <li><a>author</a></li>
