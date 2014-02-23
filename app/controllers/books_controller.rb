@@ -71,7 +71,8 @@ class BooksController < ApplicationController
     bookOwners = @book.owners
     @copies = bookOwners.group(:name).count
     @isOnwerViewingBook = bookOwners.pluck(:name).include?(session[:cas_user])
-    @noMoreBorrowers = true if @book_borrowers.length == @copies['vishalsh']
+    @isallCopiesBorrowed = true if @book_borrowers.length == @copies[session[:cas_user]]
+    @noMoreBorrowers = true if @book_borrowers.length == @copies[session[:cas_user]]
   end
 
   def destroy

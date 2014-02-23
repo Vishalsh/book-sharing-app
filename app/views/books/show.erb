@@ -1,10 +1,18 @@
-<% if !@noMoreBorrowers %>
-    <div class="row">
+<div class="row">
+  <% if !@noMoreBorrowers && @isOnwerViewingBook %>
       <a href="#" data-toggle='modal' id="add_new_borrower">
         <button class="btn btn-primary pull-right">+ Add New Borrower</button>
       </a>
-    </div>
-<% end %>
+  <% end %>
+  <% if @isOnwerViewingBook && !@isallCopiesBorrowed %>
+      <a href="/books/<%= @book.id %>" data-method="delete">
+        <button class="btn btn-primary pull-right" id="delete_book">
+          <span class="glyphicon glyphicon-trash"></span>
+          <span id="delete_text">Delete Book</span>
+        </button>
+      </a>
+  <% end %>
+</div>
 
 <div class="row book-details">
 
