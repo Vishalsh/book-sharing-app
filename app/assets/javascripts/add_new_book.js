@@ -132,6 +132,7 @@ var hideErrors = function () {
 
 var reset = function () {
     $(".form-control").val("")
+    $(".bootstrap-tagsinput").text('')
     $("#book_image").attr("src", "/assets/book_image.png")
 }
 
@@ -141,7 +142,8 @@ var checkForAddAnotherBook = function (currentSaveButton) {
     }
     else {
         $(".form-control").val("")
-        $("#book_image").attr("src", "")
+        $(".bootstrap-tagsinput").text('')
+        $("#book_image").attr("src", "/assets/book_image.png")
         $(".alert-success").show();
     }
 }
