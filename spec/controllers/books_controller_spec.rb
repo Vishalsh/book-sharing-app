@@ -71,25 +71,45 @@ describe BooksController do
 
   describe 'GET #get_by_title' do
 
-    before(:each) do
-      @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner of Azkaban",
-                                      description: "Harry Potter Epic", authors: "JK Rowling"
-      GoogleBooks.should_receive(:search).with('Harry').and_return([@possible_book])
-      get :get_by_title, title: 'Harry', format: :json
+    context 'Book fetched from google api' do
+
+      before(:each) do
+        @possible_book = OpenStruct.new title: "Harry Potter and The Prisoner of Azkaban",
+                                        description: "Harry Potter Epic", authors: "JK Rowling"
+        GoogleBooks.should_receive(:search).with('Harry').and_return([@possible_book])
+        get :get_by_title, title: 'Harry', format: :json
+      end
+
+      it 'should render the matching book as json' do
+        expect(response.body).to include (@possible_book.title)
+        expect(response.body).to include (@possible_book.description)
+        expect(response.body).to include (@possible_book.authors)
+      end
+
+      it 'should respond with 200' do
+        response.status.should eq(200)
+      end
+
     end
 
-    it 'should render the matching book as json' do
-      expect(response.body).to include (@possible_book.title)
-      expect(response.body).to include (@possible_book.description)
-      expect(response.body).to include (@possible_book.authors)
-    end
+    context 'Book not fetched from google api' do
 
-    it 'should respond with 200' do
-      response.status.should eq(200)
+      before(:each) do
+        GoogleBooks.should_receive(:search).with('Harry').and_return([])
+        get :get_by_title, title: 'Harry', format: :json
+      end
+
+      it 'should render the text if book is not fetched' do
+        expect(response.body).to include ('Not able to fetch the information due to network problem. Try again or enter manually')
+      end
+
+      it 'should respond with 422' do
+        response.status.should eq(422)
+      end
+
     end
 
   end
-
   describe 'POST #create' do
 
     context 'with valid attributes' do

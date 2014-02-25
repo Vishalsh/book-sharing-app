@@ -27,7 +27,10 @@ var getNewBookForm = function () {
 
 var searchTitleRelatedBooks = function () {
 
-    if ($(this).val().length >= 3) {
+    var val = $(this).val().trim();
+    val = val.replace(/\s+/g, '');
+
+    if (val.length % 3 == 0 && val != '') {
         var searched_books_titles = [];
         $.ajax({
             url: 'https://www.googleapis.com/books/v1/volumes?q=' + $(this).val(),
@@ -62,6 +65,13 @@ var searchGoogleBooksByTitle = function (title) {
         success: function (searchedBook) {
             $(".fetching-info").hide()
             displaySearchedBookValues(searchedBook);
+        },
+
+        error: function (error) {
+            $(".fetching-info").hide()
+            $(".alert-danger").text(error.responseText)
+            $(".alert-danger").show();
+
         }
     })
 }
@@ -120,8 +130,7 @@ var hideErrors = function () {
     $(".errors").text('');
 }
 
-var reset = function() {
-    e.preventDefault()
+var reset = function () {
     $(".form-control").val("")
     $("#book_image").attr("src", "/assets/book_image.png")
 }

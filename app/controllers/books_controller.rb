@@ -25,9 +25,15 @@ class BooksController < ApplicationController
   def get_by_title
     title = params[:title]
     response_book = GoogleBooks.search(title).first;
-    possible_book = Book.new(title: response_book.title, description: response_book.description,
+
+    if response_book
+      possible_book = Book.new(title: response_book.title, description: response_book.description,
                              author: response_book.authors, isbn: response_book.isbn_10)
-    render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
+      render json: {possible_book: possible_book, image_link: response_book.image_link}, status: :ok
+    else
+      render text: 'Not able to fetch the information due to network problem. Try again or enter manually', status: :unprocessable_entity
+    end
+
   end
 
   def new
