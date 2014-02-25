@@ -51,3 +51,12 @@
     padding-left: 5px;
   }
 }
+
+//******************************* Media Queries **************************************//
+
+@media (max-width: 768px) {
+
+  .image-div {
+    margin: 0px 20px 15px;
+  }
+}
